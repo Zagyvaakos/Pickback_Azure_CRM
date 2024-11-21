@@ -1,0 +1,13 @@
+<div class="container">
+
+    <button (click)="onFetchAzureQueries()">Fetch Azure Queries</button>
+
+    <div>{{azureQueries | json}}</div>
+</div>
+
+<div class="container">
+
+    <button (click)="onFetchAzureLatestWorkItems()">Fetch Azure Latest Work Items</button>
+
+    <div>{{azureWorkItems | json}}</div>
+</div>
