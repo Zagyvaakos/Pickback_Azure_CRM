@@ -2,15 +2,24 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
 
-  { path: '', redirectTo: 'homePage', pathMatch: 'full' },
+  { path: '', redirectTo: 'controlPanel', pathMatch: 'full' },
+  // {
+  //   path: 'homePage',
+  //   loadComponent: () =>
+  //     import('../azure-task/feature/azure-task-list/azure-task-list.component').then(
+  //       (file) => file.AzureTaskListComponent
+  //     ),
+  // },
+  { path: '**', pathMatch: 'full', redirectTo: 'controlPanel' },
+
+
   {
-    path: 'homePage',
-    loadComponent: () =>
-      import('../azure-task/feature/azure-task-list/azure-task-list.component').then(
-        (file) => file.AzureTaskListComponent
+    path: 'controlPanel',
+    loadChildren: () =>
+      import('../nav-control-panel/nav-control-panel.routes').then(
+        (file) => file.routes
       ),
   },
-  { path: '**', pathMatch: 'full', redirectTo: 'homePage' },
 
   // {
   //   path: 'pages',
