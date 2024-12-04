@@ -5,11 +5,9 @@ import { ApiService } from '../../@core/services/api.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-azure-tasks',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: 'azure-task.component.html'
-
+    selector: 'app-azure-tasks',
+    imports: [CommonModule],
+    templateUrl: 'azure-task.component.html'
 })
 export class AzureTasksComponent {
   // tasks: any[] = [];

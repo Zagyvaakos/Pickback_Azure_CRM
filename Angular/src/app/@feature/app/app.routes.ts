@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
 
-  { path: '', redirectTo: 'controlPanel', pathMatch: 'full' },
+  { path: '', redirectTo: '', pathMatch: 'full' },
   // {
   //   path: 'homePage',
   //   loadComponent: () =>
@@ -14,12 +14,14 @@ export const routes: Routes = [
 
 
   {
-    path: 'controlPanel',
+    path: '',
     loadChildren: () =>
       import('../nav-control-panel/nav-control-panel.routes').then(
         (file) => file.routes
       ),
   },
+
+
 
   // {
   //   path: 'pages',

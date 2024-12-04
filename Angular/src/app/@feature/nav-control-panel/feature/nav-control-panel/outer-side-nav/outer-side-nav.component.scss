@@ -1,0 +1,85 @@
+/* Smooth transitions for width */
+mat-sidenav {
+    transition: width 0.3s ease-in-out;
+  }
+  
+  /* When minimized, hide text and show only icons */
+  mat-sidenav[opened="true"] .nav p {
+    display: block;
+  }
+  
+  mat-sidenav[opened="false"] .nav p {
+    display: none;
+  }
+  
+  /* Optional: styling for the toggle button */
+  // .toggle {
+  //   position: absolute;
+  //   top: 10px;
+  //   left: 10px;
+  //   cursor: pointer;
+  // }
+  
+  /* Ensure the icon color changes on hover */
+  mat-icon {
+    font-size: 25px !important;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+    border-radius: 3px;
+    border-bottom: thin solid rgb(99 99 99 / 10%);
+  }
+  
+  /* Optional: styling for hover effects */
+  .nav a:hover mat-icon {
+    color: #3f51b5;
+  }
+  .nav{
+   overflow: hidden;
+  }
+  a{
+    margin-top: 8px !important;
+    margin-bottom: 8px;
+    // border-bottom: thin solid rgba(128, 128, 128, 0.123);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    >span{
+      align-items: center;
+      justify-content: center;
+      display: flex
+    }
+    
+  }
+  a.mdc-list-item{
+    align-items: center;
+    justify-content: center;
+    display: flex
+
+  }
+  .list-item{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all ease-in-out 0.2s;
+
+    // border-top: thin solid rgba(128, 128, 128, 0.281);
+
+  }
+  .list-item:hover{
+    color:  rgba(20, 101, 154, 0.57);
+    scale: 1.02;
+    transition: all ease-in-out 0.1s;
+
+  }
+  section{
+    overflow-y: hidden !important;
+  }
+  .list-item,.sidenav,.nav{
+    overflow-y: hidden ;
+  }

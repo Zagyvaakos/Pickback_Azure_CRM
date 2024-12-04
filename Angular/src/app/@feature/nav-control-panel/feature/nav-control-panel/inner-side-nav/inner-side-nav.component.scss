@@ -1,0 +1,116 @@
+mat-sidenav {
+    transition: width 0.3s ease-in-out;
+    overflow: hidden;
+  }
+  
+  mat-sidenav[opened="true"] .nav p {
+    display: block;
+  }
+  
+  mat-sidenav[opened="false"] .nav p {
+    display: none;
+  }
+  
+  .toggle {
+    position: absolute;
+    transition: all 0.2s ease;
+
+    color: inherit;
+    top: 0px;
+    left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+  }
+  
+  mat-icon {
+    cursor: pointer;
+  }
+  
+  .nav a:hover mat-icon {
+    color:  rgba(20, 101, 154, 0.57);
+  }
+  .nav{
+    margin-top: 30px;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    overflow: hidden;
+    margin-left: 5px;
+  }
+
+  @keyframes horizontal-shaking {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(3px) }
+    50% { transform: translateX(-3px) }
+    75% { transform: translateX(3px) }
+    100% { transform: translateX(0) }
+   }
+
+.toggle:hover{
+  color:  rgba(20, 101, 154, 0.57);
+  transition: all 0.2s ease;
+  transform: scale(1.03);
+  cursor: pointer;
+}
+.toggle:hover mat-icon{
+  margin-left: -2px;
+  animation: horizontal-shaking 2s ease-in;
+}
+.nav-item {
+    justify-content: start;
+    padding-left: 20px;
+    align-items: center;
+    height: 40px;
+  position: relative;
+  display: flex;
+  color: initial; 
+  transition: color 0.5s ease, transform 0.5s ease;
+}
+
+.nav-item::before  {
+  content: '';
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 0;
+  border-radius: 100px 0px 100px 0px;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(20, 101, 154, 0.57), rgba(255, 255, 255, 0.7));
+  z-index: -1;
+  transition: width 0.5s ease;
+}
+
+.nav-item:hover::before {
+  width: 100%;
+}
+
+.nav-item:hover {
+  cursor: pointer;
+
+  color: white;
+  transform: scale(1.03);
+}
+.nav-item:active{
+  transform: scale(0.99);
+  transition: all 0.2s ease;
+
+
+}
+
+.nav-item.is-active {
+  color: white;
+  transform: scale(1.03);
+}
+
+.nav-item.is-active::before {
+  width: 100%;
+  transition: none;
+}
+
+.nav-item:active {
+  transform: scale(0.99);
+  transition: all 0.2s ease;
+}

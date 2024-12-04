@@ -1,0 +1,18 @@
+<section class="sidenav">
+    <!-- Toggle Button-->
+    <div (click)="hideMenu()" class="toggle">
+        <mat-icon>
+            chevron_left
+        </mat-icon>
+        <p>{{name}}</p>
+    </div>
+    <!-- Navigation List -->
+    <mat-list class="nav">
+        <div class="nav-item" mat-list-item [ngClass]="{'is-active': route.isActive}"
+            *ngFor="let route of routeLinks; trackBy: trackByRoute" routerLinkActive="active-link"
+            [routerLink]="route.link" (click)="onRouteClick(route)">
+            <mat-icon style="margin-right: 10px" mat-list-icon>{{ route.icon }}</mat-icon>
+            <p matLine *ngIf="_navMenuService.expanded()">{{ route.name }}</p>
+        </div>
+    </mat-list>
+</section>

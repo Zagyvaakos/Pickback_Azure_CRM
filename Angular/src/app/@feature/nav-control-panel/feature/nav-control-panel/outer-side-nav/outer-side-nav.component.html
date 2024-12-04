@@ -1,0 +1,8 @@
+<section class="sidenav">
+    <div class="nav">
+        <div class="list-item" *ngFor="let menu of menus" (click)="onMenuClick(menu.link)">
+            <mat-icon mat-list-icon>{{ menu.icon }}</mat-icon>
+        </div>
+    </div>
+
+</section>

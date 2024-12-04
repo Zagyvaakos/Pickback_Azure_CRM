@@ -3,10 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import axios from 'axios';
 import { CommonModule } from '@angular/common';
 import { AzureTaskService } from '../../data-access/azure-task.service';
+import { RouterModule } from '@angular/router';
 @Component({
-  selector: 'app-azure-task-list',
+
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
+  selector: 'app-azure-task-list',
   templateUrl: './azure-task-list.component.html',
   styleUrl: './azure-task-list.component.scss'
 })

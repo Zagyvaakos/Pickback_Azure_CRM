@@ -1,12 +1,14 @@
 <div>
-    <div>
-        upper
-    </div>
-    <div>
-        side
-        <mat-sidenav-container class="example-container">
-            <mat-sidenav mode="side" opened>Sidenav content</mat-sidenav>
-            <mat-sidenav-content>Main content</mat-sidenav-content>
-        </mat-sidenav-container>
-    </div>
+    <mat-sidenav-container autosize>
+        <!-- Sidenav (Left Menu) -->
+        <mat-sidenav #sidenav fixedInViewport="true" mode="side" [opened]="true" [style.width]="'60px'">
+            <outer-side-nav (changeMenu)="changeMenu($event)" [isExpanded]="isExpanded"></outer-side-nav>
+        </mat-sidenav>
+
+        <!-- Main Content -->
+        <mat-sidenav-content [style.margin-left.px]="60">
+            <inner-side-nav-control [activeMenu]="menu"></inner-side-nav-control>
+
+        </mat-sidenav-content>
+    </mat-sidenav-container>
 </div>
