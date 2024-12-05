@@ -1,0 +1,76 @@
+
+.container{
+  max-height: 100vh;
+  overflow: hidden;
+}
+.card{
+  max-height: 100vh
+}
+.page-title{
+    font-size: xx-large;
+    font-weight: 600;
+}
+.page-subtitle{
+    font-size: small;
+}
+.task-table{
+    height: 100%;
+    width: 100%;
+}
+.task-table-head-column{
+    align-items: center;
+    justify-content: start;
+>div{
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+}
+tr{
+    height: 38px;
+    
+
+}
+::ng-deep .blah{
+  background-color: black !important;
+  width: 150px !important;
+  height: 30px;
+}
+::ng-deep .override-this
+{
+height: 30px;
+align-items: center;
+  width: 250px !important;
+}
+
+.card {
+  transition: width 0.3s ease-in-out;
+  padding: 15px;
+  margin: 10px;
+  top: 0px;
+  bottom: 0px;
+  transform: none;
+  visibility: visible;
+  border: 1px solid rgb(148 148 148 / 18%);
+  margin-top: 5px;
+  margin-bottom: 5px;
+  box-shadow: #80808014 0px 0px 10px 4px;
+  top: 0px;
+  bottom: 0px;
+  transform: none;
+  visibility: visible;
+  border-radius: 10px;
+  background-color: var(--primary-background)
+}
+.task-table-body-row{
+  border-bottom:  1px solid #80808029
+}
+.task-table {
+  border-collapse: collapse; /* Make sure borders collapse correctly */
+  width: 100%;
+  height: 100%;
+}
+

@@ -68,12 +68,12 @@ app.get('/api/azure-work-items', async (req, res) => {
 // Proxy route for fetching the latest work items
 app.get('/api/azure-latest-work-items', async (req, res) => {
 
-// const workItemsUrl = `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_apis/wit/workitems?ids=`;
+// const workItemsUrl = https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_apis/wit/workitems?ids=;
 // const API_VERSION_WORK_ITEMS = "6.0"; // Define the API version explicitly
   try {
     // Step 1: Execute WIQL query to get the latest work items
     const query = {
-      query: "SELECT [System.Id], [System.Title], [System.CreatedDate] FROM WorkItems ORDER BY [System.CreatedDate] DESC",
+      query: "SELECT [System.Id], [System.Title], [System.CreatedDate] FROM WorkItems WHERE [System.CreatedDate] >= @StartOfWeek('-7d') ORDER BY [System.CreatedDate] DESC",
     };
     const encodedPat = Buffer.from(':' + PAT).toString('base64');
 
@@ -93,6 +93,45 @@ app.get('/api/azure-latest-work-items', async (req, res) => {
 
 
     res.json(wiqlResponse.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error fetching latest work items from Azure DevOps');
+  }
+});
+
+
+app.get('/api/azure-latest-work-items', async (req, res) => {
+  try {
+    // Step 1: Execute WIQL query to get the latest work items
+    const query = {
+      query: "SELECT [System.Id], [System.Title], [System.CreatedDate] FROM WorkItems WHERE [System.CreatedDate] >= @StartOfWeek('-7d') ORDER BY [System.CreatedDate] DESC",
+    };
+    const encodedPat = Buffer.from(':' + PAT).toString('base64');
+
+    const wiqlResponse = await axios.post(wiqlUrl, query, {
+      headers: {
+        'Authorization': 'Basic ' + encodedPat,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    // Extract work item IDs from the WIQL response
+    const workItemIds = wiqlResponse.data.workItems.map(item => item.id);
+
+    if (workItemIds.length === 0) {
+      return res.json({ message: 'No work items found' });
+    }
+
+    // Step 2: Fetch the full details of work items using their IDs
+    const workItemsUrl = `https://dev.azure.com/{ORGANIZATION}/{PROJECT}/_apis/wit/workitems?ids=${workItemIds.join(',')}&api-version=6.0`;
+    const workItemsResponse = await axios.get(workItemsUrl, {
+      headers: {
+        'Authorization': 'Basic ' + encodedPat,
+      },
+    });
+
+    // Step 3: Return the full work item details
+    res.json(workItemsResponse.data);
   } catch (error) {
     console.error(error);
     res.status(500).send('Error fetching latest work items from Azure DevOps');

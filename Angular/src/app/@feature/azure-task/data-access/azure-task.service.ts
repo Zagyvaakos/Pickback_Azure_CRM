@@ -16,4 +16,8 @@ export class AzureTaskService {
     fetchAzureLatestWorkItems(): Observable<any> {
         return this.http.get(this.apiUrl + 'azure-latest-work-items');
     }
+
+    getRandomItemsForTable(): Observable<any> {
+        return this.http.get('https://testmulticarpet.pickback.hu:81/api/classifications/getByType/Item/')
+    }
 }

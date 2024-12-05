@@ -6,6 +6,13 @@
         </mat-icon>
         <p>{{name}}</p>
     </div>
+
+    <ng-container *ngIf="activeMenu === 'user' ">
+        <div class="user-placeholder-div ">
+            <div class="user one">
+            </div>
+        </div>
+    </ng-container>
     <!-- Navigation List -->
     <mat-list class="nav">
         <div class="nav-item" mat-list-item [ngClass]="{'is-active': route.isActive}"

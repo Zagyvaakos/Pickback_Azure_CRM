@@ -1,8 +1,32 @@
 <section class="sidenav">
     <div class="nav">
+        <div class="user-placeholder-div list-item" (click)="onMenuClick('user')">
+            <div class="user one">
+            </div>
+        </div>
+
+    </div>
+    <div class="nav">
         <div class="list-item" *ngFor="let menu of menus" (click)="onMenuClick(menu.link)">
-            <mat-icon mat-list-icon>{{ menu.icon }}</mat-icon>
+            <mat-icon style="border-bottom: thin solid rgb(99 99 99 / 10%);" mat-list-icon>{{ menu.icon }}</mat-icon>
         </div>
     </div>
 
+    <div style="
+    position: absolute;
+    bottom: 10px;
+    width: 100%;">
+        <div class="darkmode-placeholder-div list-item " (click)="onDarkToggle()">
+            <div class="darkmode">
+                <div class="switch" [ngClass]="themeService.isDarkmode()? 'isdarkmode' : 'issunmode'">
+                    <mat-icon class="darkmodeicon"> dark_mode
+                    </mat-icon>
+                    <mat-icon class="sunmodeicon"> wb_sunny
+                    </mat-icon>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 </section>

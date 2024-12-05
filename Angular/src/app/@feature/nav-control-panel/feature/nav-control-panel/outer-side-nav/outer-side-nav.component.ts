@@ -3,13 +3,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
+import { ThemeService } from '../../../../../@core/services/theme.service';
 
 @Component({
   selector: 'outer-side-nav',
   imports: [
-    MatIconModule,
     RouterModule,
     CommonModule,
+    MatIconModule,
     MatListModule,
   ],
 
@@ -17,9 +18,12 @@ import { RouterModule } from '@angular/router';
   styleUrl: './outer-side-nav.component.scss'
 })
 export class OuterSideNavComponent {
+  constructor(public themeService: ThemeService) {
+
+  }
   @Input() isExpanded: boolean = true;
   @Output() changeMenu = new EventEmitter();
-
+  isDarkMode: boolean = false;
   public menus = [
     { link: 'home', name: 'Kezdőlap', icon: 'home' },
     { link: 'tasks', name: 'Feladatok', icon: 'settings' },
@@ -30,4 +34,9 @@ export class OuterSideNavComponent {
     this.changeMenu.emit(link)
     this.isExpanded = true
   }
+  onDarkToggle() {
+    this.themeService.toggleDarkmode()
+
+  }
+
 }

@@ -30,7 +30,13 @@ mat-sidenav {
     height: 100v;
     z-index: 998;
   }
-
+  mat-sidenav {
+    transition: width 0.3s ease-in-out;
+  }
+  
+  mat-sidenav-content {
+    transition: margin-left 0.3s ease-in-out;
+  }
   mat-sidenav[opened="false"] .nav p {
     display: none;
   }

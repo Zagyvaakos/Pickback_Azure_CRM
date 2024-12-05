@@ -32,7 +32,11 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "assets/styles/styles.scss",
+              "node_modules/primeicons/primeicons.css",
+              "assets/styles/lara-theme.scss",
+              "node_modules/primeng/resources/primeng.min.css",
+              "assets/styles/primeng-custom-styles.scss",
             ],
             "scripts": []
           },

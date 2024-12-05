@@ -29,9 +29,9 @@ export class InnerSideNavComponent implements OnInit {
 
 
   public routeHomeLinks = [
-    { link: 'crm/mainpage', name: 'Főoldal', icon: 'home', isActive: false },
-    { link: 'crm/elementpage', name: 'Elemek', icon: 'settings', isActive: false },
-    { link: 'crm/otherpage', name: 'Egyebek', icon: 'otter', isActive: false },
+    { link: 'crm/mainpage', name: 'Kezdőlap', icon: 'home', isActive: false },
+    { link: 'crm/faq', name: 'FAQ', icon: 'info', isActive: false },
+    { link: 'crm/test', name: 'darkmode', icon: 'toggle_on', isActive: false },
   ];
 
   public routeTaskLinks = [
@@ -45,15 +45,20 @@ export class InnerSideNavComponent implements OnInit {
     { link: 'crm/tasks', name: 'Feladatok', icon: 'settings', isActive: false },
     { link: 'crm/settings', name: 'Beállítások', icon: 'settings', isActive: false },
   ];
+  public routeUserLinks = [
+    { link: 'crm/home', name: 'Kezdőlap', icon: 'home', isActive: false },
+    { link: 'crm/tasks', name: 'Feladatok', icon: 'settings', isActive: false },
+    { link: 'crm/settings', name: 'Beállítások', icon: 'settings', isActive: false },
+  ];
 
 
   ngOnInit(): void {
-
   }
   get routeLinks() {
+
     switch (this.activeMenu.toLowerCase()) {
       case 'home':
-        this.name = "Alap adatok"
+        this.name = "Kezdőlap"
         return this.routeHomeLinks;
       case 'tasks':
         this.name = "Feladatok"
@@ -61,6 +66,9 @@ export class InnerSideNavComponent implements OnInit {
       case 'settings':
         this.name = "Beállítások"
         return this.routeSettingsLinks;
+      case 'user':
+        this.name = "Profil"
+        return this.routeUserLinks;
       default:
         return [];
     }
