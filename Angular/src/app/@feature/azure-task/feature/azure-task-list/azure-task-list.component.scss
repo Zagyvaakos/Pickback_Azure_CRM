@@ -1,7 +1,19 @@
 
 .container{
+  height: calc(100vh - 20px);
   max-height: 100vh;
   overflow: hidden;
+}
+.tborder{
+  border-radius: 10px !important;
+}
+.p-datatable-wrapper{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+p-paginator, .p-paginator{
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 .card{
   max-height: 100vh
@@ -17,6 +29,10 @@
     height: 100%;
     width: 100%;
 }
+.w-100{
+  width: 100% !important;
+}
+
 .task-table-head-column{
     align-items: center;
     justify-content: start;
@@ -34,6 +50,12 @@ tr{
     
 
 }
+
+.p-button-rounded{
+height: 25px;
+width: 25px;
+display: flex;
+}
 ::ng-deep .blah{
   background-color: black !important;
   width: 150px !important;
@@ -45,10 +67,21 @@ height: 30px;
 align-items: center;
   width: 250px !important;
 }
+th{
+  padding: 15px 5px;
+  
+}
+td{
+  padding: 0px 15px;
+  
+}
+
+tbody{
+  padding: 15px
+}
 
 .card {
   transition: width 0.3s ease-in-out;
-  padding: 15px;
   margin: 10px;
   top: 0px;
   bottom: 0px;
@@ -72,5 +105,6 @@ align-items: center;
   border-collapse: collapse; /* Make sure borders collapse correctly */
   width: 100%;
   height: 100%;
+  border-radius: 10px;
 }
 

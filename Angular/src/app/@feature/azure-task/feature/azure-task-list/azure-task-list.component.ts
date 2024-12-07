@@ -1,10 +1,10 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, isDevMode, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, isDevMode, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AzureTaskService } from '../../data-access/azure-task.service';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-// import { TableModule } from 'primeng/table';
+import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ButtonModule } from 'primeng/button';
@@ -15,11 +15,12 @@ import { InputTextModule } from 'primeng/inputtext';
 @Component({
 
   standalone: true,
-  imports: [CommonModule, RouterModule, InputTextModule, ButtonGroupModule, MatButtonModule, ButtonModule, DropdownModule, FormsModule, MultiSelectModule],
+  imports: [CommonModule, RouterModule, TableModule, InputTextModule, ButtonGroupModule, MatButtonModule, ButtonModule, DropdownModule, FormsModule, MultiSelectModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   selector: 'app-azure-task-list',
   templateUrl: './azure-task-list.component.html',
-  styleUrl: './azure-task-list.component.scss'
+  styleUrl: './azure-task-list.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class AzureTaskListComponent implements OnInit {
 

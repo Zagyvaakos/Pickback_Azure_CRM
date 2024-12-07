@@ -1,105 +1,88 @@
 <div class="container">
-    <!-- <div class="page-title-placeholder">
-        <div class="page-title">Feladatok</div>
-        <div class="page-subtitle">Az alábbiakban találhatóak a Pickback System részére kiállított feladatok</div>
-    </div> -->
-    <div class="row p-0 m-0 w-100" style="display: flex; align-items: center;">
-        <div class="col" style="display: flex">
-            <div style="margin: 0px 5px">
-                <p-dropdown [styleClass]="isDefault ? 'override-this' : 'blah'" [options]="statuses"
-                    [(ngModel)]="selectedCity" placeholder="Státusz" [editable]="true" optionLabel="name" />
-            </div>
-            <div style="margin: 0px 5px">
-
-                <p-multiSelect [styleClass]="isDefault ? 'override-this' : 'blah'" [options]="statuses"
-                    [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedCities" [showHeader]="true"
-                    [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true" optionLabel="name"
-                    placeholder="Státusz" [filterBy]="'name'"
-                    [selectedItemsLabel]="selectedCities.length ? selectedCities.length + ' kiválasztva' : ''"
-                    [loading]="false" [virtualScroll]="true" [virtualScrollItemSize]="32"
-                    class="multiselect-custom-virtual-scroll">
-
-                    <ng-template let-element pTemplate="footer">
-                        <div class="py-2 px-3">
-                            <b>
-                                {{ selectedCities ? selectedCities.length : 0 }}
-                            </b>
-                            elem{{ (selectedCities ? selectedCities.length : 0) > 1 ? 's' : '' }} kiválasztva.
-                        </div>
-                    </ng-template>
-                </p-multiSelect>
-            </div>
-        </div>
-        <div class="col">
-            <p-button label="Törlés" [outlined]="true" icon="pi pi-filter-slash" />
-        </div>
-
-
-    </div>
-
-
-    <div class="card">
-        <div class="h-100 w-100">
-            <table class="task-table">
-                <thead class="task-table-head">
-                    <tr class="task-table-head-row">
-                        <th class="task-table-head-column" *ngFor="let column of columns">
-                            {{column.name}}
-                        </th>
-
-                    </tr>
-                </thead>
-                <tbody class="task-table-body">
-                    <tr class="task-table-body-row" *ngFor="let workItem of workItems">
-                        <td class="task-table-body-column">{{workItem.id}}</td>
-                        <td class="task-table-body-column">{{workItem.url}}</td>
-                        <td class="task-table-body-column">r1</td>
-
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- 
-
-    <div class="card">
-        <p-table #dt1 dataKey="id" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true">
-            <ng-template pTemplate="caption">
-                <div class="flex" style="height: 40px;">
-                    <p-button label="Törlés" [outlined]="true" icon="pi pi-filter-slash" />
-                    <span class="p-input-icon-left ml-auto">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" placeholder="Search keyword" />
-                    </span>
+    <div style="position: absolute; width: 100%;">
+        <div class="row p-0 m-0 w-100" style="display: flex; align-items: center;">
+            <div class="col" style="display: flex">
+                <div style="margin: 0px 5px">
+                    <p-dropdown [styleClass]="isDefault ? 'override-this' : 'blah'" [options]="statuses"
+                        [(ngModel)]="selectedCity" placeholder="Státusz" [editable]="true"
+                        optionLabel="name"></p-dropdown>
                 </div>
-            </ng-template>
-            <ng-template pTemplate="header">
-                <tr>
-                    <th style="min-width: 15rem">
-                        <div class="flex align-items-center">
-                            Azonosító
-                            <p-columnFilter type="text" field="id" display="menu" />
-                        </div>
-                    </th>
-                </tr>
-            </ng-template>
-        </p-table>
+                <div style="margin: 0px 5px">
+                    <p-multiSelect [styleClass]="isDefault ? 'override-this' : 'blah'" [options]="statuses"
+                        [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedCities"
+                        [showHeader]="true" [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true"
+                        optionLabel="name" placeholder="Státusz" [filterBy]="'name'"
+                        [selectedItemsLabel]="selectedCities.length ? selectedCities.length + ' kiválasztva' : ''"
+                        [loading]="false" [virtualScroll]="true" [virtualScrollItemSize]="32"
+                        class="multiselect-custom-virtual-scroll">
+                        <ng-template let-element pTemplate="footer">
+                            <div class="py-2 px-3">
+                                <b>
+                                    {{ selectedCities ? selectedCities.length : 0 }}
+                                </b>
+                                elem{{ (selectedCities ? selectedCities.length : 0) > 1 ? 's' : '' }} kiválasztva.
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                </div>
+            </div>
+            <div class="col">
+                <p-button label="Törlés" [outlined]="true" icon="pi pi-filter-slash"></p-button>
+            </div>
+        </div>
 
+        <div class="row p-0 m-0 w-100" style="display: flex; align-items: center;">
+            <div class="card w-100">
+                <p-table [styleClass]="'tborder'" #dt1 dataKey="id" [columns]="columns" [value]="workItems" [rows]="10"
+                    [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [resizableColumns]="true" [scrollable]="true"
+                    scrollHeight="flex" [rowHover]="true" [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Elemek {first}-{last} -ig. Összesen: {totalRecords}">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>
+                                <div class="flex align-items-center">
+                                    Azonosító
+                                    <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex align-items-center">
+                                    Név
+                                    <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex align-items-center">
+                                    Dátum
+                                    <p-columnFilter type="date" field="date" display="menu"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th style="text-align: center">Műveletek</th>
+                        </tr>
+                    </ng-template>
 
+                    <ng-template pTemplate="body" let-item>
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.date | date: 'short' }}</td>
+                            <td style="text-align: center">
+                                <div class="row" style="display: flex; flex-direction: row;">
+                                    <p-button icon="pi pi-pencil"
+                                        class="p-button-rounded p-button-warning mr-2"></p-button>
+                                    <p-button icon="pi pi-trash" class="p-button-rounded p-button-danger"></p-button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
 
-    </div> -->
-
-    <!-- <div class="container">
-
-        <p-button type="button" (click)="onFetchAzureQueries()">Fetch Azure Queries</p-button>
-
-        <div>{{azureQueries | json}}</div>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="4" style="text-align: center">Nincs találat</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
     </div>
-
-    <div class="container">
-
-        <button (click)="onFetchAzureLatestWorkItems()">Fetch Azure Latest Work Items</button>
-
-        <div>{{azureWorkItems | json}}</div>
-    </div> -->
+</div>

@@ -5,7 +5,7 @@
             <inner-side-nav (toggleMenu)="toggleMenu($event)" [activeMenu]="activeMenu"></inner-side-nav>
         </mat-sidenav>
 
-        <mat-sidenav-content [style.margin-left.px]="_navMenuService.expanded() ? 250 : 10">
+        <mat-sidenav-content [style.margin-left.px]="_navMenuService.expanded() ? 250 : 0">
             <div class="content-container">
                 <router-outlet></router-outlet>
             </div>
