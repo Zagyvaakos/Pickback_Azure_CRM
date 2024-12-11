@@ -41,13 +41,13 @@ export class InnerSideNavComponent implements OnInit {
   ];
 
   public routeSettingsLinks = [
-    { link: 'crm/home', name: 'Kezdőlap', icon: 'home', isActive: false },
-    { link: 'crm/tasks', name: 'Feladatok', icon: 'settings', isActive: false },
-    { link: 'crm/settings', name: 'Beállítások', icon: 'settings', isActive: false },
+    { link: 'crm/home', name: 'Aktív feladatok', icon: 'home', isActive: false },
+    { link: 'crm/tasks', name: 'Nyitott feladatok', icon: 'settings', isActive: false },
+    { link: 'crm/settings', name: 'Elmúlt 7 nap feladatai', icon: 'settings', isActive: false },
   ];
   public routeUserLinks = [
-    { link: 'crm/home', name: 'Kezdőlap', icon: 'home', isActive: false },
-    { link: 'crm/tasks', name: 'Feladatok', icon: 'settings', isActive: false },
+    { link: 'crm/home', name: 'Aktív feladatok', icon: 'home', isActive: false },
+    { link: 'crm/tasks', name: 'Nyitott feladatok', icon: 'settings', isActive: false },
     { link: 'crm/settings', name: 'Beállítások', icon: 'settings', isActive: false },
   ];
 

@@ -71,6 +71,8 @@
   src: url("../fonts/Inter-italic.var.woff2?v=3.19") format("woff2");
 }
 :root {
+  --changeGradientColor: linear-gradient(90deg, var(--changHighlightColor), rgba(255, 255, 255, 0.7));
+  --changHighlightColor: #3babf634;
   --changeOutlineColor: #3babf6;
   --blue-50:#f5f9ff;
   --blue-100:#d0e1fd;
@@ -831,6 +833,7 @@
     right: 3rem;
   }
 
+
   .p-overlay-modal .p-cascadeselect-sublist .p-cascadeselect-panel {
     box-shadow: none;
     border-radius: 0;
@@ -1199,7 +1202,7 @@
     width: auto;
   }
   .p-fluid .p-inputgroup .p-button.p-button-icon-only {
-    width: 3rem;
+    width: 2.5rem;
   }
 
   .p-icon-field-left .p-input-icon:first-of-type {
@@ -2230,8 +2233,10 @@
     border-radius: 2rem;
   }
   .p-button.p-button-icon-only {
-    width: 3rem;
-    padding: 0.75rem 0;
+    width: 36px;
+    height: 36px;
+    // padding: 0.5rem 0;
+
   }
   .p-button.p-button-icon-only .p-button-icon-left,
 .p-button.p-button-icon-only .p-button-icon-right {
@@ -3046,11 +3051,10 @@
     color: #374151;
     border: 1px solid #e5e7eb;
     border-width: 1px 0 1px 0;
-    padding: 1rem 1rem;
     font-weight: 700;
   }
   .p-dataview .p-dataview-content {
-    background: #ffffff;
+ 
     color: #4b5563;
     border: 0 none;
     padding: 0;
@@ -3340,6 +3344,7 @@
     padding: 0px;
     height: 35px;
     border-radius: 6px;
+    font-size: small !important;
   }
   .p-paginator .p-paginator-first,
 .p-paginator .p-paginator-prev,
@@ -3401,12 +3406,14 @@
     height: 23px;
     margin: 0.143rem;
     transition: box-shadow 0.2s;
+    font-size: small !important;
   }
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     background: #EFF6FF;
     border-color: #EFF6FF;
     color: #4a4a4b;
     font-weight: 600;
+    font-size: small !important;
   }
   .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
     background: #f3f4f6;

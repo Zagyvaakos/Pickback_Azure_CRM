@@ -1,88 +1,178 @@
 <div class="container">
-    <div style="position: absolute; width: 100%;">
-        <div class="row p-0 m-0 w-100" style="display: flex; align-items: center;">
-            <div class="col" style="display: flex">
-                <div style="margin: 0px 5px">
-                    <p-dropdown [styleClass]="isDefault ? 'override-this' : 'blah'" [options]="statuses"
-                        [(ngModel)]="selectedCity" placeholder="Státusz" [editable]="true"
-                        optionLabel="name"></p-dropdown>
-                </div>
-                <div style="margin: 0px 5px">
-                    <p-multiSelect [styleClass]="isDefault ? 'override-this' : 'blah'" [options]="statuses"
-                        [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedCities"
-                        [showHeader]="true" [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true"
-                        optionLabel="name" placeholder="Státusz" [filterBy]="'name'"
-                        [selectedItemsLabel]="selectedCities.length ? selectedCities.length + ' kiválasztva' : ''"
-                        [loading]="false" [virtualScroll]="true" [virtualScrollItemSize]="32"
-                        class="multiselect-custom-virtual-scroll">
-                        <ng-template let-element pTemplate="footer">
-                            <div class="py-2 px-3">
-                                <b>
-                                    {{ selectedCities ? selectedCities.length : 0 }}
-                                </b>
-                                elem{{ (selectedCities ? selectedCities.length : 0) > 1 ? 's' : '' }} kiválasztva.
-                            </div>
-                        </ng-template>
-                    </p-multiSelect>
-                </div>
+    <div class="row p-0 m-0 w-100" style="display: flex; align-items: center;">
+        <div class="col" style="display: flex">
+            <div style="margin: 0px 5px">
+                <p-dropdown [styleClass]="isDefault ? 'override-this' : 'blah'" [options]="statuses"
+                    [(ngModel)]="selectedCity" placeholder="Státusz" [editable]="true" optionLabel="name"></p-dropdown>
             </div>
-            <div class="col">
-                <p-button label="Törlés" [outlined]="true" icon="pi pi-filter-slash"></p-button>
+            <div style="margin: 0px 5px">
+                <p-multiSelect [styleClass]="isDefault ? 'override-this' : 'blah'" [options]="statuses"
+                    [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedCities" [showHeader]="true"
+                    [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true" optionLabel="name"
+                    placeholder="Státusz" [filterBy]="'name'"
+                    [selectedItemsLabel]="selectedCities.length ? selectedCities.length + ' kiválasztva' : ''"
+                    [loading]="false" [virtualScroll]="true" [virtualScrollItemSize]="32"
+                    class="multiselect-custom-virtual-scroll">
+                    <ng-template let-element pTemplate="footer">
+                        <div class="py-2 px-3">
+                            <b>
+                                {{ selectedCities ? selectedCities.length : 0 }}
+                            </b>
+                            elem{{ (selectedCities ? selectedCities.length : 0) > 1 ? 's' : '' }} kiválasztva.
+                        </div>
+                    </ng-template>
+                </p-multiSelect>
             </div>
         </div>
+        <div class="col">
+            <p-button label="Törlés" [outlined]="true" icon="pi pi-filter-slash"></p-button>
+        </div>
+    </div>
 
-        <div class="row p-0 m-0 w-100" style="display: flex; align-items: center;">
-            <div class="card w-100">
-                <p-table [styleClass]="'tborder'" #dt1 dataKey="id" [columns]="columns" [value]="workItems" [rows]="10"
-                    [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [resizableColumns]="true" [scrollable]="true"
-                    scrollHeight="flex" [rowHover]="true" [showCurrentPageReport]="true"
-                    currentPageReportTemplate="Elemek {first}-{last} -ig. Összesen: {totalRecords}">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>
-                                <div class="flex align-items-center">
-                                    Azonosító
-                                    <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
-                                </div>
-                            </th>
-                            <th>
-                                <div class="flex align-items-center">
-                                    Név
-                                    <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
-                                </div>
-                            </th>
-                            <th>
-                                <div class="flex align-items-center">
-                                    Dátum
-                                    <p-columnFilter type="date" field="date" display="menu"></p-columnFilter>
-                                </div>
-                            </th>
-                            <th style="text-align: center">Műveletek</th>
-                        </tr>
-                    </ng-template>
+    <!-- Table Section -->
+    <div class="row p-0 m-0 w-100 content-container">
+        <div class="col" style="display: flex;height: 100%;">
+            <div class="rand" style="align-items: stretch;">
 
-                    <ng-template pTemplate="body" let-item>
-                        <tr>
-                            <td>{{ item.id }}</td>
-                            <td>{{ item.name }}</td>
-                            <td>{{ item.date | date: 'short' }}</td>
-                            <td style="text-align: center">
-                                <div class="row" style="display: flex; flex-direction: row;">
-                                    <p-button icon="pi pi-pencil"
-                                        class="p-button-rounded p-button-warning mr-2"></p-button>
-                                    <p-button icon="pi pi-trash" class="p-button-rounded p-button-danger"></p-button>
-                                </div>
-                            </td>
-                        </tr>
-                    </ng-template>
 
-                    <ng-template pTemplate="emptymessage">
-                        <tr>
-                            <td colspan="4" style="text-align: center">Nincs találat</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
+                <div class="card2 w-100">
+                    <p-table [scrollable]="true" scrollHeight="600px" #dt1 dataKey="id" [columns]="columns"
+                        [value]="workItems" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true"
+                        [resizableColumns]="true" [rowHover]="true" [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Elemek {first}-{last} -ig. Összesen: {totalRecords}">
+
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    <div class="flex align-items-center">
+                                        ID
+                                        <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex align-items-center">
+                                        Feladat neve
+                                        <p-columnFilter type="text" field="title" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex align-items-center">
+                                        Hozzárendelve
+                                        <p-columnFilter type="text" field="assignedTo" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex align-items-center">
+                                        Státusz
+                                        <p-columnFilter type="text" field="status" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex align-items-center">
+                                        Jelölők
+                                        <p-columnFilter type="text" field="tag" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex align-items-center">
+                                        Megjegyzések
+                                        <p-columnFilter type="number" field="comment" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex align-items-center">
+                                        Legutóbbi tevékenység
+                                        <p-columnFilter type="date" field="activity" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th style="text-align: center" style="width: 60px;">
+                                    <div class="flex align-items-center" style="width: 60px;">Műveletek</div>
+                                </th>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-item>
+                            <tr>
+                                <td>{{ item.id }}</td>
+                                <td>{{ item.title }}</td>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.date | date: 'short' }}</td>
+                                <td style="text-align: center">
+                                    <div class="row" style="display: flex; flex-direction: row;">
+                                        <p-button icon="pi pi-pencil"
+                                            class="p-button-rounded p-button-warning mr-2"></p-button>
+                                        <p-button icon="pi pi-trash"
+                                            class="p-button-rounded p-button-danger"></p-button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="4" style="text-align: center">Nincs találat</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- <div class="row p-0 m-0 w-100" style="flex: 1; overflow: hidden; align-items: center;">
+        <div class="card w-100">
+            <p-table [styleClass]="'tborder'" #dt1 dataKey="id" [columns]="columns" [value]="workItems" [rows]="10"
+                [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [resizableColumns]="true" [scrollable]="true"
+                scrollHeight="flex" [rowHover]="true" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Elemek {first}-{last} -ig. Összesen: {totalRecords}">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>
+                            <div class="flex align-items-center">
+                                Azonosító
+                                <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex align-items-center">
+                                Név
+                                <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex align-items-center">
+                                Dátum
+                                <p-columnFilter type="date" field="date" display="menu"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="text-align: center">Műveletek</th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-item>
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.date | date: 'short' }}</td>
+                        <td style="text-align: center">
+                            <div class="row" style="display: flex; flex-direction: row;">
+                                <p-button icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2"></p-button>
+                                <p-button icon="pi pi-trash" class="p-button-rounded p-button-danger"></p-button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="4" style="text-align: center">Nincs találat</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div> -->

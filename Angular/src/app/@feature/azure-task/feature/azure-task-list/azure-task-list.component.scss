@@ -3,6 +3,11 @@
   height: calc(100vh - 20px);
   max-height: 100vh;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.card2{
+  width: calc(100% - 15px) !important;
 }
 .tborder{
   border-radius: 10px !important;
@@ -16,7 +21,6 @@ p-paginator, .p-paginator{
   border-bottom-right-radius: 10px;
 }
 .card{
-  max-height: 100vh
 }
 .page-title{
     font-size: xx-large;
@@ -51,6 +55,17 @@ tr{
 
 }
 
+.rand
+{
+  max-height: 100%;
+  width: 100%;
+}
+
+.container {
+  overflow: visible !important;
+}
+
+
 .p-button-rounded{
 height: 25px;
 width: 25px;
@@ -68,7 +83,7 @@ align-items: center;
   width: 250px !important;
 }
 th{
-  padding: 15px 5px;
+  padding: 0px 5px;
   
 }
 td{
@@ -80,9 +95,9 @@ tbody{
   padding: 15px
 }
 
-.card {
+.card2 {
   transition: width 0.3s ease-in-out;
-  margin: 10px;
+  max-height: 100%;
   top: 0px;
   bottom: 0px;
   transform: none;

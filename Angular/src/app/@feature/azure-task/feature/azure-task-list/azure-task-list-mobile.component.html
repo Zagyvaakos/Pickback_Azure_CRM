@@ -1,0 +1,216 @@
+<div class="container">
+
+    <p-dataView #dv [value]="workItemsToShow()" [alwaysShowPaginator]="true" [paginator]="true"
+        [rowsPerPageOptions]="[10, 25, 50, 100, 250, 500]" [showCurrentPageReport]="true" [showPageLinks]="true"
+        [sortField]="sortField" [sortOrder]="sortOrder" [emptyMessage]="'Nincs elérhető adat'"
+        [paginatorDropdownAppendTo]="'body'" [rows]="rowsPerPage" filterBy="name" layout="list"
+        (onPage)="onPageChange($event)">
+        <ng-template pTemplate="header">
+            <div class="row p-0 mt-1 mb-2 w-100" style="display: flex; align-items: center;">
+                <div class="col p-0 m-0 w-100" style="display: flex">
+                    <!-- <div style="margin: 0px 5px">
+                        <p-dropdown [styleClass]="'override-this catchme'" [options]="statuses"
+                            [(ngModel)]="selectedCity" placeholder="Státusz" [editable]="true" optionLabel="name"
+                            [style]="{ 'background-color': selectedCity ? getStateBackgroundColor(selectedCity.value) : '', 'color': selectedCity ? getStateColor(selectedCity.value) : '' }">
+                            <ng-template let-statusess pTemplate="status">
+                                <div class="item-status" style="width: 100% !important"
+                                    [ngStyle]="{'background-color': getStateBackgroundColor(statusess.value)}">
+                                    <div [ngStyle]="{'color': getStateColor(statusess.value)}">
+                                        {{getStateString(statusess.value)}}
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                    </div> -->
+                    <div style="margin: 0px 5px " style="width: 100%; padding-left: 10px ">
+                        <span class="p-input-icon-left" style="width: 100%">
+                            <i class="pi pi-search"></i>
+                            <input style="width: 100%; height: 30px;" type="text" pInputText [(ngModel)]="searchText" />
+                        </span>
+
+                    </div>
+
+                    <div style="margin: 0px 5px">
+                        <p-multiSelect styleClass="override-this" [options]="getNames()"
+                            [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedNames"
+                            [showHeader]="true" [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true"
+                            optionLabel="name" placeholder="Feladat" [filterBy]="'name'"
+                            [selectedItemsLabel]="selectedNames.length ? selectedNames.length + ' kiválasztva' : ''"
+                            [loading]="false" [virtualScroll]="true" [virtualScrollItemSize]="32"
+                            (onChange)="filterData()">
+
+
+                            <ng-template let-element pTemplate="footer">
+                                <div class="py-2 px-3">
+                                    <b>
+                                        {{ selectedNames ? selectedNames.length : 0 }}
+                                    </b>
+                                    elem{{ (selectedNames ? selectedNames.length : 0) > 1 ? 's' : '' }} kiválasztva.
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+                    </div>
+
+
+
+                    <div style="margin: 0px 5px">
+                        <p-multiSelect styleClass="override-this" [options]="statuses"
+                            [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedCities"
+                            [showHeader]="true" [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true"
+                            optionLabel="name" placeholder="Típus" [filterBy]="'name'"
+                            [selectedItemsLabel]="selectedCities.length ? selectedCities.length + ' kiválasztva' : ''"
+                            [loading]="false" [virtualScroll]="true" [virtualScrollItemSize]="32"
+                            (onChange)="filterData()">
+
+                            <ng-template let-statusess pTemplate="status">
+                                <div class="item-status" style="width: 100% !important"
+                                    [ngStyle]="{'background-color': getStateBackgroundColor(statusess.value)}">
+                                    <div [ngStyle]="{'color': getStateColor(statusess.value)}">
+                                        {{getStateString(statusess.value)}}
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-element pTemplate="footer">
+                                <div class="py-2 px-3">
+                                    <b>
+                                        {{ selectedCities ? selectedCities.length : 0 }}
+                                    </b>
+                                    elem{{ (selectedCities ? selectedCities.length : 0) > 1 ? 's' : '' }} kiválasztva.
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+                    </div>
+                    <div style="margin: 0px 5px">
+                        <p-multiSelect styleClass="override-this" [options]="statuses"
+                            [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedCities"
+                            [showHeader]="true" [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true"
+                            optionLabel="name" placeholder="Státusz" [filterBy]="'name'"
+                            [selectedItemsLabel]="selectedCities.length ? selectedCities.length + ' kiválasztva' : ''"
+                            [loading]="false" [virtualScroll]="true" [virtualScrollItemSize]="32"
+                            (onChange)="filterData()">
+
+                            <ng-template let-statusess pTemplate="status">
+                                <div class="item-status" style="width: 100% !important"
+                                    [ngStyle]="{'background-color': getStateBackgroundColor(statusess.value)}">
+                                    <div [ngStyle]="{'color': getStateColor(statusess.value)}">
+                                        {{getStateString(statusess.value)}}
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-element pTemplate="footer">
+                                <div class="py-2 px-3">
+                                    <b>
+                                        {{ selectedCities ? selectedCities.length : 0 }}
+                                    </b>
+                                    elem{{ (selectedCities ? selectedCities.length : 0) > 1 ? 's' : '' }} kiválasztva.
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+                    </div>
+                    <div style="margin: 0px 5px"> <p-button label="Törlés" [outlined]="true" icon="pi pi-filter-slash"
+                            (click)="clearFilter()"></p-button></div>
+                </div>
+
+
+            </div>
+            <!-- <div class="mb-1 p-2 flex flex-column md:flex-row md:justify-content-between">
+
+                <span class="p-input-icon-left mb-2 md:mb-0">
+                    <i class="pi pi-search"></i>
+                </span>
+
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </div> -->
+            <div class="col-12 p-0 m-0 item-header-container"
+                style="padding: 10px 34px 10px 12px !important; border-right: none !important;">
+                <div class="item-container">
+                    <div class="item-list-item">
+                        <div style="width: 70px; cursor: pointer; display: flex; gap: 10px; align-items: center;"
+                            (click)="sortBy('id')">
+                            ID
+                            <i class="pi" [ngClass]="{
+                            'pi-sort-amount-up': sortField === 'id' && sortOrder === 1,
+                            'pi-sort-amount-down': sortField === 'id' && sortOrder === -1
+                          }"
+                                [ngStyle]="{'color': sortField === 'id' ? (sortOrder === 1 ? 'green' : 'blue') : 'inherit'}">
+                            </i>
+                        </div>
+                        <div style="cursor: pointer; display: flex; gap: 10px; align-items: center;"
+                            (click)="sortBy('title')">
+                            Név
+                            <i class="pi" [ngClass]="{
+                            'pi-sort-amount-up': sortField === 'title' && sortOrder === 1,
+                            'pi-sort-amount-down': sortField === 'title' && sortOrder === -1
+                          }"
+                                [ngStyle]="{'color': sortField === 'title' ? (sortOrder === 1 ? 'green' : 'blue') : 'inherit'}">
+                            </i>
+                        </div>
+                        <div>Leírás</div>
+                        <div style="width: 70px; cursor: pointer; display: flex; gap: 10px; align-items: center;"
+                            (click)="sortBy('status')">
+                            Státusz
+                            <i class="pi" [ngClass]="{
+                            'pi-sort-amount-up': sortField === 'status' && sortOrder === 1,
+                            'pi-sort-amount-down': sortField === 'status' && sortOrder === -1
+                          }"
+                                [ngStyle]="{'color': sortField === 'status' ? (sortOrder === 1 ? 'green' : 'blue') : 'inherit'}">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template let-workItemList pTemplate="listItem">
+            <div class="col-12 p-0 m-0 item-list-container" [ngStyle]="{'border-right': getTypeColor(item.type)}"
+                *ngFor="let item of workItemList">
+                <div class="item-container">
+
+
+
+                    <div class="item-list-item">
+                        <div style="width: 70px;" class="item-id">{{item.id}}</div>
+                        <!-- <div class="item-name">{{item}}</div> -->
+                        <div class="item-name" style="max-width: 300px;">{{item.title}}</div>
+                        <div class="item-name" *ngIf="isMobile()">{{item.description}}</div>
+                        <div style="width: 70px;
+                        display: flex
+                    ;
+                        gap: 10px;
+                        align-items: center;
+                        ">
+                            <!-- <div class="dot" [ngStyle]="{'background-color': getStateColor(item.status)}">
+                            </div> -->
+                            <div class="item-status"
+                                [ngStyle]="{'background-color': getStateBackgroundColor(item.status)}">
+                                <div [ngStyle]="{'color': getStateColor(item.status)}">{{getStateString(item.status)}}
+                                </div>
+                            </div>
+                            <!-- <div class="icon-container" [ngStyle]="{'color': getTypeColor(item.type)}">
+                                <span class="material-icons">{{getTypeIcon(item.type)}}</span>
+    
+                            </div> -->
+                            <!-- <div class="item-description">{{item.description}}</div>
+                                <p-rating [ngModel]="item.rating" [readonly]="true" [cancel]="false"></p-rating>
+                                <i class="pi pi-tag item-category-icon"></i><span
+                                    class="item-category">{{item.category}}</span> -->
+
+                        </div>
+                        <!-- <div class="item-name">
+                            <div class="dot" [ngStyle]="{'background-color': getTypeColor(item.type)}"></div>
+                        </div> -->
+
+                    </div>
+
+                    <div style="width: 100px; align-items: right; right:-5px;" class="item-id visibleIcons">
+                        <span class="material-icons listview" style="color: rgb(255, 255, 255)"
+                            (click)="navigateTo('view', item.id)">visibility</span>
+                        <span class="material-icons listview" style="color: rgb(255, 255, 255)"
+                            (click)="navigateTo('edit', item.id)">edit</span>
+                        <span class="material-icons listview" style="color: rgb(255, 255, 255)">delete</span>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+    </p-dataView>
+</div>

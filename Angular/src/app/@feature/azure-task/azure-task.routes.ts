@@ -10,7 +10,14 @@ export const routes: Routes = [
       ),
   },
   {
-    path: ':view/:id',
+    path: 'view/:id',
+    loadComponent: () =>
+      import('./feature/azure-task-edit/azure-task-edit.component').then(
+        (file) => file.AzureTaskEditComponent
+      ),
+  },
+  {
+    path: 'edit/:id',
     loadComponent: () =>
       import('./feature/azure-task-edit/azure-task-edit.component').then(
         (file) => file.AzureTaskEditComponent

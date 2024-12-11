@@ -36,7 +36,9 @@
               "node_modules/primeicons/primeicons.css",
               "assets/styles/lara-theme.scss",
               "node_modules/primeng/resources/primeng.min.css",
-              "assets/styles/primeng-custom-styles.scss",
+              "node_modules/primeflex/primeflex.scss",
+              "assets/styles/primeng-custom-styles.scss"
+
             ],
             "scripts": []
           },

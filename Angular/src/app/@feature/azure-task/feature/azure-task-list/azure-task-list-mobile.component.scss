@@ -1,0 +1,290 @@
+.item-list-container{
+    transition: width 0.3s ease-in-out;
+    max-height: 100%;
+    top: 0px;
+    bottom: 0px;
+    transform: none;
+    visibility: visible;
+    border: 1px solid rgb(148 148 148 / 18%);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-shadow: #80808014 0px 0px 10px 4px;
+    top: 0px;
+    bottom: 0px;
+    transform: none;
+    visibility: visible;
+    border-radius: 10px;
+    background-color: var(--primary-background);
+    padding: 8px !important;
+    
+}
+.item-header-container{
+    transition: width 0.3s ease-in-out;
+    max-height: 100%;
+    top: 0px;
+    bottom: 0px;
+    transform: none;
+    visibility: visible;
+    border: 1px solid rgb(148 148 148 / 18%);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-shadow: #80808014 0px 0px 10px 4px;
+    top: 0px;
+    bottom: 0px;
+    transform: none;
+    visibility: visible;
+    border-radius: 10px;
+    background-color: var(--primary-background);
+    padding: 8px !important;
+    
+}
+.material-icons.listview{
+    max-height: 20px !important;
+    max-width: 20px !important;
+    font-size: 20px !important;
+}
+.visibleIcons{
+    width: 85px;
+    align-items: center;
+    right: 2px;
+    gap: 5px;
+    display: grid
+;
+    justify-content: center;
+    /* grid-column: 3; */
+    display: flex
+;
+    flex-direction: row;
+}
+
+.p-dataview-content{
+    gap: 5px;
+    display: grid;
+    padding: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(100vh - 135px);
+}
+.p-dataview .p-dataview-header{
+    border: none !important;
+}
+
+.item-container{
+    align-items: center;
+    display: flex;
+}
+
+.item-list-item{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr 1fr 2fr 1fr);
+    grid-gap: 10px;
+    grid-template-rows: 1;
+    width: 100%;
+    align-items: center;
+}
+
+.dot {
+    height: 14px;
+    width: 14px;
+    border: 1px solid #ffffff;
+    // background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+.item-list-container:hover{
+    background: var(--changeGradientColor);
+    border-right-width: 82px !important;
+    transition: all 0.3s ease-in-out;
+    .visibleIcons{
+    transition: all 0.3s ease-in-out;
+        opacity: 1;
+    }
+}
+.item-list-container{
+    padding: 4px 8px !important;
+    transition: all 0.3s ease-in-out;
+    border-right-width: 24px !important;
+    .visibleIcons{
+    transition: all 0.3s ease-in-out;
+    margin-right: -100px;
+        opacity: 0;
+    }
+}
+
+.item-status{
+    justify-content: center;
+    width: 50px !important;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: smaller;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+}
+.material-icons{
+    cursor: pointer;
+    width: 30px !important;
+
+    transition: all 0.05s ease-in-out;
+}
+.material-icons:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: all 0.05s ease-in-out;
+}
+.material-icons:active{
+    cursor: pointer;
+    transform: scale(0.95);
+    transition: all 0.05s ease-in-out;
+}
+
+
+
+:host ::ng-deep {
+    .p-dropdown {
+        width: 14rem;
+        font-weight: normal;
+    }
+    
+    .item-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+    
+    .item-description {
+        margin: 0 0 1rem 0;
+    }
+    
+    .item-category-icon {
+        vertical-align: middle;
+        margin-right: .5rem;
+    }
+    
+    .item-category {
+        font-weight: 600;
+        vertical-align: middle;
+    }
+    
+    .item-list-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        width: 100%;
+    
+        img {
+            width: 150px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            margin-right: 2rem;
+        }
+    
+        .item-list-detail {
+            flex: 1 1 0;
+        }
+    
+        .p-rating {
+            margin: 0 0 .5rem 0;
+        }
+    
+        .item-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: .5rem;
+            align-self: flex-end;
+        }
+    
+        .item-list-action {
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .p-button {
+            margin-bottom: .5rem;
+        }
+    }
+    
+    .item-grid-item {
+        margin: .5em;
+        border: 1px solid #dee2e6;
+    
+        .item-grid-item-top,
+        .item-grid-item-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    
+        img {
+            width: 75%;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            margin: 2rem 0;
+        }
+    
+        .item-grid-item-content {
+            text-align: center;
+        }
+    
+        .item-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+    }
+}
+
+.card {
+    padding: 0 20px;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 576px) {
+	:host ::ng-deep .item-list-item {
+		flex-direction: column;
+		align-items: center;
+
+		img {
+			width: 75%;
+			margin: 2rem 0;
+		}
+
+		.item-list-detail {
+			text-align: center;
+		}
+
+		.item-price {
+			align-self: center;
+		}
+
+		.item-list-action {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.item-list-action {
+			margin-top: 2rem;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+		}
+	}
+}
+::ng-deep .blah.p-multiselect{
+    background-color: black !important;
+    height: 30px !important;
+   
+  }
+//   ::ng-deep .override-this
+//   {
+//   height: 30px !important;
+//   align-items: center;
+//     width: 250px !important;
+//   }
+.override-this{
+    width: 200px !important;
+    // width: 100% !important;
+    height: 30px !important;
+    align-items: center;
+}
+

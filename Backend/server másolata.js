@@ -6,9 +6,9 @@ const port = 3000;
 
 // Enable CORS for requests from localhost:4200 (Angular app)
 app.use(cors({
-  origin: 'http://localhost:4200', 
-  methods: 'GET',
-  allowedHeaders: 'Content-Type, Authorization', 
+  origin: 'http://localhost:4200', // Allow requests from Angular app
+  methods: 'GET', // Restrict to only GET requests (or specify other methods as needed)
+  allowedHeaders: 'Content-Type, Authorization', // Specify allowed headers
 }));
 
 // Azure DevOps API URL
@@ -16,10 +16,8 @@ const ORGANIZATION = 'pickback'
 const PROJECT = 'PickBack.ERP'
 const API_VERSION = '6.0';
 
-const random = 'http://192.168.10.99:10481/WeatherForecast/tasks'
 const azureQueriesUrl = 'https://dev.azure.com/pickback/PickBack.ERP/_apis/wit/queries?api-version=6.0';
 const azureWorkItemsUrl = 'https://dev.azure.com/pickback/PickBack.ERP/_apis/wit/queries?api-version=6.0';
-const queriesUrl = 'https://dev.azure.com/pickback/PickBack.ERP/_apis/wit/queries?$depth=1&api-version=6.0';
 const wiqlUrl = `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_apis/wit/wiql?api-version=${API_VERSION}`;
 
 const PAT = '8QBTvUA3HTgnrfHYqLK3G2bA08Wt1hsMxG6f1a32V3EAXF1KvKIKJQQJ99AKACAAAAAotW3FAAASAZDOVYbG'; // Your PAT token
@@ -47,24 +45,6 @@ app.get('/api/azure-queries', async (req, res) => {
 });
 
 
-app.get('/api/azure-queries-list', async (req, res) => {
-  try {
-  const encodedPat = Buffer.from(':' + PAT).toString('base64');
-    // Call Azure DevOps API using Axios
-    const response = await axios.get(random, {
-      headers: {
-       
-        'Content-Type': 'application/json',  // Ensure the content type is set to JSON
-      },
-    });
-
-    // Send the response back to the frontend
-    res.json(response.data);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error fetching tasks from Azure DevOps');
-  }
-});
 app.get('/api/azure-work-items', async (req, res) => {
   try {
   const encodedPat = Buffer.from(':' + PAT).toString('base64');
@@ -157,9 +137,6 @@ app.get('/api/azure-latest-work-items', async (req, res) => {
     res.status(500).send('Error fetching latest work items from Azure DevOps');
   }
 });
-
-
-
 
 
 

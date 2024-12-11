@@ -18,6 +18,10 @@ export class AzureTaskService {
     }
 
     getRandomItemsForTable(): Observable<any> {
-        return this.http.get('https://testmulticarpet.pickback.hu:81/api/classifications/getByType/Item/')
+        return this.http.get('http://192.168.10.99:10481/WeatherForecast/tasks')
+    }
+    getQueries(): Observable<any> {
+        return this.http.get(this.apiUrl + 'azure-queries-list');
+
     }
 }
