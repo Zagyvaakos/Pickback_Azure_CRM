@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     let darkmodeString = localStorage.getItem('isDarkmode')
     console.log(darkmodeString, 'striing')
     let darkmode = false;
@@ -32,5 +33,7 @@ export class AppComponent implements OnInit {
         break
     }
     this.themeService.toggleDarkmode(darkmode)
+
+    this.themeService.initializeTheme();
   }
 }

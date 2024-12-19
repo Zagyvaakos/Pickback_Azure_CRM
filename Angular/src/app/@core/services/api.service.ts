@@ -6,14 +6,15 @@ import { Observable } from 'rxjs';
     providedIn: 'root',
 })
 export class ApiService {
-    private apiUrl = 'http://localhost:3000/api/'; // Backend API URL
+    private apiUrl = 'http://192.168.10.99:10481/'; // Backend API URL
 
     constructor(private http: HttpClient) { }
 
     fetchAzureQueries(): Observable<any> {
-        return this.http.get(this.apiUrl + 'azure-queries');  // HTTP GET request
+        return this.http.post(this.apiUrl + 'PBTasks/list', { 'limit': 500 });  // HTTP GET request
     }
     fetchAzureLatestWorkItems(): Observable<any> {
-        return this.http.get(this.apiUrl + 'azure-latest-work-items');  // HTTP GET request
+        return this.http.post(this.apiUrl + 'PBTasks/list', { 'limit': 500 });  // HTTP GET request
+
     }
 }

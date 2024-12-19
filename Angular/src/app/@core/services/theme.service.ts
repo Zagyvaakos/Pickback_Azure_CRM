@@ -10,7 +10,6 @@ export class ThemeService {
 
     }
     public isDarkmode = signal(false);
-
     toggleDarkmode(optionalBoolean?: boolean) {
         if (optionalBoolean !== undefined) {
             localStorage.setItem('isDarkmode', optionalBoolean.toString())
@@ -32,39 +31,25 @@ export class ThemeService {
             localStorage.setItem('isDarkmode', newDarkmode.toString())
 
             this.isDarkmode.update((current) => !current);
+            this.updateTheme(this.isDarkmode());
 
-            // if (newDarkmode) {
-            //     this.loadTheme('dark')
-            // } else {
-            //     this.loadTheme('light')
-            // }
 
 
         }
     }
-
-
-    // loadTheme(themeName: string) {
-    //     const head = this.document.getElementsByTagName('head')[0];
-    //     const themeSrc = this.document.getElementById('client-theme') as HTMLLinkElement;
-    //     if (themeSrc) {
-    //         themeSrc.href = `${themeName}.scss`
-    //     }
-    //     else {
-    //         const style = this.document.createElement('link');
-    //         style.id = 'client-theme';
-    //         style.rel = 'stylesheet';
-    //         style.href = `${themeName}.scss`
-    //         head.appendChild(style)
-    //     }
-    // }
-
     initializeTheme(): void {
         const savedDarkmode = localStorage.getItem('isDarkmode') === 'true';
         this.isDarkmode.set(savedDarkmode);
-
-        document.body.classList.add(savedDarkmode ? 'dark-theme' : 'light-theme');
+        this.updateTheme(savedDarkmode);
     }
+    private updateTheme(isDarkMode: boolean): void {
+        if (isDarkMode) {
+            document.body.classList.add('dark-theme');
+            document.body.classList.remove('light-theme');
+        } else {
+            document.body.classList.add('light-theme');
+            document.body.classList.remove('dark-theme');
+        }
+    }
+
 }
-// document.body.classList.toggle('dark-theme', newDarkmode);
-// document.body.classList.toggle('light-theme', !newDarkmode);

@@ -16,7 +16,7 @@ const ORGANIZATION = 'pickback'
 const PROJECT = 'PickBack.ERP'
 const API_VERSION = '6.0';
 
-const random = 'http://192.168.10.99:10481/WeatherForecast/tasks'
+const random = 'http://192.168.10.99:10481/PBTasks/list'
 const azureQueriesUrl = 'https://dev.azure.com/pickback/PickBack.ERP/_apis/wit/queries?api-version=6.0';
 const azureWorkItemsUrl = 'https://dev.azure.com/pickback/PickBack.ERP/_apis/wit/queries?api-version=6.0';
 const queriesUrl = 'https://dev.azure.com/pickback/PickBack.ERP/_apis/wit/queries?$depth=1&api-version=6.0';
@@ -51,7 +51,7 @@ app.get('/api/azure-queries-list', async (req, res) => {
   try {
   const encodedPat = Buffer.from(':' + PAT).toString('base64');
     // Call Azure DevOps API using Axios
-    const response = await axios.get(random, {
+    const response = await axios.post(random, {
       headers: {
        
         'Content-Type': 'application/json',  // Ensure the content type is set to JSON

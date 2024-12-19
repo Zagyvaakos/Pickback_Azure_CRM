@@ -1,11 +1,12 @@
 .item-list-container{
+    
     transition: width 0.3s ease-in-out;
     max-height: 100%;
     top: 0px;
     bottom: 0px;
     transform: none;
     visibility: visible;
-    border: 1px solid rgb(148 148 148 / 18%);
+    border: 1px solid var(--border-color);
     margin-top: 5px;
     margin-bottom: 5px;
     box-shadow: #80808014 0px 0px 10px 4px;
@@ -14,7 +15,7 @@
     transform: none;
     visibility: visible;
     border-radius: 10px;
-    background-color: var(--primary-background);
+    background-color: var(--background-color-item);
     padding: 8px !important;
     
 }
@@ -34,7 +35,8 @@
     transform: none;
     visibility: visible;
     border-radius: 10px;
-    background-color: var(--primary-background);
+    color: var(--color);
+    background-color: var(--background-color);
     padding: 8px !important;
     
 }
@@ -73,7 +75,14 @@
     align-items: center;
     display: flex;
 }
-
+.p-multiselect .p-multiselect-close {
+    display: none;
+}   
+.p-dataview .p-paginator {
+    box-shadow: 0px -1px 13px rgba(0, 0, 0, 0.15);
+    border-radius: 8px; /* Optional for rounded edges */
+    background-color: var(--background-color)/* Optional to ensure background matches your design */
+}
 .item-list-item{
     display: grid;
     grid-template-columns: repeat(1, 1fr 1fr 2fr 1fr);
@@ -83,10 +92,18 @@
     align-items: center;
 }
 
+.item-list-item-head > * {
+    border-right: 1px solid var(--background-color); /* Right separator */
+}
+
+.item-list-item-head> :last-child {
+    border-right: none; /* Remove border from the last column */
+}
+
 .dot {
     height: 14px;
     width: 14px;
-    border: 1px solid #ffffff;
+    border: 1px solid var(--border-color);
     // background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
@@ -205,7 +222,7 @@
     
     .item-grid-item {
         margin: .5em;
-        border: 1px solid #dee2e6;
+        border: 1px solid var(--border-color);
     
         .item-grid-item-top,
         .item-grid-item-bottom {
@@ -282,7 +299,8 @@
 //     width: 250px !important;
 //   }
 .override-this{
-    width: 200px !important;
+    // min-width: 200px ;
+    width: 100% !important;
     // width: 100% !important;
     height: 30px !important;
     align-items: center;

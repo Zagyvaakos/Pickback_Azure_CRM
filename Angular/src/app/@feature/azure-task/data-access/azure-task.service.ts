@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AzureTaskService {
     private apiUrl = 'http://localhost:3000/api/';
+    private TibiUrl = 'http://192.168.10.99:10481/';
 
     constructor(private http: HttpClient) { }
 
@@ -20,8 +21,9 @@ export class AzureTaskService {
     getRandomItemsForTable(): Observable<any> {
         return this.http.get('http://192.168.10.99:10481/WeatherForecast/tasks')
     }
-    getQueries(): Observable<any> {
-        return this.http.get(this.apiUrl + 'azure-queries-list');
+    getQueries(data: any): Observable<any> {
+
+        return this.http.post(this.TibiUrl + 'PBTasks/list', data);
 
     }
 }

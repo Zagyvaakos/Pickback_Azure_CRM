@@ -1,19 +1,157 @@
-<div class="container">
-    <div class="card flex flex-column md:flex-row gap-3">
-        <div class="p-inputgroup">
-            <button type="button" pButton label="Search"></button>
-            <input type="text" pInputText placeholder="Keyword" />
+<div class="_container">
+    <div class="row p-0 m-0 d-flex"
+        style="padding: 0px 10px; height: 40px; align-items: center; justify-content: space-between">
+        <div style="display: flex;
+            flex-direction: row;
+            align-items: center;">
+            <div class="title" style="padding: 0px 10px">
+                Szerkesztés
+            </div>
+            <div class="separator-line"></div>
+            <div style="padding: 0px 10px; align-items: center; display: flex; gap: 10px; font-size: 12px !important;">
+                <p-button label="Vissza" icon="pi pi-angle-left" class="p-button-text" styleClass="custom-button-back">
+                </p-button>
+            </div>
         </div>
-
-        <div class="p-inputgroup">
-            <input type="text" pInputText placeholder="Keyword" />
-            <button type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn"></button>
-        </div>
-
-        <div class="p-inputgroup">
-            <button type="button" pButton icon="pi pi-check" styleClass="p-button-success"></button>
-            <input type="text" pInputText placeholder="Vote" />
-            <button type="button" pButton icon="pi pi-times" styleClass="p-button-danger"></button>
+        <div style="display: flex;
+            flex-direction: row;
+            align-items: center;">
+            <div style="margin: 0px 5px; width: 100%; "> <p-button [label]="'Mentés'" [outlined]="true"></p-button>
+            </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col" style="flex-grow: 7">
+            <div class=" card flex" style="flex-direction: column;">
+                <div class="mt-2 mb-1 title" style="font-size: medium; font-weight: 600;">
+                    Adatok
+                </div>
+                <div class="row  gap-1" style="width: 100% ">
+                    <div class="col p-0 m-0" style="flex-grow: 7">
+                        <input class="override-this" type="text" pInputText placeholder="Feladat neve"
+                            [formControl]="azureTaskForm.controls['name']" />
+                    </div>
+                    <div class="col p-0 m-0 " style="flex-grow: 3">
+                        <p-dropdown styleClass=" override-this" [options]="statuses"
+                            [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedCities"
+                            [showHeader]="true" [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true"
+                            optionLabel="name" placeholder="Státusz" [filterBy]="'name'" [loading]="false"
+                            [virtualScroll]="true" [virtualScrollItemSize]="32">
+                            <ng-template let-statusess pTemplate="status">
+                                <div class="item-status" style="width: 100% !important"
+                                    [ngStyle]="{'background-color': taskUI.getStateBackgroundColor(statusess.value)}">
+                                    <div [ngStyle]="{'color': taskUI.getStateColor(statusess.value)}">
+                                        {{taskUI.getStateString(statusess.value)}}
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+
+                    </div>
+                </div>
+                <div class="row p-0 m-0 w-100" style="width: 100%; display: flex; flex-direction: column; ">
+                    <div class="mt-2 mb-1 title" style="font-size: medium; font-weight: 600;">
+                        Feladat leírása
+                    </div>
+                    <div style="width: 100%;">
+                        <p-editor [style]="{ height: '320px' }">
+                            <ng-template pTemplate="header">
+                                <span class="ql-formats">
+                                    <button type="button" class="ql-bold" aria-label="Bold"></button>
+                                    <button type="button" class="ql-italic" aria-label="Italic"></button>
+                                    <button type="button" class="ql-underline" aria-label="Underline"></button>
+                                </span>
+                            </ng-template>
+                        </p-editor>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col" style="flex-grow: 2">
+            <div class=" card flex" style="flex-direction: column; height: 100%;">
+                <div class="row p-0 m-0 w-100" style="width: 100%; display: flex; flex-direction: column; ">
+                    <div class="mt-2 mb-2 pb-1 title"
+                        style="border-bottom: 1px solid rgb(197, 197, 197); font-size: medium; font-weight: 600;">
+                        Részletek
+                    </div>
+                    <div style="width: 100%;">
+                        <div style="font-weight: 600; color: gray;">
+                            Órák száma
+                        </div>
+                        <div style="font-weight: 700; padding: 10px;">
+                            0.5 óra
+                        </div>
+                    </div>
+                    <div style="width: 100%;">
+                        <div style="font-weight: 600; color: gray;">
+                            Prioritás
+                        </div>
+                        <div style="padding: 10px;">
+                            <p-dropdown styleClass=" override-this" [options]="priorities"
+                                [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedCities"
+                                [showHeader]="true" [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true"
+                                optionLabel="name" placeholder="Prioritás" [filterBy]="'name'" [loading]="false"
+                                [virtualScroll]="true" [virtualScrollItemSize]="32">
+
+                                <ng-template let-priorities pTemplate="priorities">
+                                    <div style="width: 100% !important">
+                                        <div>
+                                            {{ priorities.name}}
+                                        </div>
+                                    </div>
+                                </ng-template>
+
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div style="width: 100%;">
+                        <div style="font-weight: 600; color: gray;">
+                            Becsült idő
+                        </div>
+                        <div style="font-weight: 700; padding: 10px;">
+                            10 óra
+                        </div>
+                    </div>
+                    <div style="width: 100%;">
+                        <div style="margin: 0px 5px;  "> <p-button [label]="'SPLIT'" [outlined]="true"></p-button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row p-0 m-0 d-flex"
+        style="padding: 0px 10px; height: 40px; align-items: center; justify-content: space-between">
+        <div style="display: flex;
+        flex-direction: row;
+        align-items: center;">
+            <div class="title" style="padding: 0px 10px">
+                Megjegyzések
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class=" card flex" style="flex-direction: column;">
+                <div class="row  gap-1" style="width: 100% "></div>
+                <div class="row p-0 m-0 w-100" style="width: 100%; display: flex; flex-direction: row; ">
+                    <div>
+                        <div class="user one">
+                        </div>
+                    </div>
+                    <div style="width: 100%; margin-left: 10px;">
+
+                        <p-editor [style]="{ minHeight: '100px' }" />
+                    </div>
+                </div>
+                <div style="width: 100%; display: flex; flex-direction: row; justify-content: end; margin-top: 10px;">
+
+                    <div style="margin: 0px 5px;  "> <p-button [label]="'Mégse'" [outlined]="true"></p-button>
+                    </div>
+                    <div style="margin: 0px 5px;  "> <p-button [label]="'Mentés'" [outlined]="true"></p-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

@@ -32,28 +32,33 @@
               }
             ],
             "styles": [
-              "assets/styles/styles.scss",
               "node_modules/primeicons/primeicons.css",
-              "assets/styles/lara-theme.scss",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeflex/primeflex.scss",
-              "assets/styles/primeng-custom-styles.scss"
+              "src/assets/styles/primeng-custom-styles.scss",
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.snow.css",
+              "src/assets/styles/lara-light-theme-default.scss",
+              "src/assets/styles/styles.scss"
 
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "quill-delta"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
+                  "maximumWarning": "500MB",
                   "maximumError": "1MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "2MB",
+                  "maximumError": "4MB"
                 }
               ],
               "outputHashing": "all"
