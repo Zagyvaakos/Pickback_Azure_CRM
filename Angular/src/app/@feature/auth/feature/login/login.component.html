@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="wrapper" *ngIf="!stupid()">
+    <h2>Bejelentkezés</h2>
+    <div class="input-field">
+      <input type="text" required [(ngModel)]="loginData().email">
+      <label>E-mail cím</label>
+    </div>
+    <div class="input-field">
+      <input type="password" required [(ngModel)]="loginData().password">
+      <label>Jelszó</label>
+    </div>
+    <div class="forget">
+      <label for="remember">
+        <input type="checkbox" id="remember">
+        <p>Emlékezz rám</p>
+      </label>
+      <div (click)="onStupid()">Elfelejtette a jelszavát?</div>
+    </div>
+    <button (click)="onLogin()" type="submit">Bejelentkezés</button>
+
+  </div>
+  <div class="wrapper" *ngIf="stupid()">
+    <h4>Attól, hogy 2 agysejted van és azok sem működnek egyszerre, még eszedbe juthatna, hogy kell elszámolni 4-ig.
+      Segítek! 1234
+    </h4>
+
+    <button (click)="onStupid()" type="button">Vissza</button>
+
+  </div>
+</div>

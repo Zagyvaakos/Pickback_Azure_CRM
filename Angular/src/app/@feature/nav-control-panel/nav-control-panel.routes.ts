@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
+import { authGuard } from '../auth/auth.guard';
 
 
 export const routes: Routes = [
   {
     path: '',
+    canActivate: [authGuard],
     loadComponent: () =>
       import(
         './feature/nav-control-panel/nav-control-panel.component'

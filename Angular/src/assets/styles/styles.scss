@@ -123,7 +123,7 @@ body {
     --background-color: #272727;
     --background-color-item: #383838b0;
     --background-color-lighter: rgb(61, 56, 56);
-    --background-color-lighter-focus: #000000;
+    --background-color-lighter-focus: #05080bf0;
     --background-color-overlay: rgba(0, 0, 0, 0.384);
     --background-color-soft:   #3b3b3bee;
     --highlight-focus-background: rgb(119, 119, 119);
@@ -146,11 +146,18 @@ body {
   --highlight-background-color: #0f0f0f;
   --highlight-text: #388c99;
   --selected-text-color: #388c99;
-  --editor-header: #000000ea;
+  --editor-header: #272727;
+  --box-shadow-user: 0px 0px 0px 7px rgb(255 255 255 / 29%), 0px 0px 10px 12px #00000071;
   // #c9c9c9
 }
 
 .light-theme {
+  --button-hover-background: rgb(56, 140, 153);
+  --changeOutlineColorHover:rgb(58, 201, 223);
+  --changeOutlineColor: rgb(56, 140, 153);
+
+  --box-shadow-user: 0px 0px 0px 7px rgba(0, 0, 0, 0.29), 0px 0px 10px 12px #b4b4b487;
+
   --button-background: rgb(56, 140, 153);
   --selected-text-color: #165077;
   --highlight-text: #055d86;
@@ -196,7 +203,7 @@ body {
   --fill-color: var(--other-color);
   --background-color: #fff;
   --background-color-lighter: rgb(212, 196, 196);
-  --background-color-lighter-focus: #eff5f66b;
+  --background-color-lighter-focus: #b8c1d547;
   --background-color-overlay: rgba(255, 255, 255, 0.384);
   --background-color-soft: rgb(255, 255, 255);
   --highlight-focus-background: rgb(173, 173, 173);
@@ -211,7 +218,6 @@ body {
   --changeBasicBackground: var(--background-color);
   --changeGradientColor: linear-gradient(90deg, var(--changHighlightColor), rgba(255, 255, 255, 0.7));
   --changHighlightColor: #3babf634;
-  --changeOutlineColor: #3babf6;
   --switch-color: #144464;
   --editor-header: #f9fafb;
 }

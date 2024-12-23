@@ -138,7 +138,7 @@ mat-sidenav {
   display: inline-block;
   width: 150px;
   height: 150px;
-  box-shadow: 0px 0px 4px 3px #80808021;
+  box-shadow: var(--box-shadow-user);
   border-radius: 25%;
   background-repeat: no-repeat;
   background-position: center center;

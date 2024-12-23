@@ -193,4 +193,44 @@ export class AzureTaskListComponent implements OnInit {
 
     this.router.navigate([view, id], { relativeTo: this.route });
   }
+
+  testpost() {
+    const data = {
+      id: 0,
+      company: {
+        id: 0,
+        name: "string"
+      },
+      createdUser: {
+        id: 0,
+        isAdmin: true,
+        isActive: true,
+        company: {
+          id: 0,
+          name: "string"
+        },
+        firstName: "string",
+        lastName: "string",
+        email: "string",
+        passwordHash: "string",
+        phone1: "string",
+        phone2: "string"
+      },
+      createdDate: new Date().toISOString(), // Current date-time in ISO format
+      type: "Bug",
+      status: "New",
+      title: "string",
+      description: "string",
+      siteUrl: "string",
+      affectedVersion: "string",
+      fixedVersion: "string"
+    };
+
+    // Call the insertData method
+    this.azureTaskService.insertData(data).subscribe(response => {
+      console.log('Data inserted successfully:', response);
+    }, error => {
+      console.error('Error inserting data:', error);
+    });
+  }
 }
