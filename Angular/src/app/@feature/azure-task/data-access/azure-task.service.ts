@@ -28,14 +28,28 @@ export class AzureTaskService {
     }
     getQueries(data: any): Observable<any> {
 
-        return this.http.post(this.TibiUrl + 'PBTasks/list', data);
+        return this.http.post(this.TibiUrl + 'tasks/list', data);
 
     }
     insertData(data: any): Observable<any> {
         const headers = new HttpHeaders({
-            Authorization: `Bearer ${this.token}` // Add Bearer token to the headers
+            Authorization: `Bearer ${this.token}`
         });
 
-        return this.http.post(this.TibiUrl + 'PBTasks/insert', data, { headers });
+        return this.http.post(this.TibiUrl + 'tasks/insert', data, { headers });
+    }
+    getTask(id: number): Observable<any> {
+        const headers = new HttpHeaders({
+            Authorization: `Bearer ${this.token}`
+        });
+        return this.http.get(this.TibiUrl + 'tasks/' + id, { headers });
+
+    }
+    delete(id: number): Observable<any> {
+        const headers = new HttpHeaders({
+            Authorization: `Bearer ${this.token}`
+        });
+
+        return this.http.delete(this.TibiUrl + 'tasks/delete/' + id, { headers });
     }
 }

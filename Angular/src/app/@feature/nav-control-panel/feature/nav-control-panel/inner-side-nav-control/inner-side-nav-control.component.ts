@@ -32,28 +32,10 @@ import { NavMenuService } from '../../../data-access/nav-menu.service';
   styleUrl: './inner-side-nav-control.component.scss'
 })
 export class InnerSideNavControlComponent implements OnInit {
-
-  public isExpanded!: boolean;
-
   constructor(public _navMenuService: NavMenuService) {
   }
-
   ngOnInit() {
-    this.isExpanded = this._navMenuService.expanded();
-
   }
-
-
   @Input() activeMenu: string = "";
-
-  onRouteClick(link: string) {
-    console.log('Navigating to:', link);
-  }
-  toggleMenu(e: any) {
-    console.log(e, 'any')
-    console.log(this.isExpanded)
-
-  }
-
 
 }

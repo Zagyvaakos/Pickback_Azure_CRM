@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
@@ -26,18 +26,22 @@ import { MatIconModule } from '@angular/material/icon';
     templateUrl: './nav-control-panel.component.html',
     styleUrl: './nav-control-panel.component.scss'
 })
-export class NavControlPanelComponent {
-    public isExpanded = true;
-    public isExpandedInnerMenu = true;
+export class NavControlPanelComponent implements OnInit {
     public menu: string = "";
 
     constructor(
         private _navMenuService: NavMenuService,
     ) {
     }
-
+    ngOnInit(): void {
+        let menuState = localStorage.getItem('menuState');
+        const isMenuExpanded = menuState === 'true';
+        this._navMenuService.expanded.update(() => isMenuExpanded);
+    }
     public changeMenu(event: any) {
         this._navMenuService.expanded.update(() => (true));
+        localStorage.setItem('menuState', this._navMenuService.expanded().toString())
         this.menu = event
+
     }
 }

@@ -42,6 +42,8 @@ export class AzureTaskEditComponent implements OnInit {
     selectedCities: any[] = [];
     azureTaskForm!: FormGroup
 
+
+    comments: any[] = [{ value: 1 }, { value: 1 }, { value: 1 }, { value: 1 }, { value: 1 }, { value: 1 }, { value: 1 }]
     statuses2 = [
 
         { value: AzureTaskStatusType.STOPPED, name: 'Áll' },
@@ -74,17 +76,19 @@ export class AzureTaskEditComponent implements OnInit {
 
         console.log(this.aroute);
         this.id = this.aroute.snapshot.params['id'];
+        if (+this.id !== 0) {
+            this.azureTaskService.getTask(this.id).pipe().subscribe((result) => {
+                console.log(result, 'result')
+                // if (this.id !== null) {
+                //     const found = result.objects.find((obj: any) => obj.id === +this.id);
+                //     if (found !== undefined) {
+                //         this.azureTaskForm.controls['name'].patchValue(found.title)
+                //     } else {
+                //     }
+                // }
 
-        // this.azureTaskService.getQueries(this.filter).pipe().subscribe((result) => {
-        //     console.log(result, 'result')
-        //     if (this.id !== null) {
-        //         const found = result.objects.find((obj: any) => obj.id === +this.id);
-        //         if (found !== undefined) {
-        //             this.azureTaskForm.controls['name'].patchValue(found.title)
-        //         } else {
-        //         }
-        //     }
+            });
+        }
 
-        // });
     }
 }

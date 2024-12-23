@@ -146,12 +146,15 @@
     transition: all 0.05s ease-in-out;
 }
 .material-icons:hover{
+    color: var(--changeOutlineColor) !important;
     cursor: pointer;
     transform: scale(1.05);
     transition: all 0.05s ease-in-out;
 }
 .material-icons:active{
     cursor: pointer;
+    color: var(--changeOutlineColorHover) !important;
+
     transform: scale(0.95);
     transition: all 0.05s ease-in-out;
 }

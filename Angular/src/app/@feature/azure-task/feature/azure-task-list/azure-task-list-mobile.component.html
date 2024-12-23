@@ -11,11 +11,10 @@
                     <div style="margin: 0px 5px">
                         <span class="p-input-icon-left" style="width: 100%">
                             <i class="pi pi-search"></i>
-                            <input style="width: 100%; height: 30px;" type="text" pInputText [(ngModel)]="searchText" />
+                            <input style="width: 100%; height: 30px;" type="text" pInputText [value]="textFilter()"
+                                (input)="onInputChange($event)" />
                         </span>
-
                     </div>
-
                 </div>
                 <div class="col p-0 m-0 w-100" style="display: flex">
                     <div style="margin: 0px 5px">
@@ -98,16 +97,21 @@
                     </div>
                 </div>
                 <div style="display: flex">
-                    <div style="margin: 0px 5px; width: 100%; "> <p-button [label]="clearFilterButtonLabel"
-                            [outlined]="true" icon="pi pi-filter-slash" (click)="clearFilter()"></p-button></div>
-                    <div style="margin: 0px 5px; width: 100%; "> <p-button [label]="'testpost'" [outlined]="true"
-                            icon="pi pi-filter-slash" (click)="testpost()"></p-button></div>
+                    <div style="margin: 0px 5px; width: 100%; display: flex;"> <p-button
+                            style="height: 30px !important;" [label]=" clearFilterButtonLabel" [outlined]="true"
+                            icon="pi pi-filter-slash" (click)="clearFilter()"></p-button></div>
+                    <div style="margin: 0px 5px; width: 100%; display: flex;"> <p-button
+                            style="height: 30px !important;" [label]="addTaskButtonLabel" [outlined]="true"
+                            icon="pi pi-plus" (click)="navigateTo('edit', '0')"></p-button></div>
+                    <!-- <div style="margin: 0px 5px; width: 100%; "> <p-button [label]="'testpost'" [outlined]="true"
+                            icon="pi pi-filter-slash" (click)="testpost()"></p-button></div> -->
                 </div>
             </div>
 
             <div class="col-12 p-0 m-0 item-header-container "
                 style="padding: 10px 34px 10px 12px !important; border-right: none !important;">
                 <div class="item-container">
+
                     <div class="item-list-item item-list-item-head">
                         <div style=" cursor: pointer; display: flex; gap: 10px; align-items: center;"
                             (click)="sortBy('id')">
@@ -172,11 +176,18 @@
                             (click)="navigateTo('view', item.id)">visibility</span>
                         <span class="material-icons listview" style="color: rgb(255, 255, 255)"
                             (click)="navigateTo('edit', item.id)">edit</span>
-                        <span class="material-icons listview" style="color: rgb(255, 255, 255)">delete</span>
+                        <span class="material-icons listview" style="color: rgb(255, 255, 255)"
+                            (click)="onDeleteTask($event, item)">delete</span>
                     </div>
                 </div>
             </div>
         </ng-template>
 
     </p-dataView>
+
+
 </div>
+
+
+<p-toast />
+<p-confirmDialog [acceptLabel]="'Igen'" [rejectLabel]="'Mégse'" />

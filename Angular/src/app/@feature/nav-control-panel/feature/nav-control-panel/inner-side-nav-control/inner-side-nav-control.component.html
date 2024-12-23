@@ -2,7 +2,7 @@
     <mat-sidenav-container autosize>
         <mat-sidenav #sidenav fixedInViewport="true" mode="side" [opened]="true"
             [style.width]="_navMenuService.expanded() ? '250px' : '0px'">
-            <inner-side-nav (toggleMenu)="toggleMenu($event)" [activeMenu]="activeMenu"></inner-side-nav>
+            <inner-side-nav [activeMenu]="activeMenu"></inner-side-nav>
         </mat-sidenav>
 
         <mat-sidenav-content [style.margin-left.px]="_navMenuService.expanded() ? 250 : 0">

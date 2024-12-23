@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, isDevMode, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { Component, computed, CUSTOM_ELEMENTS_SCHEMA, isDevMode, OnInit, signal, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AzureTaskService } from '../../data-access/azure-task.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -13,6 +13,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MatIconModule } from '@angular/material/icon';
 import { AzureTaskUIService } from '../../data-access/azure-task-ui.service';
 import { Filter } from '../../../../@shared/models/Filter.model';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmationService, MessageService } from 'primeng/api';
 @Component({
   selector: 'app-azure-task-list',
   templateUrl: './azure-task-list-mobile.component.html',
@@ -25,14 +28,17 @@ import { Filter } from '../../../../@shared/models/Filter.model';
     TableModule,
     DropdownModule,
     MultiSelectModule,
+    ConfirmDialogModule,
     InputTextModule,
+    ToastModule,
     ButtonModule,
     MatIconModule,
     MatButtonModule,
     FormsModule,
     DataViewModule  // Add the module here, not the component
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [ConfirmationService, MessageService]
 })
 export class AzureTaskListComponent implements OnInit {
 
@@ -40,24 +46,34 @@ export class AzureTaskListComponent implements OnInit {
     public taskUI: AzureTaskUIService,
     private azureTaskService: AzureTaskService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService,
   ) {
     this.updateButtonLabel();
     window.addEventListener('resize', () => this.updateButtonLabel());
   }
   totalCount = signal<number>(0);
+
+  textFilter = signal<string>('')
+  typeFilter = signal<any[]>([])
+  statusFilter = signal<any[]>([])
+
+
   filter: Filter = {
-    text: '',
+    text: this.textFilter().toLowerCase(),
     offset: 1,
     limit: 10,
     sortField: 'title',
     sortDirection: 'asc',
     createdUser: { id: 1 },
     companyIds: [],
-    statuses: [],
-    types: [],
+    statuses: this.statusFilter(),
+    types: this.typeFilter(),
   }
+
   clearFilterButtonLabel: string = 'Törlés';
+  addTaskButtonLabel: string = 'Új';
   isDefault = true;
   workItems = signal<any>([]);
   workItemsToShow = signal<any>([]);
@@ -73,6 +89,8 @@ export class AzureTaskListComponent implements OnInit {
   selectedCity: any;
   selectedCities: any[] = [];
   selectedNames: any[] = [];
+
+
 
   ngOnInit(): void {
     console.log(this.route, 'route')
@@ -174,6 +192,7 @@ export class AzureTaskListComponent implements OnInit {
 
   updateButtonLabel() {
     this.clearFilterButtonLabel = window.innerWidth < 1500 ? '' : 'Törlés';
+    this.addTaskButtonLabel = window.innerWidth < 1500 ? '' : 'Új';
   }
   isMobile() {
     return true
@@ -233,4 +252,46 @@ export class AzureTaskListComponent implements OnInit {
       console.error('Error inserting data:', error);
     });
   }
+  onDeleteTask(event: Event, task: any) {
+
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Biztosan törli a(z) "' + `${task.title}` + '" című feladatot?',
+      header: 'Feladat törlése',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: "p-button-danger p-button-text",
+      rejectButtonStyleClass: "p-button-text p-button-text",
+      acceptIcon: "none",
+      rejectIcon: "none",
+
+      accept: () => {
+        this.azureTaskService.delete(task.id).subscribe((response: any) => {
+          if (response) {
+            this.loadItems();
+            this.messageService.add({ severity: 'info', summary: 'Siker!', detail: 'Törlés kész' });
+
+          }
+        })
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'error', summary: 'Figyelemeztetés!', detail: 'Törlés visszavonva' });
+      }
+    });
+  }
+  onInputChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement) {
+      this.textFilter.set(inputElement.value);
+      this.loadItems()
+    }
+  }
+
+  // onInputChange(event: Event): void {
+  //   const inputElement = event.target as HTMLInputElement;
+  //   if (inputElement) {
+  //     // Emit the new value to the Subject
+  //     this.inputSubject.next(inputElement.value);
+  //   }
+  // }
+
 }

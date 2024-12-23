@@ -284,17 +284,22 @@ body{
 ::-webkit-scrollbar {
   width: 8px;
 }
+.ql-editor{
+  min-height: 100px !important;
+  max-height: 400px !important;
+  overflow: auto;
+}
 
 /* Track */
 ::-webkit-scrollbar-track {
   box-shadow: var( --scrollbar-track);
-  border-radius: 5px;
+  border-radius: 1px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
-  border-radius: 5px;
+  border-radius: 1px;
   transition: all 0.15s ease-in-out;
 
   min-height: 30px;

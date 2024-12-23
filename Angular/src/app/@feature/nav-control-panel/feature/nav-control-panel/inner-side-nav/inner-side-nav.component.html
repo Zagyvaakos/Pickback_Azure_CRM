@@ -14,7 +14,7 @@
     </ng-container>
     <mat-list class="nav">
         <div class="nav-item" mat-list-item [ngClass]="{'is-active': route.isActive}"
-            *ngFor="let route of routeLinks; trackBy: trackByRoute" routerLinkActive="active-link"
+            *ngFor="let route of currentRouteLinks; trackBy: trackByRoute" routerLinkActive="active-link"
             [routerLink]="route.link" (click)="onRouteClick(route)">
             <p matLine *ngIf="_navMenuService.expanded()">{{ route.name }}</p>
         </div>

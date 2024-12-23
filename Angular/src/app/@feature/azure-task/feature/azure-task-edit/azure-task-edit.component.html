@@ -129,7 +129,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngFor="let comment of comments">
         <div class="col">
             <div class=" card flex" style="flex-direction: column;">
                 <div class="row  gap-1" style="width: 100% "></div>
@@ -138,9 +138,16 @@
                         <div class="user one">
                         </div>
                     </div>
-                    <div style="width: 100%; margin-left: 10px;">
-
-                        <p-editor [style]="{ minHeight: '100px' }" />
+                    <div style="width: 100%; margin-left: 10px">
+                        <p-editor [style]="{ minHeight: '100px', maxHeigh: '500px', overflow: 'auto'}">
+                            <ng-template pTemplate="header">
+                                <span class="ql-formats">
+                                    <button type="button" class="ql-bold" aria-label="Bold"></button>
+                                    <button type="button" class="ql-italic" aria-label="Italic"></button>
+                                    <button type="button" class="ql-underline" aria-label="Underline"></button>
+                                </span>
+                            </ng-template>
+                        </p-editor>
                     </div>
                 </div>
                 <div style="width: 100%; display: flex; flex-direction: row; justify-content: end; margin-top: 10px;">

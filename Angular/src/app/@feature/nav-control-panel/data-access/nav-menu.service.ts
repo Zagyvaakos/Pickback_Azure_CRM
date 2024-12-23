@@ -10,8 +10,11 @@ export class NavMenuService {
     toggleMenu(optionalBoolean?: boolean) {
         if (optionalBoolean !== undefined) {
             this.expanded.set(optionalBoolean);
+            localStorage.setItem('menuState', this.expanded().toString())
         } else {
             this.expanded.update((current) => !current);
+            localStorage.setItem('menuState', this.expanded().toString())
+
         }
     }
 }

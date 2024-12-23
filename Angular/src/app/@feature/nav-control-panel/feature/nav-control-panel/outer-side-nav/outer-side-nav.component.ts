@@ -21,7 +21,6 @@ export class OuterSideNavComponent {
   constructor(public themeService: ThemeService) {
 
   }
-  @Input() isExpanded: boolean = true;
   @Output() changeMenu = new EventEmitter();
   isDarkMode: boolean = false;
   public menus = [
@@ -32,7 +31,6 @@ export class OuterSideNavComponent {
 
   onMenuClick(link: string) {
     this.changeMenu.emit(link)
-    this.isExpanded = true
   }
   onDarkToggle() {
     this.themeService.toggleDarkmode()
