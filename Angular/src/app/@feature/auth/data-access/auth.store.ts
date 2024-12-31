@@ -48,6 +48,8 @@ export const AuthStore = signalStore(
                 next: () => {
                   matSnackBar.open('Sikeres bejelentkezés!', undefined, {
                     panelClass: 'success',
+                    duration: 3000,
+
                   });
                   router.navigate(['/crm/home']);
                 },
@@ -55,6 +57,7 @@ export const AuthStore = signalStore(
                   console.error('Login error:', err);
                   matSnackBar.open('Sikertelen bejelentkezés!', undefined, {
                     panelClass: 'error',
+                    duration: 3000,
                   });
                 },
                 finalize: () => {

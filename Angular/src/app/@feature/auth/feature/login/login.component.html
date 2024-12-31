@@ -10,10 +10,10 @@
       <label>Jelszó</label>
     </div>
     <div class="forget">
-      <label for="remember">
-        <input type="checkbox" id="remember">
+      <!-- <label for="remember">
+        <input type="checkbox" id="remember" [(ngModel)]="rememberMe">
         <p>Emlékezz rám</p>
-      </label>
+      </label> -->
       <div (click)="onStupid()">Elfelejtette a jelszavát?</div>
     </div>
     <button (click)="onLogin()" type="submit">Bejelentkezés</button>

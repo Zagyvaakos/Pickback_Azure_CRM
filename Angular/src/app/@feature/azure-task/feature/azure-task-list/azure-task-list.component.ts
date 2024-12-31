@@ -1,4 +1,4 @@
-import { Component, computed, CUSTOM_ELEMENTS_SCHEMA, isDevMode, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { Component, computed, CUSTOM_ELEMENTS_SCHEMA, isDevMode, OnDestroy, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AzureTaskService } from '../../data-access/azure-task.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -16,6 +16,8 @@ import { Filter } from '../../../../@shared/models/Filter.model';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
+import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-azure-task-list',
   templateUrl: './azure-task-list-mobile.component.html',
@@ -30,6 +32,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     MultiSelectModule,
     ConfirmDialogModule,
     InputTextModule,
+    OverlayPanelModule,
     ToastModule,
     ButtonModule,
     MatIconModule,
@@ -40,8 +43,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [ConfirmationService, MessageService]
 })
-export class AzureTaskListComponent implements OnInit {
-
+export class AzureTaskListComponent implements OnInit, OnDestroy {
   constructor(
     public taskUI: AzureTaskUIService,
     private azureTaskService: AzureTaskService,
@@ -53,6 +55,8 @@ export class AzureTaskListComponent implements OnInit {
     this.updateButtonLabel();
     window.addEventListener('resize', () => this.updateButtonLabel());
   }
+  @ViewChild('op') op: OverlayPanel | undefined;
+
   totalCount = signal<number>(0);
 
   textFilter = signal<string>('')
@@ -80,35 +84,34 @@ export class AzureTaskListComponent implements OnInit {
   rowsPerPage = 10;
   searchText: string = '';
   statuses = [
-    { value: 0, name: 'Áll' },
-    { value: 1, name: 'Hibás' },
-    { value: 2, name: 'Kész' },
-    { value: 3, name: 'Új' },
+    { value: 'Stopped', name: 'Áll' },
+    { value: 'Bug', name: 'Hibás' },
+    { value: 'Completed', name: 'Kész' },
+    { value: 'New', name: 'Új' },
 
   ];
   selectedCity: any;
   selectedCities: any[] = [];
   selectedNames: any[] = [];
-
+  destroy$ = new Subject();
 
 
   ngOnInit(): void {
-    console.log(this.route, 'route')
     const savedState = this.loadPaginationState();
     if (savedState) {
-
       this.rowsPerPage = savedState.rows;
-
     }
     this.loadItems();
 
   }
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
   onPageChange(event: any) {
-    console.log(event, 'pagechange')
     this.savePaginationState(event);
   }
   savePaginationState(event: any,) {
-    console.log(event, 'event')
     const paginationState = {
       rows: event.rows,
       first: event.first
@@ -117,7 +120,6 @@ export class AzureTaskListComponent implements OnInit {
     this.filter.limit = event.rows;
 
     this.filter.offset = event.first / event.rows + 1
-    console.log(this.filter, 'filter')
     this.loadItems()
   }
   loadPaginationState() {
@@ -132,24 +134,23 @@ export class AzureTaskListComponent implements OnInit {
     return item.id;
   }
   loadItems() {
-    this.getWorkItems().subscribe({
+    this.getWorkItems().pipe(takeUntil(this.destroy$)).subscribe({
       next: (result) => {
         this.totalCount.set(result.totalCount);
-        console.log(this.totalCount(), 'this total')
         console.log(result)
-        if (result) {
-          result.objects[2].status = 1;
-          result.objects[4].status = 2;
-          result.objects[3].status = 3;
-          result.objects[5].status = 0;
-          result.objects[6].status = 3;
-          result.objects[9].status = 2;
-          result.objects[4].type = 1;
-          result.objects[0].type = 2;
-          result.objects[6].type = 3;
-          result.objects[3].type = 2;
-          result.objects[8].type = 3;
-        }
+        // if (result) {
+        //   result.objects[2].status = 1;
+        //   result.objects[4].status = 2;
+        //   result.objects[3].status = 3;
+        //   result.objects[5].status = 0;
+        //   result.objects[6].status = 3;
+        //   result.objects[9].status = 2;
+        //   result.objects[4].type = 1;
+        //   result.objects[0].type = 2;
+        //   result.objects[6].type = 3;
+        //   result.objects[3].type = 2;
+        //   result.objects[8].type = 3;
+        // }
 
 
         this.workItems.set(result.objects);
@@ -213,45 +214,7 @@ export class AzureTaskListComponent implements OnInit {
     this.router.navigate([view, id], { relativeTo: this.route });
   }
 
-  testpost() {
-    const data = {
-      id: 0,
-      company: {
-        id: 0,
-        name: "string"
-      },
-      createdUser: {
-        id: 0,
-        isAdmin: true,
-        isActive: true,
-        company: {
-          id: 0,
-          name: "string"
-        },
-        firstName: "string",
-        lastName: "string",
-        email: "string",
-        passwordHash: "string",
-        phone1: "string",
-        phone2: "string"
-      },
-      createdDate: new Date().toISOString(), // Current date-time in ISO format
-      type: "Bug",
-      status: "New",
-      title: "string",
-      description: "string",
-      siteUrl: "string",
-      affectedVersion: "string",
-      fixedVersion: "string"
-    };
 
-    // Call the insertData method
-    this.azureTaskService.insertData(data).subscribe(response => {
-      console.log('Data inserted successfully:', response);
-    }, error => {
-      console.error('Error inserting data:', error);
-    });
-  }
   onDeleteTask(event: Event, task: any) {
 
     this.confirmationService.confirm({
@@ -286,12 +249,58 @@ export class AzureTaskListComponent implements OnInit {
     }
   }
 
-  // onInputChange(event: Event): void {
-  //   const inputElement = event.target as HTMLInputElement;
-  //   if (inputElement) {
-  //     // Emit the new value to the Subject
-  //     this.inputSubject.next(inputElement.value);
-  //   }
-  // }
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// testpost() {
+//   const data = {
+//     id: 0,
+//     company: {
+//       id: 0,
+//       name: "string"
+//     },
+//     createdUser: {
+//       id: 0,
+//       isAdmin: true,
+//       isActive: true,
+//       company: {
+//         id: 0,
+//         name: "string"
+//       },
+//       firstName: "string",
+//       lastName: "string",
+//       email: "string",
+//       passwordHash: "string",
+//       phone1: "string",
+//       phone2: "string"
+//     },
+//     createdDate: new Date().toISOString(), // Current date-time in ISO format
+//     type: "Bug",
+//     status: "New",
+//     title: "string",
+//     description: "string",
+//     siteUrl: "string",
+//     affectedVersion: "string",
+//     fixedVersion: "string"
+//   };
+
+//   // Call the insertData method
+//   this.azureTaskService.insertData(data).subscribe(response => {
+//     console.log('Data inserted successfully:', response);
+//   }, error => {
+//     console.error('Error inserting data:', error);
+//   });
+// }

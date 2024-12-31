@@ -150,7 +150,7 @@
   .p-link:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
 
   .p-component-overlay-enter {
@@ -190,7 +190,7 @@
   .p-autocomplete:not(.p-disabled).p-focus .p-autocomplete-multiple-container {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
     border-color: var(--changeOutlineColor);
   }
   .p-autocomplete .p-autocomplete-multiple-container {
@@ -299,7 +299,7 @@
   .p-calendar:not(.p-calendar-disabled).p-focus > .p-inputtext {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
     border-color: var(--changeOutlineColor);
   }
 
@@ -348,7 +348,7 @@
 .p-datepicker .p-datepicker-header .p-datepicker-next:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-datepicker .p-datepicker-header .p-datepicker-title {
     line-height: 2rem;
@@ -395,7 +395,7 @@
   .p-datepicker table td > span:focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-datepicker table td.p-datepicker-today > span {
     background: var(--border-color);
@@ -434,7 +434,7 @@
   .p-datepicker .p-timepicker button:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-datepicker .p-timepicker button:last-child {
     margin-top: 0.2em;
@@ -492,7 +492,7 @@
   .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):not(.p-highlight):hover {
     background: var(--filled-background);
@@ -500,7 +500,7 @@
   .p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):not(.p-highlight):hover {
     background: var(--filled-background);
@@ -508,7 +508,7 @@
   .p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
 
   p-calendar.p-calendar-clearable .p-inputtext {
@@ -541,7 +541,7 @@
   .p-cascadeselect:not(.p-disabled).p-focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
     border-color: var(--changeOutlineColor);
   }
   .p-cascadeselect .p-cascadeselect-label {
@@ -684,7 +684,7 @@
   .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
     border-color: var(--changeOutlineColor);
   }
   .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
@@ -736,7 +736,7 @@
   .p-chips:not(.p-disabled).p-focus .p-chips-multiple-container {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
     border-color: var(--changeOutlineColor);
   }
   .p-chips .p-chips-multiple-container {
@@ -812,7 +812,7 @@
   .p-dropdown:not(.p-disabled).p-focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
     border-color: var(--changeOutlineColor);
   }
   .p-dropdown.p-dropdown-clearable .p-dropdown-label {
@@ -1109,7 +1109,7 @@
   .p-inputswitch.p-focus .p-inputswitch-slider {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-inputswitch:not(.p-disabled):hover .p-inputswitch-slider {
     background: #b7bcc5;
@@ -1146,7 +1146,7 @@
   .p-inputtext:enabled:focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
     border-color: var(--changeOutlineColor);
   }
   .p-inputtext.ng-dirty.ng-invalid {
@@ -1330,7 +1330,7 @@
   .p-listbox.p-focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
     border-color: var(--changeOutlineColor);
   }
 
@@ -1350,7 +1350,7 @@
   .p-multiselect:not(.p-disabled).p-focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
     border-color: var(--changeOutlineColor);
   }
   .p-multiselect .p-multiselect-label {
@@ -1449,7 +1449,7 @@
   .p-multiselect-panel .p-multiselect-header .p-multiselect-close:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-multiselect-panel .p-multiselect-items {
     padding: 0.75rem 0;
@@ -1573,7 +1573,7 @@
   .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
     border-color: var(--changeOutlineColor);
   }
   .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
@@ -1650,7 +1650,7 @@
   .p-rating .p-rating-item.p-focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
     color: var(--changeOutlineColor);
@@ -1737,7 +1737,7 @@
   .p-slider .p-slider-handle:focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-slider .p-slider-range {
     background: var(--changeOutlineColor);
@@ -1813,7 +1813,7 @@
   .p-treeselect:not(.p-disabled).p-focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
     border-color: var(--changeOutlineColor);
   }
   .p-treeselect .p-treeselect-label {
@@ -1904,7 +1904,7 @@
   .p-treeselect-panel .p-treeselect-header .p-treeselect-close:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-treeselect-panel .p-treeselect-items-wrapper .p-tree {
     border: 0 none;
@@ -2021,7 +2021,7 @@
   .p-button:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-button .p-button-label {
     transition-duration: 0.2s;
@@ -2163,7 +2163,7 @@
     border-color: #0284c7;
   }
   .p-button.p-button-info:not(:disabled):focus, .p-button-group.p-button-info > .p-button:not(:disabled):focus, .p-splitbutton.p-button-info > .p-button:not(:disabled):focus {
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-button.p-button-info:not(:disabled):active, .p-button-group.p-button-info > .p-button:not(:disabled):active, .p-splitbutton.p-button-info > .p-button:not(:disabled):active {
     background: #0369a1;
@@ -2479,7 +2479,7 @@
   }
   .p-button.p-button-link:not(:disabled):focus {
     background: transparent;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
     border-color: transparent;
   }
   .p-button.p-button-link:not(:disabled):active {
@@ -2508,7 +2508,7 @@
   .p-speeddial-item.p-focus > .p-speeddial-action {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
 
   .p-speeddial-action {
@@ -2601,7 +2601,7 @@
 .p-carousel .p-carousel-content .p-carousel-next:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-carousel .p-carousel-indicators {
     padding: 1rem;
@@ -2744,7 +2744,7 @@
 .p-datatable .p-datatable-tbody > tr > td .p-row-editor-cancel:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-datatable .p-datatable-tbody > tr > td .p-row-editor-save {
     margin-right: 0.5rem;
@@ -2949,7 +2949,7 @@
   .p-column-filter-menu-button:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
 
   .p-column-filter-clear-button {
@@ -2969,7 +2969,7 @@
   .p-column-filter-clear-button:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
 
   .p-column-filter-overlay {
@@ -3058,7 +3058,7 @@
   .p-orderlist .p-orderlist-list-container.p-focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
     border-color: var(--changeOutlineColor);
   }
   .p-orderlist .p-orderlist-header {
@@ -3176,7 +3176,7 @@
   .p-organizationchart .p-organizationchart-node-content .p-node-toggler:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
 
   .p-paginator {
@@ -3280,7 +3280,7 @@
   .p-picklist .p-picklist-list-wrapper.p-focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
     border-color: var(--changeOutlineColor);
   }
   .p-picklist .p-picklist-header {
@@ -3426,7 +3426,7 @@
   .p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-tree .p-tree-container .p-treenode .p-treenode-content .p-treenode-icon {
     margin-right: 0.5rem;
@@ -3530,7 +3530,7 @@
   .p-tree.p-tree-horizontal .p-treenode .p-treenode-content:focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
 
   .p-treetable .p-paginator-top {
@@ -3635,7 +3635,7 @@
   .p-treetable .p-treetable-tbody > tr > td .p-treetable-toggler:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-treetable .p-treetable-tbody > tr > td .p-treetable-toggler.p-icon {
     width: 2rem;
@@ -3908,7 +3908,7 @@
   .p-fieldset.p-fieldset-toggleable .p-fieldset-legend a:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-fieldset.p-fieldset-toggleable .p-fieldset-legend:hover {
     background: var(--filled-background);
@@ -3947,7 +3947,7 @@
   .p-panel .p-panel-header .p-panel-header-icon:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-panel.p-panel-toggleable .p-panel-header {
  padding: var(--padding-fix);
@@ -3994,7 +3994,7 @@
   .p-scrollpanel .p-scrollpanel-bar:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
 
   .p-splitter {
@@ -4013,7 +4013,7 @@
   .p-splitter .p-splitter-gutter .p-splitter-gutter-handle:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-splitter .p-splitter-gutter-resizing {
     background: var(--border-color);
@@ -4134,7 +4134,7 @@
   .p-stepper-header .p-stepper-action:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
 
   .p-stepper.p-stepper-readonly .p-stepper-header {
@@ -4200,7 +4200,7 @@
   .p-stepper .p-stepper-header .p-stepper-action:not(.p-disabled):focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-stepper .p-stepper-header.p-highlight .p-stepper-number {
     background: var(--highlight-background-color);
@@ -4212,7 +4212,7 @@
   .p-stepper .p-stepper-header:not(.p-disabled):focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-stepper .p-stepper-header:has(~ .p-highlight) .p-stepper-separator {
     background-color: var(--changeOutlineColor);
@@ -4350,7 +4350,7 @@
   .p-dialog .p-dialog-header .p-dialog-header-icon:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-dialog .p-dialog-header .p-dialog-header-icon:last-child {
     margin-right: 0;
@@ -4391,12 +4391,13 @@
   .p-overlaypanel {
     background: var(--background-color-soft);
     color: var(--color);
-    border: 0 none;
+    border: 1px solid var(--changeOutlineColor);
     border-radius: 6px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
   .p-overlaypanel .p-overlaypanel-content {
-    padding: 1.25rem;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
   .p-overlaypanel .p-overlaypanel-close {
     background: var(--changeOutlineColor);
@@ -4416,12 +4417,12 @@
   .p-overlaypanel:after {
     border: solid transparent;
     border-color: rgba(255, 255, 255, 0);
-    border-bottom-color: #ffffff;
+    border-bottom-color: var(--background-color-soft);
   }
   .p-overlaypanel:before {
     border: solid transparent;
     border-color: rgba(255, 255, 255, 0);
-    border-bottom-color: #f2f2f2;
+    border-bottom-color: var(--changeOutlineColor );
   }
   .p-overlaypanel.p-overlaypanel-flipped:after {
     border-top-color: #ffffff;
@@ -4459,7 +4460,7 @@
 .p-sidebar .p-sidebar-header .p-sidebar-icon:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-sidebar .p-sidebar-header + .p-sidebar-content {
     padding-top: 0;
@@ -4506,7 +4507,7 @@
   .p-fileupload .p-fileupload-buttonbar .p-button.p-fileupload-choose.p-focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-fileupload .p-fileupload-content {
     background: var(--background-color-soft);
@@ -4555,7 +4556,7 @@
   .p-breadcrumb .p-breadcrumb-list li .p-menuitem-link:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-breadcrumb .p-breadcrumb-list li .p-menuitem-link .p-menuitem-text {
     color: var(--item-color);
@@ -5084,7 +5085,7 @@
     .p-menubar .p-menubar-button:focus {
       outline: 0 none;
       outline-offset: 0;
-      box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+      box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
     }
     .p-menubar .p-menubar-root-list {
       position: absolute;
@@ -5420,7 +5421,7 @@
   .p-steps .p-steps-item .p-menuitem-link:not(.p-disabled):focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-steps .p-steps-item.p-highlight .p-steps-number {
     background: var(--highlight-background-color);
@@ -5679,7 +5680,7 @@
   .p-message .p-message-close:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-message.p-message-info {
     background: rgba(219, 234, 254, 0.7);
@@ -5813,7 +5814,7 @@
   .p-toast .p-toast-message .p-toast-icon-close:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-toast .p-toast-message.p-toast-message-info {
     background: rgba(27, 27, 27, 0.7);
@@ -5982,7 +5983,7 @@
   .p-galleria .p-galleria-thumbnail-container .p-galleria-thumbnail-item-content:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
 
   .p-galleria-mask {
@@ -6132,7 +6133,7 @@
   .p-chip .pi-chip-remove-icon:focus-visible {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
   .p-chip .pi-chip-remove-icon:focus {
     outline: 0 none;
@@ -6150,7 +6151,7 @@
   .p-inplace .p-inplace-display:focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--changeOutlineColor);
+    box-shadow: 0 0 0 0.1rem var(--changeOutlineColor);
   }
 
   .p-metergroup {

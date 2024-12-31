@@ -1,100 +1,72 @@
 import { Injectable } from '@angular/core';
 
-
 @Injectable({
     providedIn: 'root',
 })
 export class AzureTaskUIService {
+    private typeColors: { [key: number | string]: string } = {
+        0: '24px solid #c32828f0',
+        1: '24px solid #63c328bf',
+        2: '24px solid #288fc3bf',
+        3: '24px solid #e98400f0',
+        4: '24px solid #8a8a8af0',
+    };
+
+    private typeIcons: { [key: number | string]: string } = {
+        0: 'task',
+        1: 'task',
+        2: 'bug_report',
+        3: 'text_snippet',
+        4: 'schedule',
+    };
+
+    private stateColors: { [key: number | string]: string } = {
+        'Stopped': '#c32828f0',
+        'Bug': '#e98400f0',
+        'Completed': '#63c328bf',
+        'Closed': '#8a8a8af0',
+        'Active': '#288fc3bf',
+        'New': '#bebebe',
+        'Withdrawn': '#e98400f0',
+    };
+
+    private stateBackgroundColors: { [key: number | string]: string } = {
+        'Stopped': '#c3282838',
+        'Bug': '#e9840038',
+        'Completed': '#63c32838',
+        'Closed': '#8a8a8a38',
+        'Active': '#288fc338',
+        'New': '#8a8a8a38',
+        'Withdrawn': '#e9840028',
+    };
+
+    private stateStrings: { [key: number | string]: string } = {
+        'Stopped': 'Áll',
+        'Bug': 'Hibás',
+        'Completed': 'Kész',
+        'Closed': 'Lezárt',
+        'Active': 'Aktív',
+        'New': 'Új',
+        'Withdrawn': 'Kiszedett',
+    };
+
     getTypeColor(status: number): string {
-        switch (status) {
-            case 0:
-                return '24px solid #c32828f0';
-            case 1:
-                return '24px solid #63c328bf';
-            case 2:
-                return '24px solid #288fc3bf';
-            case 3:
-                return '24px solid #e98400f0';
-            case 4:
-                return '24px solid #8a8a8af0';
-            default:
-                return '';
-        }
-    }
-    getTypeIcon(type: number): string {
-        switch (type) {
-            case 0:
-                return 'task';
-            case 1:
-                return 'task';
-            case 2:
-                return 'bug_report';
-            case 3:
-                return 'text_snippet';
-            case 4:
-                return 'schedule';
-            default:
-                return '';
-        }
+        return this.typeColors[status] || '';
     }
 
+    getTypeIcon(type: number): string {
+        return this.typeIcons[type] || '';
+    }
 
     getStateColor(state: number): string {
-        switch (state) {
-            case 0:
-                return '#c32828f0';
-            case 1:
-                return '#e98400f0';
-            case 2:
-                return '#63c328bf';
-            case 3:
-                return '#8a8a8af0';
-            case 4:
-                return '#288fc3bf';
-            case 5:
-                return '#e98400f0';
-            default:
-                return '';
-        }
+        return this.stateColors[state] || '#bebebe';
     }
 
     getStateBackgroundColor(state: number): string {
-
-        switch (state) {
-            case 0:
-                return '#c3282838';
-            case 1:
-                return '#e9840038';
-            case 2:
-                return '#63c32838';
-            case 3:
-                return '#8a8a8a38';
-            case 4:
-                return '#288fc338';
-            case 5:
-                return '#e9840038';
-            default:
-                return '';
-        }
-
-
-
+        return this.stateBackgroundColors[state] || '#8a8a8a38';
     }
 
     getStateString(state: number): string {
-        switch (state) {
-            case 0:
-                return 'Áll';
-            case 1:
-                return 'Hibás';
-            case 2:
-                return 'Kész';
-            case 3:
-                return 'Új';
-            case 4:
-                return 'Aktív';
-            default:
-                return 'Lezárt';
-        }
+        return this.stateStrings[state] || 'Hiba a név-értékeknél';
     }
 }

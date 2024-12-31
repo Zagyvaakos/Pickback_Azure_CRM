@@ -15,13 +15,19 @@
     font-size: 14px !important;
     font-weight: 400 !important;
     span{
-        font-size: 14px !important;
-
-    font-weight: 400 !important;
-
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: var(--changeOutlineColor);
     }
 }
-
+.card.active-editor {
+  box-shadow: 0 0 10px red;
+}
+.custom-button-back:hover{
+  span{color: white !important;
+    font-weight: 700 !important;
+  }
+}
 .item-status{
     justify-content: center;
     width: 50px !important;
@@ -39,6 +45,8 @@
     // width: 100% !important;
     height: 30px !important;
     align-items: center;
+    font-size: larger;
+    font-weight: 700;
 }
   @media (max-width: 850px) {
     .row {
@@ -51,7 +59,7 @@
   }
 
   .one {
-    background-image: url('https://via.placeholder.com/400x200');
+    background-image: url('https://ih1.redbubble.net/image.3835241466.9911/flat,750x,075,f-pad,750x1000,f8f8f8.jpg');
   }
   .user {
     display: inline-block;
@@ -63,3 +71,20 @@
     background-position: center center;
     background-size: cover;
   }
+
+  .buttonWidthOverride{
+    width: max-content;
+  }
+  .disabled-toolbar {
+    pointer-events: none; /* Disable interactivity */
+    opacity: 0.5; /* Make it visually distinct */
+}
+.outlinedCard{
+  transition: all 0.3s ease;
+  outline: 1px solid var(--changeOutlineColor) !important;
+  box-shadow: 0px 0px 10px 0px var(--box-shadow-color-focus);
+}
+.card{
+  transition: all 0.3s ease;
+
+}

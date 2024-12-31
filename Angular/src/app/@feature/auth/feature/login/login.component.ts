@@ -1,4 +1,4 @@
-import { Component, inject, signal, viewChild } from '@angular/core';
+import { Component, inject, OnInit, signal, viewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -31,7 +31,7 @@ import { CommonModule } from '@angular/common';
   ],
   providers: [AuthStore],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   readonly store = inject(AuthStore);
   readonly ngForm = viewChild(NgForm);
 
@@ -40,6 +40,20 @@ export class LoginComponent {
     password: '',
   });
   public stupid = signal<boolean>(false);
+
+  // rememberMe = false;
+
+
+  ngOnInit(): void {
+
+    // const savedEmail = localStorage.getItem('email');
+    // const savedPassword = localStorage.getItem('password');
+
+    // if (savedEmail && savedPassword) {
+    //   this.loginData.set({ email: savedEmail, password: savedPassword });
+    //   this.rememberMe = true;
+    // }
+  }
 
   /**
    *
@@ -67,5 +81,10 @@ export class LoginComponent {
       return;
     }
     this.store.login(this.loginData());
+
+    // if (this.rememberMe) {
+    //   localStorage.setItem('email', this.loginData().email);
+    //   localStorage.setItem('password', this.loginData().password); // Avoid storing plaintext in real apps
+    // }
   }
 }

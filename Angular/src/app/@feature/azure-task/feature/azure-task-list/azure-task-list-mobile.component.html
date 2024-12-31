@@ -98,11 +98,80 @@
                 </div>
                 <div style="display: flex">
                     <div style="margin: 0px 5px; width: 100%; display: flex;"> <p-button
-                            style="height: 30px !important;" [label]=" clearFilterButtonLabel" [outlined]="true"
-                            icon="pi pi-filter-slash" (click)="clearFilter()"></p-button></div>
-                    <div style="margin: 0px 5px; width: 100%; display: flex;"> <p-button
-                            style="height: 30px !important;" [label]="addTaskButtonLabel" [outlined]="true"
-                            icon="pi pi-plus" (click)="navigateTo('edit', '0')"></p-button></div>
+                            [label]=" clearFilterButtonLabel" [outlined]="true" icon="pi pi-filter-slash"
+                            (click)="clearFilter()"></p-button></div>
+                    <div style="margin: 0px 5px; width: 100%; display: flex;"> <p-button [label]="addTaskButtonLabel"
+                            [outlined]="true" icon="pi pi-plus" (onClick)="op.toggle($event)"></p-button></div>
+                    <p-overlayPanel #op>
+                        <div class="flex flex-column">
+
+                            <div>
+                                <div class="button-holder" style=" width: 100%; display: flex;"> <p-button
+                                        styleClass="customMenuButton red" label="Bug" [ngStyle]="{ 
+                                            'height': '30px', 
+                                            'border-radius': '0px', 
+                                            'width': '100%', 
+                                            'display': 'flex', 
+                                            'flex-direction': 'row', 
+                                            'justify-content': 'start', 
+                                            'align-items': 'center' 
+                                          }" icon="pi pi-slack" (onClick)="navigateTo('edit', '0')"></p-button>
+                                </div>
+                                <div class="button-holder" style=" width: 100%; display: flex;"> <p-button
+                                        styleClass="customMenuButton blue" label="Időbecslés" [ngStyle]="{ 
+                                            'height': '30px', 
+                                            'border-radius': '0px', 
+                                            'width': '100%', 
+                                            'display': 'flex', 
+                                            'flex-direction': 'row', 
+                                            'justify-content': 'start', 
+                                            'align-items': 'center' 
+                                          }" icon="pi pi-clock" (onClick)="navigateTo('edit', '0')"></p-button>
+                                </div>
+                                <div class="button-holder" style=" width: 100%; display: flex;"> <p-button
+                                        styleClass="customMenuButton grey" label="Meeting" [ngStyle]="{ 
+                                            'height': '30px', 
+                                            'border-radius': '0px', 
+                                            'width': '100%', 
+                                            'display': 'flex', 
+                                            'flex-direction': 'row', 
+                                            'justify-content': 'start', 
+                                            'align-items': 'center' 
+                                          }" icon="pi pi-calendar" (onClick)="navigateTo('edit', '0')"></p-button>
+                                </div>
+                                <div class="button-holder" style=" width: 100%; display: flex;"> <p-button
+                                        styleClass="customMenuButton green" label="Teszt" [ngStyle]="{ 
+    'height': '30px', 
+    'border-radius': '0px', 
+    'width': '100%', 
+    'display': 'flex', 
+    'flex-direction': 'row', 
+    'justify-content': 'start', 
+    'align-items': 'center' 
+  }" icon="pi pi-pen-to-square" (onClick)="navigateTo('edit', '0')"></p-button>
+                                </div>
+                                <div class="button-holder" style=" width: 100%; display: flex;"> <p-button
+                                        styleClass="customMenuButton yellow" label="Feladat" [ngStyle]="{ 
+    'height': '30px', 
+    'border-radius': '0px', 
+    'width': '100%', 
+    'display': 'flex', 
+    'flex-direction': 'row', 
+    'justify-content': 'start', 
+    'align-items': 'center' 
+  }" icon="pi pi-book" (onClick)="navigateTo('edit', '0')"></p-button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </p-overlayPanel>
+                    <!-- <div style="margin: 0px 5px; width: 100%; display: flex;"> <p-button styleClass="customMenuButton"
+                             [label]="addTaskButtonLabel" [outlined]="true"
+                            icon="pi pi-plus" (click)="navigateTo('edit', '0')"></p-button></div> -->
+                    <!-- <div style="margin: 0px 5px; width: 100%; display: flex;"> <p-button
+                             [label]="addTaskButtonLabel" [outlined]="true"
+                            icon="pi pi-plus" (click)="navigateTo('edit', '0')"></p-button></div> -->
                     <!-- <div style="margin: 0px 5px; width: 100%; "> <p-button [label]="'testpost'" [outlined]="true"
                             icon="pi pi-filter-slash" (click)="testpost()"></p-button></div> -->
                 </div>

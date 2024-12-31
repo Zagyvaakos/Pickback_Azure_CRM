@@ -32,12 +32,13 @@
               }
             ],
             "styles": [
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.snow.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeflex/primeflex.scss",
               "src/assets/styles/primeng-custom-styles.scss",
-              "node_modules/quill/dist/quill.core.css",
-              "node_modules/quill/dist/quill.snow.css",
+   
               "src/assets/styles/lara-light-theme-default.scss",
               "src/assets/styles/styles.scss"
 
