@@ -1,16 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { NavMenuService } from '../../../data-access/nav-menu.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
+import { AUTH_TOKEN_KEY } from '../../../../auth/auth.config';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'inner-side-nav',
   imports: [
     MatIconModule,
     RouterModule,
+    ButtonModule,
+    TooltipModule,
     CommonModule,
     MatListModule,
   ],
@@ -24,13 +30,16 @@ export class InnerSideNavComponent implements OnInit {
     private cdr: ChangeDetectorRef,
   ) { }
 
+  matSnackBar = inject(MatSnackBar);
 
+  authTokenKey = inject(AUTH_TOKEN_KEY);
+  router = inject(Router);
   public currentRouteLinks: any[] = [];
 
   @Input() activeMenu: string = '';
   @Output() toggleMenu = new EventEmitter();
   name: string = "Vissza"
-
+  grouptext: string = '';
 
 
   public routeHomeLinks: any[] = [
@@ -51,9 +60,9 @@ export class InnerSideNavComponent implements OnInit {
     { link: 'crm/settings', name: 'Elmúlt 7 nap feladatai', icon: 'settings', isActive: false },
   ];
   public routeUserLinks: any[] = [
-    { link: 'crm/home', name: 'Aktív feladatok', icon: 'home', isActive: false },
-    { link: 'crm/tasks', name: 'Nyitott feladatok', icon: 'settings', isActive: false },
-    { link: 'crm/settings', name: 'Beállítások', icon: 'settings', isActive: false },
+    { link: 'crm/user/edit', name: 'Felhasználó', icon: 'home', isActive: false },
+    { link: 'crm/tasks', name: 'Értesítések', icon: 'settings', isActive: false },
+    { link: 'crm/settings', name: 'Stílus és megjelenés', icon: 'settings', isActive: false },
   ];
 
 
@@ -81,6 +90,8 @@ export class InnerSideNavComponent implements OnInit {
         break;
       case 'tasks':
         this.name = 'Feladatok';
+        this.grouptext = 'FELADATOK';
+
         this.currentRouteLinks = this.routeTaskLinks;
         break;
       case 'settings':
@@ -89,6 +100,7 @@ export class InnerSideNavComponent implements OnInit {
         break;
       case 'user':
         this.name = 'Profil';
+        this.grouptext = 'Általános beállítások';
         this.currentRouteLinks = this.routeUserLinks;
         break;
       default:
@@ -110,5 +122,16 @@ export class InnerSideNavComponent implements OnInit {
   }
   hideMenu() {
     this._navMenuService.expanded.update(() => (false))
+  }
+
+  logOut() {
+
+    localStorage.setItem(this.authTokenKey, '')
+    this.matSnackBar.open('Ön kijelentekzett!', undefined, {
+      panelClass: 'success',
+      duration: 3000,
+
+    });
+    this.router.navigate(['/login'])
   }
 }

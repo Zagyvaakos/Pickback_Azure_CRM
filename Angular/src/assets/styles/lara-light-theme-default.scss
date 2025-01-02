@@ -3255,13 +3255,13 @@
     background: var(--highlight-background-color);
     border-color: #EFF6FF;
     color: var(--highlight-text);
-    font-weight: 600;
+    font-weight: 800;
     font-size: small !important;
   }
   .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
     background: var(--filled-background);
     border-color: transparent;
-    color:var(--highlight-text);
+    color:var(--changeOutlineColorHover);
   }
 
   .p-picklist .p-picklist-buttons {

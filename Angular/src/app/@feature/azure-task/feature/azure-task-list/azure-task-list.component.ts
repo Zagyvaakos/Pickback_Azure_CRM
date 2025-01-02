@@ -136,6 +136,7 @@ export class AzureTaskListComponent implements OnInit, OnDestroy {
   loadItems() {
     this.getWorkItems().pipe(takeUntil(this.destroy$)).subscribe({
       next: (result) => {
+        console.log(result, 'result')
         this.totalCount.set(result.totalCount);
         console.log(result)
         // if (result) {

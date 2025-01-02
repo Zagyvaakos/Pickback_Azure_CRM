@@ -30,6 +30,14 @@ export const routes: Routes = [
             (file) => file.routes
           ),
       },
+      {
+        title: 'Felhasználó',
+        path: 'crm/user',
+        loadChildren: () =>
+          import('../user/user.routes').then(
+            (file) => file.routes
+          ),
+      },
     ],
   },
 

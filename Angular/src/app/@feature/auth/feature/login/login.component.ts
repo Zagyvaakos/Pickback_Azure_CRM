@@ -10,6 +10,7 @@ import { LoginData } from '../../models/login-data';
 // import { markAllAsTouched } from '../../../../@core/utils/markAllAsTouched';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
+import { debounce, debounceTime, delay } from 'rxjs';
 
 
 
@@ -72,16 +73,23 @@ export class LoginComponent implements OnInit {
     console.log(this.stupid())
 
   }
+  loading: boolean = false;
 
-  /** */
+
   onLogin(): void {
+    if (this.loading) return;
+    this.loading = true;
     console.log(this.loginData())
     if (this.ngForm()?.invalid) {
-      // markAllAsTouched(this.ngForm());
+      setTimeout(() => {
+        this.loading = false;
+      }, 1000);
       return;
     }
     this.store.login(this.loginData());
-
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
     // if (this.rememberMe) {
     //   localStorage.setItem('email', this.loginData().email);
     //   localStorage.setItem('password', this.loginData().password); // Avoid storing plaintext in real apps

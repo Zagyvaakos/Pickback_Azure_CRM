@@ -46,19 +46,25 @@ export const AuthStore = signalStore(
               }),
               tapResponse({
                 next: () => {
-                  matSnackBar.open('Sikeres bejelentkezés!', undefined, {
-                    panelClass: 'success',
-                    duration: 3000,
+                  setTimeout(() => {
+                    matSnackBar.open('Sikeres bejelentkezés!', undefined, {
+                      panelClass: 'success',
+                      duration: 3000,
 
-                  });
+                    });
+                  }, 300);
+
                   router.navigate(['/crm/home']);
                 },
                 error: (err) => {
-                  console.error('Login error:', err);
-                  matSnackBar.open('Sikertelen bejelentkezés!', undefined, {
-                    panelClass: 'error',
-                    duration: 3000,
-                  });
+                  setTimeout(() => {
+                    matSnackBar.open('Sikertelen bejelentkezés!', undefined, {
+                      panelClass: 'error',
+                      duration: 3000,
+                    });
+                  }, 300);
+
+
                 },
                 finalize: () => {
                   patchState(store, () => ({ isLoading: false }));
