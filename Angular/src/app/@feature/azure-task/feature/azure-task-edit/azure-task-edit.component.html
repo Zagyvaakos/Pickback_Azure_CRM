@@ -9,7 +9,8 @@
             </div>
             <div class="separator-line"></div>
             <div style="padding: 0px 10px; align-items: center; display: flex; gap: 10px; font-size: 12px !important;">
-                <p-button label="Vissza" icon="pi pi-angle-left" class="p-button-text" styleClass="custom-button-back">
+                <p-button label="Vissza" (click)="navigationService.navigateBack()" icon="pi pi-angle-left"
+                    class="p-button-text" styleClass="custom-button-back">
                 </p-button>
             </div>
         </div>

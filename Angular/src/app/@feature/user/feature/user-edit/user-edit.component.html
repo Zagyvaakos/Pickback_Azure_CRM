@@ -1,1 +1,53 @@
-<p>user-edit works!</p>
+<div class="_container">
+    <div class="row p-0 m-0 d-flex"
+        style="padding: 0px 10px; height: 40px; align-items: center; justify-content: space-between">
+        <div style="display: flex;
+            flex-direction: row;
+            align-items: center;">
+            <div class="title" style="padding: 0px 10px">
+                Felhasználó beállításai
+            </div>
+            <div class="separator-line"></div>
+            <div style="padding: 0px 10px; align-items: center; display: flex; gap: 10px; font-size: 12px !important;">
+                <p-button label="Vissza" (click)="navigationService.navigateBack()" icon="pi pi-angle-left"
+                    class="p-button-text" styleClass="custom-button-back">
+                </p-button>
+            </div>
+        </div>
+        <div style="display: flex;
+            flex-direction: row;
+            align-items: center;">
+
+            <div style="margin: 0px 5px; width: 100%; "> <p-button styleClass="buttonWidthOverride" (click)="save()"
+                    [label]="'Mentés'" [outlined]="true"></p-button>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class=" card flex" style="flex-direction: column;">
+                <div class="mt-2 mb-3 title" style="font-size: medium; font-weight: 600;">
+                    Adatok
+                </div>
+
+                <div class="row  gap-1 pl-2" style="width: 100% ">
+
+                    <div class="col p-0 m-0">
+                        <p-floatLabel variant="on">
+                            <input id="firstname" class="override-this" type="text" pInputText />
+                            <label for="firstname">Vezetéknév</label>
+                        </p-floatLabel>
+                    </div>
+                    <div class="col p-0 m-0">
+                        <p-floatLabel variant="on">
+                            <input id="lastname" class="override-this" type="text" pInputText />
+                            <label for="lastname">Keresztnév</label>
+                        </p-floatLabel>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

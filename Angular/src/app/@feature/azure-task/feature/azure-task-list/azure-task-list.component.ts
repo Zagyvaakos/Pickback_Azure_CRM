@@ -38,7 +38,7 @@ import { Subject, takeUntil } from 'rxjs';
     MatIconModule,
     MatButtonModule,
     FormsModule,
-    DataViewModule  // Add the module here, not the component
+    DataViewModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [ConfirmationService, MessageService]

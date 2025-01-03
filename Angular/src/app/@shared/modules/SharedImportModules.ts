@@ -11,7 +11,7 @@ import { TableModule } from 'primeng/table';
 import { EditorModule } from 'primeng/editor';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 @NgModule({
   imports: [
@@ -21,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     MatIconModule,
     MatButtonModule,
+    FloatLabelModule,
     EditorModule,
     InputTextModule,
     TableModule,
@@ -42,6 +43,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ButtonModule,
     DropdownModule,
     MultiSelectModule,
+    FloatLabelModule,
     DataViewModule,
   ],
 })

@@ -14,6 +14,7 @@ import { EditorModule } from 'primeng/editor';
 import { AzureTaskUIService } from '../../data-access/azure-task-ui.service';
 import { AzureTaskService } from '../../data-access/azure-task.service';
 import { AzureTaskStatusType } from '../../models/azure-task.model';
+import { NavigationService } from '../../../../@shared/navigation/navigation.service';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class AzureTaskEditComponent implements OnInit {
 
     constructor(
         public taskUI: AzureTaskUIService,
+        public navigationService: NavigationService,
         public router: Router,
         private aroute: ActivatedRoute,
         private azureTaskService: AzureTaskService,
