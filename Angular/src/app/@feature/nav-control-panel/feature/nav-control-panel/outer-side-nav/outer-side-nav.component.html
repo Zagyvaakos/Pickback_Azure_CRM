@@ -8,10 +8,25 @@
     </div>
     <div class="nav">
         <div class="list-item" *ngFor="let menu of menus" (click)="onMenuClick(menu.link)">
-            <mat-icon style="border-bottom: thin solid rgb(99 99 99 / 10%);" mat-list-icon>{{ menu.icon }}</mat-icon>
+            <mat-icon [pTooltip]="menu.name" style="border-bottom: thin solid rgb(99 99 99 / 10%);" mat-list-icon>{{
+                menu.icon }}</mat-icon>
         </div>
     </div>
 
+    <div class="nav">
+        <div class="list-item" (click)="onRoleChange()">
+            <mat-icon style="border-bottom: thin solid rgb(99 99 99 / 10%);" mat-list-icon>person</mat-icon>
+        </div>
+
+    </div>
+    <div class="nav">
+        <div class="list-item" (click)="onEditingStateChange()">
+            <mat-icon style="border-bottom: thin solid rgb(99 99 99 / 10%);" mat-list-icon>{{userService.isEditing()?
+                'edit' :
+                'visibility'}}</mat-icon>
+        </div>
+
+    </div>
     <div style="
     position: absolute;
     bottom: 10px;

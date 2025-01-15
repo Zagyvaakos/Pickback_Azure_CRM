@@ -1,0 +1,44 @@
+.title-display {
+    cursor: pointer;
+    font-size: x-large;
+    font-weight: 700;
+  }
+  
+
+
+  .input-field {
+    position: relative;
+    border-bottom: 2px solid #ccc;
+  }
+
+  .input-field input {
+    width: fit-content;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: x-large;
+    display: flex;
+    justify-content: center;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+  }
+
+  .editingInput{
+    display: flex;
+    position: relative;
+  }
+.editingButtons{
+    position: absolute;
+    right: -65px;
+}
+.btn-ok{
+    background-color: transparent;
+    border: none !important;
+    color: var(--changeOutlineColorHover) !important;
+}
+.btn-cancel{
+    background-color: transparent;
+    border: none !important;
+    color: red !important;
+}

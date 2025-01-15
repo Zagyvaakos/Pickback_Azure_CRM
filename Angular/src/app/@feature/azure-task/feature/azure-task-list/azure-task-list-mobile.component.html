@@ -3,20 +3,158 @@
     <p-dataView #dv [value]="workItemsToShow()" [totalRecords]="totalCount()" [alwaysShowPaginator]="true"
         [paginator]="true" [rowsPerPageOptions]="[10, 25, 50, 100, 250, 500]" [showCurrentPageReport]="true"
         [pageLinks]="5" [showPageLinks]="true" [sortField]="sortField" [sortOrder]="sortOrder" [lazy]="true"
-        [emptyMessage]="'Nincs elérhető adat'" [paginatorDropdownAppendTo]="'body'" [rows]="filter.limit"
-        [page]="filter.offset" (onPage)="onPageChange($event)" filterBy="name" layout="list">
+        [emptyMessage]="'Nincs elérhető adat'" [paginatorDropdownAppendTo]="'body'" [rows]="paginationLimit()"
+        [page]="paginationOffset()" (onPage)="onPageChange($event)" filterBy="name" layout="list">
         <ng-template pTemplate="header">
-            <div class="row  m-0 w-100" style="display: flex; align-items: center; padding: 8px 0px">
-                <div class="col p-0 m-0 w-100" style="display: flex">
-                    <div style="margin: 0px 5px">
-                        <span class="p-input-icon-left" style="width: 100%">
-                            <i class="pi pi-search"></i>
-                            <input style="width: 100%; height: 30px;" type="text" pInputText [value]="textFilter()"
-                                (input)="onInputChange($event)" />
-                        </span>
+            <div class="row  m-0 w-100"
+                style="display: flex; align-items: center; justify-content: space-between; padding: 8px 0px">
+                <div style="display: flex; width: 100%; ">
+                    <div class="col p-0 m-0" style="display: flex; max-width: 300px; min-width: 120px !important;">
+                        <div style="margin: 0px 5px">
+                            <span class="p-input-icon-left" style="width: 100%">
+                                <i class="pi pi-search"></i>
+                                <input style="width: 100%; height: 30px;" type="text" pInputText [value]="textFilter()"
+                                    (input)="onInputChange($event)" />
+                            </span>
+                        </div>
                     </div>
+                    <div class="p-0 m-0 w-100" style="display: flex">
+                        <div style="margin: 0px 5px; width: 100%">
+                            <p-multiSelect styleClass="override-this" [options]="statuses"
+                                [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedStatuses"
+                                [showHeader]="true" [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true"
+                                optionLabel="name" placeholder="Státusz" [filterBy]="'name'"
+                                [selectedItemsLabel]="selectedStatuses.length ? selectedStatuses.length + ' kiválasztva' : ''"
+                                [loading]="false" [virtualScroll]="true" [virtualScrollItemSize]="32"
+                                (onChange)="filterData()">
+
+                                <ng-template let-statusess pTemplate="status">
+                                    <div class="item-status" style="width: 100% !important"
+                                        [ngStyle]="{'background-color': taskUI.getStateBackgroundColor(statusess.value)}">
+                                        <div [ngStyle]="{'color': taskUI.getStateColor(statusess.value)}">
+                                            {{taskUI.getStateString(statusess.value)}}
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-element pTemplate="footer">
+                                    <div class="py-2 px-3">
+                                        <b>
+                                            {{ selectedStatuses ? selectedStatuses.length : 0 }}
+                                        </b>
+                                        elem{{ (selectedStatuses ? selectedStatuses.length : 0) > 1 ? 's' : '' }}
+                                        kiválasztva.
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </div>
+                    </div>
+                    <div class="p-0 m-0 w-100" style="display: flex">
+                        <div style="margin: 0px 5px ;width: 100%">
+                            <p-multiSelect styleClass=" override-this" [options]="types"
+                                [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedTypes"
+                                [showHeader]="true" [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true"
+                                optionLabel="name" placeholder="Típus" [filterBy]="'name'"
+                                [selectedItemsLabel]="selectedTypes.length ? selectedTypes.length + ' kiválasztva' : ''"
+                                [loading]="false" [virtualScroll]="true" [virtualScrollItemSize]="32"
+                                (onChange)="filterData()">
+
+                                <ng-template let-typess pTemplate="status">
+                                    <div class="item-status" style="width: 100% !important"
+                                        [ngStyle]="{'background-color': taskUI.getTypeBackgroundColor(typess.value)}">
+                                        <div [ngStyle]="{'color': taskUI.getTypeColor(typess.value)}">
+                                            {{taskUI.getTypeString(typess.value)}}
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-element pTemplate="footer">
+                                    <div class="py-2 px-3">
+                                        <b>
+                                            {{ selectedTypes ? selectedTypes.length : 0 }}
+                                        </b>
+                                        elem{{ (selectedTypes ? selectedTypes.length : 0) > 1 ? 's' : '' }}
+                                        kiválasztva.
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </div>
+                    </div>
+                    <div style="margin: 0px 5px;  display: flex;"> <p-button severity="danger"
+                            [label]=" clearFilterButtonLabel" [outlined]="true" icon="pi pi-filter-slash"
+                            (click)="clearFilter()"></p-button></div>
                 </div>
-                <div class="col p-0 m-0 w-100" style="display: flex">
+
+                <div style="display: flex;">
+
+                    <div style="display: flex">
+
+                        <div style="margin: 0px 5px; width: 100%; display: flex;"> <p-button
+                                [label]="addTaskButtonLabel" [outlined]="true" icon="pi pi-plus"
+                                (onClick)="op.toggle($event)"></p-button></div>
+                        <p-overlayPanel #op>
+                            <div class="flex flex-column">
+
+                                <div>
+                                    <div class="button-holder" style=" width: 100%; display: flex;"> <p-button
+                                            styleClass="customMenuButton red" label="Bug" [ngStyle]="{ 
+                                                'height': '30px', 
+                                                'border-radius': '0px', 
+                                                'width': '100%', 
+                                                'display': 'flex', 
+                                                'flex-direction': 'row', 
+                                                'justify-content': 'start', 
+                                                'align-items': 'center' 
+                                              }" icon="pi pi-slack" (onClick)="navigateTo('edit', '0')"></p-button>
+                                    </div>
+                                    <div class="button-holder" style=" width: 100%; display: flex;"> <p-button
+                                            styleClass="customMenuButton blue" label="Időbecslés" [ngStyle]="{ 
+                                                'height': '30px', 
+                                                'border-radius': '0px', 
+                                                'width': '100%', 
+                                                'display': 'flex', 
+                                                'flex-direction': 'row', 
+                                                'justify-content': 'start', 
+                                                'align-items': 'center' 
+                                              }" icon="pi pi-clock" (onClick)="navigateTo('edit', '0')"></p-button>
+                                    </div>
+                                    <div class="button-holder" style=" width: 100%; display: flex;"> <p-button
+                                            styleClass="customMenuButton grey" label="Meeting" [ngStyle]="{ 
+                                                'height': '30px', 
+                                                'border-radius': '0px', 
+                                                'width': '100%', 
+                                                'display': 'flex', 
+                                                'flex-direction': 'row', 
+                                                'justify-content': 'start', 
+                                                'align-items': 'center' 
+                                              }" icon="pi pi-calendar" (onClick)="navigateTo('edit', '0')"></p-button>
+                                    </div>
+                                    <div class="button-holder" style=" width: 100%; display: flex;"> <p-button
+                                            styleClass="customMenuButton green" label="Teszt"
+                                            [ngStyle]="{'height': '30px', 'border-radius': '0px', 'width': '100%', 'display': 'flex', 'flex-direction': 'row', 'justify-content': 'start', 'align-items': 'center' }"
+                                            icon="pi pi-pen-to-square" (onClick)="navigateTo('edit', '0')"></p-button>
+                                    </div>
+                                    <div class="button-holder" style=" width: 100%; display: flex;"> <p-button
+                                            styleClass="customMenuButton yellow" label="Feladat"
+                                            [ngStyle]="{'height': '30px', 'border-radius': '0px', 'width': '100%', 'display': 'flex', 'flex-direction': 'row', 'justify-content': 'start', 'align-items': 'center'}"
+                                            icon="pi pi-book" (onClick)="navigateTo('edit', '0')"></p-button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </p-overlayPanel>
+                        <!-- <div style="margin: 0px 5px; width: 100%; display: flex;"> <p-button styleClass="customMenuButton"
+                                 [label]="addTaskButtonLabel" [outlined]="true"
+                                icon="pi pi-plus" (click)="navigateTo('edit', '0')"></p-button></div> -->
+                        <!-- <div style="margin: 0px 5px; width: 100%; display: flex;"> <p-button
+                                 [label]="addTaskButtonLabel" [outlined]="true"
+                                icon="pi pi-plus" (click)="navigateTo('edit', '0')"></p-button></div> -->
+                        <!-- <div style="margin: 0px 5px; width: 100%; "> <p-button [label]="'testpost'" [outlined]="true"
+                                icon="pi pi-filter-slash" (click)="testpost()"></p-button></div> -->
+                    </div>
+
+                </div>
+
+                <!-- <div class="col p-0 m-0 w-100" style="display: flex">
                     <div style="margin: 0px 5px">
                         <p-multiSelect styleClass="override-this" [options]="getNames()"
                             [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedNames"
@@ -37,144 +175,10 @@
                             </ng-template>
                         </p-multiSelect>
                     </div>
-                </div>
-                <div class="col-2 p-0 m-0 w-100" style="display: flex">
-                    <div style="margin: 0px 5px; width: 100%">
-                        <p-multiSelect styleClass="override-this" [options]="statuses"
-                            [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedCities"
-                            [showHeader]="true" [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true"
-                            optionLabel="name" placeholder="Típus" [filterBy]="'name'"
-                            [selectedItemsLabel]="selectedCities.length ? selectedCities.length + ' kiválasztva' : ''"
-                            [loading]="false" [virtualScroll]="true" [virtualScrollItemSize]="32"
-                            (onChange)="filterData()">
-
-                            <ng-template let-statusess pTemplate="status">
-                                <div class="item-status" style="width: 100% !important"
-                                    [ngStyle]="{'background-color': taskUI.getStateBackgroundColor(statusess.value)}">
-                                    <div [ngStyle]="{'color': taskUI.getStateColor(statusess.value)}">
-                                        {{taskUI.getStateString(statusess.value)}}
-                                    </div>
-                                </div>
-                            </ng-template>
-                            <ng-template let-element pTemplate="footer">
-                                <div class="py-2 px-3">
-                                    <b>
-                                        {{ selectedCities ? selectedCities.length : 0 }}
-                                    </b>
-                                    elem{{ (selectedCities ? selectedCities.length : 0) > 1 ? 's' : '' }} kiválasztva.
-                                </div>
-                            </ng-template>
-                        </p-multiSelect>
-                    </div>
-                </div>
-                <div class="col-2 p-0 m-0 w-100" style="display: flex">
-                    <div style="margin: 0px 5px ;width: 100%">
-                        <p-multiSelect styleClass=" override-this" [options]="statuses"
-                            [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedCities"
-                            [showHeader]="true" [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true"
-                            optionLabel="name" placeholder="Státusz" [filterBy]="'name'"
-                            [selectedItemsLabel]="selectedCities.length ? selectedCities.length + ' kiválasztva' : ''"
-                            [loading]="false" [virtualScroll]="true" [virtualScrollItemSize]="32"
-                            (onChange)="filterData()">
-
-                            <ng-template let-statusess pTemplate="status">
-                                <div class="item-status" style="width: 100% !important"
-                                    [ngStyle]="{'background-color': taskUI.getStateBackgroundColor(statusess.value)}">
-                                    <div [ngStyle]="{'color': taskUI.getStateColor(statusess.value)}">
-                                        {{taskUI.getStateString(statusess.value)}}
-                                    </div>
-                                </div>
-                            </ng-template>
-                            <ng-template let-element pTemplate="footer">
-                                <div class="py-2 px-3">
-                                    <b>
-                                        {{ selectedCities ? selectedCities.length : 0 }}
-                                    </b>
-                                    elem{{ (selectedCities ? selectedCities.length : 0) > 1 ? 's' : '' }} kiválasztva.
-                                </div>
-                            </ng-template>
-                        </p-multiSelect>
-                    </div>
-                </div>
-                <div style="display: flex">
-                    <div style="margin: 0px 5px; width: 100%; display: flex;"> <p-button
-                            [label]=" clearFilterButtonLabel" [outlined]="true" icon="pi pi-filter-slash"
-                            (click)="clearFilter()"></p-button></div>
-                    <div style="margin: 0px 5px; width: 100%; display: flex;"> <p-button [label]="addTaskButtonLabel"
-                            [outlined]="true" icon="pi pi-plus" (onClick)="op.toggle($event)"></p-button></div>
-                    <p-overlayPanel #op>
-                        <div class="flex flex-column">
-
-                            <div>
-                                <div class="button-holder" style=" width: 100%; display: flex;"> <p-button
-                                        styleClass="customMenuButton red" label="Bug" [ngStyle]="{ 
-                                            'height': '30px', 
-                                            'border-radius': '0px', 
-                                            'width': '100%', 
-                                            'display': 'flex', 
-                                            'flex-direction': 'row', 
-                                            'justify-content': 'start', 
-                                            'align-items': 'center' 
-                                          }" icon="pi pi-slack" (onClick)="navigateTo('edit', '0')"></p-button>
-                                </div>
-                                <div class="button-holder" style=" width: 100%; display: flex;"> <p-button
-                                        styleClass="customMenuButton blue" label="Időbecslés" [ngStyle]="{ 
-                                            'height': '30px', 
-                                            'border-radius': '0px', 
-                                            'width': '100%', 
-                                            'display': 'flex', 
-                                            'flex-direction': 'row', 
-                                            'justify-content': 'start', 
-                                            'align-items': 'center' 
-                                          }" icon="pi pi-clock" (onClick)="navigateTo('edit', '0')"></p-button>
-                                </div>
-                                <div class="button-holder" style=" width: 100%; display: flex;"> <p-button
-                                        styleClass="customMenuButton grey" label="Meeting" [ngStyle]="{ 
-                                            'height': '30px', 
-                                            'border-radius': '0px', 
-                                            'width': '100%', 
-                                            'display': 'flex', 
-                                            'flex-direction': 'row', 
-                                            'justify-content': 'start', 
-                                            'align-items': 'center' 
-                                          }" icon="pi pi-calendar" (onClick)="navigateTo('edit', '0')"></p-button>
-                                </div>
-                                <div class="button-holder" style=" width: 100%; display: flex;"> <p-button
-                                        styleClass="customMenuButton green" label="Teszt" [ngStyle]="{ 
-    'height': '30px', 
-    'border-radius': '0px', 
-    'width': '100%', 
-    'display': 'flex', 
-    'flex-direction': 'row', 
-    'justify-content': 'start', 
-    'align-items': 'center' 
-  }" icon="pi pi-pen-to-square" (onClick)="navigateTo('edit', '0')"></p-button>
-                                </div>
-                                <div class="button-holder" style=" width: 100%; display: flex;"> <p-button
-                                        styleClass="customMenuButton yellow" label="Feladat" [ngStyle]="{ 
-    'height': '30px', 
-    'border-radius': '0px', 
-    'width': '100%', 
-    'display': 'flex', 
-    'flex-direction': 'row', 
-    'justify-content': 'start', 
-    'align-items': 'center' 
-  }" icon="pi pi-book" (onClick)="navigateTo('edit', '0')"></p-button>
-                                </div>
-                            </div>
+                </div> -->
 
 
-                        </div>
-                    </p-overlayPanel>
-                    <!-- <div style="margin: 0px 5px; width: 100%; display: flex;"> <p-button styleClass="customMenuButton"
-                             [label]="addTaskButtonLabel" [outlined]="true"
-                            icon="pi pi-plus" (click)="navigateTo('edit', '0')"></p-button></div> -->
-                    <!-- <div style="margin: 0px 5px; width: 100%; display: flex;"> <p-button
-                             [label]="addTaskButtonLabel" [outlined]="true"
-                            icon="pi pi-plus" (click)="navigateTo('edit', '0')"></p-button></div> -->
-                    <!-- <div style="margin: 0px 5px; width: 100%; "> <p-button [label]="'testpost'" [outlined]="true"
-                            icon="pi pi-filter-slash" (click)="testpost()"></p-button></div> -->
-                </div>
+
             </div>
 
             <div class="col-12 p-0 m-0 item-header-container "
@@ -200,7 +204,6 @@
                   }" [ngStyle]="{'color': sortField === 'title' ? (sortOrder === 1 ? 'green' : 'blue') : 'inherit'}">
                             </i>
                         </div>
-                        <div>Leírás</div>
                         <div style="width: 70px; cursor: pointer; display: flex; gap: 10px; align-items: center;"
                             (click)="sortBy('status')">
                             Státusz
@@ -224,7 +227,7 @@
                     <div class="item-list-item">
                         <div class="item-id">{{item.id}}</div>
                         <div class="item-name" style="max-width: 300px;">{{item.title}}</div>
-                        <div class="item-name" *ngIf="isMobile()">{{item.description}}</div>
+                        <!-- <div class="item-name" *ngIf="isMobile()">{{item.description}}</div> -->
                         <div style="width: 70px;
                 display: flex
             ;

@@ -1,4 +1,4 @@
-import { Component, computed, CUSTOM_ELEMENTS_SCHEMA, isDevMode, OnDestroy, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, computed, CUSTOM_ELEMENTS_SCHEMA, effect, isDevMode, OnDestroy, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AzureTaskService } from '../../data-access/azure-task.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -17,7 +17,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
-import { Subject, takeUntil } from 'rxjs';
+import { finalize, Subject, takeUntil } from 'rxjs';
+import { LoadingComponent } from '../../../../@ui/loading/loading.component';
+import { LoadingService } from '../../../../@core/services/loading.service';
 @Component({
   selector: 'app-azure-task-list',
   templateUrl: './azure-task-list-mobile.component.html',
@@ -45,6 +47,7 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class AzureTaskListComponent implements OnInit, OnDestroy {
   constructor(
+    public loadingService: LoadingService,
     public taskUI: AzureTaskUIService,
     private azureTaskService: AzureTaskService,
     private router: Router,
@@ -54,27 +57,37 @@ export class AzureTaskListComponent implements OnInit, OnDestroy {
   ) {
     this.updateButtonLabel();
     window.addEventListener('resize', () => this.updateButtonLabel());
+    effect(() => {
+      const value = this.textFilter();
+      if (this.debounceTimer) {
+        clearTimeout(this.debounceTimer);
+      }
+      this.debounceTimer = setTimeout(() => {
+        this.debouncedFilter.set(value);
+        this.loadItems();
+      }, 300);
+    });
   }
   @ViewChild('op') op: OverlayPanel | undefined;
-
+  private debounceTimer: any;
+  debouncedFilter = signal<string>('');
   totalCount = signal<number>(0);
-
-  textFilter = signal<string>('')
-  typeFilter = signal<any[]>([])
-  statusFilter = signal<any[]>([])
-
-
-  filter: Filter = {
+  textFilter = signal<string>('');
+  typeFilter = signal<any[]>([]);
+  statusFilter = signal<any[]>([]);
+  paginationLimit = signal<number>(10);
+  paginationOffset = signal<number>(1);
+  filter = computed(() => ({
     text: this.textFilter().toLowerCase(),
-    offset: 1,
-    limit: 10,
+    offset: this.paginationOffset(),
+    limit: this.paginationLimit(),
     sortField: 'title',
     sortDirection: 'asc',
     createdUser: { id: 1 },
     companyIds: [],
     statuses: this.statusFilter(),
     types: this.typeFilter(),
-  }
+  }));
 
   clearFilterButtonLabel: string = 'Törlés';
   addTaskButtonLabel: string = 'Új';
@@ -84,19 +97,37 @@ export class AzureTaskListComponent implements OnInit, OnDestroy {
   rowsPerPage = 10;
   searchText: string = '';
   statuses = [
-    { value: 'Stopped', name: 'Áll' },
-    { value: 'Bug', name: 'Hibás' },
+    { value: 'Withdrawn', name: 'Kiszedett' },
     { value: 'Completed', name: 'Kész' },
     { value: 'New', name: 'Új' },
-
   ];
-  selectedCity: any;
-  selectedCities: any[] = [];
+  types = [
+    { value: 'Bug', name: 'Hiba' },
+    { value: 'Task', name: 'Feladat' },
+    { value: 'UserStory', name: 'US' },
+  ]
+  selectedStatus: any;
+  selectedStatuses: any[] = [];
+  selectedType: any;
+  selectedTypes: any[] = [];
   selectedNames: any[] = [];
   destroy$ = new Subject();
 
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      console.log('Route parameter changed:', params);
+    });
+
+    let paginationState = localStorage.getItem('paginationState');
+    if (paginationState) {
+      const parsedState = JSON.parse(paginationState);
+      const rows = parsedState.rows;
+      const first = parsedState.first;
+      this.paginationLimit.set(rows);
+      this.paginationOffset.set(first / rows + 1);
+    }
+    this.loadingService.isLoading.set(true)
     const savedState = this.loadPaginationState();
     if (savedState) {
       this.rowsPerPage = savedState.rows;
@@ -117,9 +148,8 @@ export class AzureTaskListComponent implements OnInit, OnDestroy {
       first: event.first
     };
     localStorage.setItem('paginationState', JSON.stringify(paginationState));
-    this.filter.limit = event.rows;
-
-    this.filter.offset = event.first / event.rows + 1
+    this.paginationLimit.set(event.rows); // Update limit signal
+    this.paginationOffset.set(event.first / event.rows + 1); // Update offset signal
     this.loadItems()
   }
   loadPaginationState() {
@@ -134,50 +164,50 @@ export class AzureTaskListComponent implements OnInit, OnDestroy {
     return item.id;
   }
   loadItems() {
-    this.getWorkItems().pipe(takeUntil(this.destroy$)).subscribe({
-      next: (result) => {
-        console.log(result, 'result')
-        this.totalCount.set(result.totalCount);
-        console.log(result)
-        // if (result) {
-        //   result.objects[2].status = 1;
-        //   result.objects[4].status = 2;
-        //   result.objects[3].status = 3;
-        //   result.objects[5].status = 0;
-        //   result.objects[6].status = 3;
-        //   result.objects[9].status = 2;
-        //   result.objects[4].type = 1;
-        //   result.objects[0].type = 2;
-        //   result.objects[6].type = 3;
-        //   result.objects[3].type = 2;
-        //   result.objects[8].type = 3;
-        // }
+    this.loadingService.isLoading.set(true)
 
+    setTimeout(() => {
 
-        this.workItems.set(result.objects);
-        this.filterData();
-      },
-      error: (err) => {
-        console.error('Error loading items:', err);
-      },
-    });
+      this.getWorkItems().pipe(takeUntil(this.destroy$), finalize(() => this.loadingService.isLoading.set(false))).subscribe({
+        next: (result) => {
+          this.totalCount.set(result.totalCount);
+          this.workItemsToShow.set(result.objects);
+        },
+
+      });
+    }, 100)
   }
   filterData(): void {
-    let allItems = [...this.workItems()];
-    let filteredItems: any[] = [];
+    this.loadingService.isLoading.set(true)
+    let statuses: any[] = [];
+    let types: any[] = [];
+    this.selectedStatuses.forEach((status) => {
 
-    if (this.selectedCities.length > 0) {
-      filteredItems = [...allItems.filter(item => this.selectedCities.some(status => status.value === item.status))]
+      statuses.push(status.value)
+    })
 
-    } else {
-      if (filteredItems.length === 0) {
-        filteredItems = [...allItems];
-      }
-    }
-    this.workItemsToShow.set(filteredItems);
+    this.selectedTypes.forEach((type) => {
+      types.push(type.value)
+    })
+    this.statusFilter.set(statuses);
+    this.typeFilter.set(types);
+    this.loadItems()
+    // let allItems = [...this.workItems()];
+
+    // if (this.selectedStatuses.length > 0) {
+    //   filteredItems = [...allItems.filter(item => this.selectedStatuses.some(status => status.value === item.status))]
+
+    // } else {
+    //   if (filteredItems.length === 0) {
+    //     filteredItems = [...allItems];
+    //   }
+    // }
+    // filteredItems = [...allItems];
+
+    // this.workItemsToShow.set(filteredItems);
   }
   getWorkItems() {
-    return this.azureTaskService.getQueries(this.filter);
+    return this.azureTaskService.getQueries(this.filter());
   }
   getNames() {
     let names: any[] = []
@@ -187,8 +217,10 @@ export class AzureTaskListComponent implements OnInit, OnDestroy {
     return names
   }
   clearFilter(): void {
-    this.selectedCity = null;
-    this.selectedCities = [];
+    this.selectedStatus = null;
+    this.selectedStatuses = [];
+    this.selectedType = null;
+    this.selectedTypes = [];
     this.filterData();
   }
 
@@ -246,12 +278,8 @@ export class AzureTaskListComponent implements OnInit, OnDestroy {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement) {
       this.textFilter.set(inputElement.value);
-      this.loadItems()
     }
   }
-
-
-
 }
 
 
@@ -300,8 +328,5 @@ export class AzureTaskListComponent implements OnInit, OnDestroy {
 
 //   // Call the insertData method
 //   this.azureTaskService.insertData(data).subscribe(response => {
-//     console.log('Data inserted successfully:', response);
-//   }, error => {
-//     console.error('Error inserting data:', error);
-//   });
+//   }
 // }

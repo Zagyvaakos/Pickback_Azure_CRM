@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 // import { Role } from '../../role/models/role';
 import { LoginData } from '../models/login-data';
+import { ApiConfig } from '../../../@shared/config/api-config';
 // import { ApiSettingsStore } from '../../app/data-access/api-settings.store';
 
 @Injectable({
@@ -10,7 +11,7 @@ import { LoginData } from '../models/login-data';
 export class AuthService {
   // readonly apiSettingsStore = inject(ApiSettingsStore);
   readonly httpClient = inject(HttpClient);
-
+  private apiUrl = ApiConfig.helpdeskUrl
   /**
    *
    * @param body
@@ -18,7 +19,7 @@ export class AuthService {
    */
   login$(body: LoginData) {
     return this.httpClient.post<string>(
-      'http://192.168.10.99:10481/auth/login',
+      this.apiUrl + 'auth/login',
       body,
       { responseType: 'text' as 'json' } // Specify response type as 'text'
     );

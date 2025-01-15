@@ -30,9 +30,26 @@ export const routes: Routes = [
             (file) => file.routes
           ),
       },
+
+      {
+        title: 'Feladatok',
+        path: 'crm/alltasks',
+        loadChildren: () =>
+          import('../azure-task/azure-task.routes').then(
+            (file) => file.routes
+          ),
+      },
       {
         title: 'Felhasználó',
         path: 'crm/user',
+        loadChildren: () =>
+          import('../user/user.routes').then(
+            (file) => file.routes
+          ),
+      },
+      {
+        title: 'Felhasználó',
+        path: 'crm/tasks/wasd',
         loadChildren: () =>
           import('../user/user.routes').then(
             (file) => file.routes

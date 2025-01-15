@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';  // CommonModule for ngIf, etc.
 import { RouterOutlet } from '@angular/router';
 import { ThemeService } from '../../../@core/services/theme.service';
+import { LoadingComponent } from '../../../@ui/loading/loading.component';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet,
+  imports: [CommonModule, RouterOutlet, LoadingComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
@@ -19,7 +20,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     let darkmodeString = localStorage.getItem('isDarkmode')
-    console.log(darkmodeString, 'striing')
     let darkmode = false;
     switch (darkmodeString) {
       case 'true':

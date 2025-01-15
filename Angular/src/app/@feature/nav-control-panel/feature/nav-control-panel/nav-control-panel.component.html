@@ -2,12 +2,12 @@
     <mat-sidenav-container autosize>
         <!-- Sidenav (Left Menu) -->
         <mat-sidenav #sidenav fixedInViewport="true" mode="side" [opened]="true" [style.width]="'60px'">
-            <outer-side-nav (changeMenu)="changeMenu($event)"></outer-side-nav>
+            <outer-side-nav></outer-side-nav>
         </mat-sidenav>
 
         <!-- Main Content -->
         <mat-sidenav-content [style.margin-left.px]="60">
-            <inner-side-nav-control [activeMenu]="menu"></inner-side-nav-control>
+            <inner-side-nav-control></inner-side-nav-control>
 
         </mat-sidenav-content>
     </mat-sidenav-container>

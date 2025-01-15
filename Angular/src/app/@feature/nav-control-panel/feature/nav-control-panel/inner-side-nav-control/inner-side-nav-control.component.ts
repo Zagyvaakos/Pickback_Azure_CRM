@@ -11,6 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { InnerSideNavComponent } from '../inner-side-nav/inner-side-nav.component';
 import { NavMenuService } from '../../../data-access/nav-menu.service';
+import { LoadingComponent } from '../../../../../@ui/loading/loading.component';
 
 @Component({
   selector: 'inner-side-nav-control',
@@ -36,6 +37,4 @@ export class InnerSideNavControlComponent implements OnInit {
   }
   ngOnInit() {
   }
-  @Input() activeMenu: string = "";
-
 }

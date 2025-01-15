@@ -41,7 +41,6 @@ export const AuthStore = signalStore(
           switchMap((loginData) => {
             return authService.login$(loginData).pipe(
               tap((token) => {
-                console.log('Token received:', token); // Debug response
                 localStorage.setItem(authTokenKey, token);
               }),
               tapResponse({

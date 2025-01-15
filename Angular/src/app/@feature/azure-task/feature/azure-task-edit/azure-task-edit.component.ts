@@ -3,23 +3,26 @@ import { Component, computed, CUSTOM_ELEMENTS_SCHEMA, effect, OnInit, signal, Vi
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { DataViewModule } from 'primeng/dataview';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TableModule } from 'primeng/table';
+import { FileUploadModule } from 'primeng/fileupload';
 import { EditorModule } from 'primeng/editor';
 import { AzureTaskUIService } from '../../data-access/azure-task-ui.service';
 import { AzureTaskService } from '../../data-access/azure-task.service';
-import { AzureTaskStatusType } from '../../models/azure-task.model';
 import { NavigationService } from '../../../../@shared/navigation/navigation.service';
+import { TooltipModule } from 'primeng/tooltip';
+import { filter } from 'rxjs';
+import { UserService } from '../../../user/data-access/user.service';
 
 
 @Component({
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, RouterModule, EditorModule, MatIconModule, InputTextModule, TableModule, InputTextModule, MatButtonModule, ButtonModule, DropdownModule, FormsModule, MultiSelectModule, DataViewModule],
+    imports: [CommonModule, TooltipModule, ReactiveFormsModule, RouterModule, EditorModule, MatIconModule, InputTextModule, TableModule, InputTextModule, MatButtonModule, ButtonModule, DropdownModule, FormsModule, MultiSelectModule, DataViewModule, FileUploadModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     selector: 'app-azure-task-edit',
     templateUrl: './azure-task-edit.component.html',
@@ -30,23 +33,25 @@ import { NavigationService } from '../../../../@shared/navigation/navigation.ser
 export class AzureTaskEditComponent implements OnInit {
     azureTaskFormGroup!: FormGroup;
 
+    files: any[] = [];
 
 
 
     constructor(
+
         public taskUI: AzureTaskUIService,
         public navigationService: NavigationService,
         public router: Router,
         private aroute: ActivatedRoute,
         private azureTaskService: AzureTaskService,
         private formBuilder: FormBuilder,
-        private location: Location
+        private location: Location,
+        public userService: UserService,
     ) {
         this.azureTaskFormGroup = new FormGroup({
             id: new FormControl(null),
             title: new FormControl(null),
             description: new FormControl(null),
-            status: new FormControl(null),
             type: new FormControl(null),
             comments: new FormArray([]),
         })
@@ -56,23 +61,23 @@ export class AzureTaskEditComponent implements OnInit {
     id: any;
     selectedCity: any;
     selectedCities: any[] = [];
+    uploadedFiles: any[] = [];
     // azureTaskForm!: FormGroup
 
 
     // comments: any[] = [{ value: 1 }]
-    statuses2 = [
+    // statuses2 = [
 
-        { value: AzureTaskStatusType.STOPPED, name: 'Áll' },
-        { value: AzureTaskStatusType.ERROR, name: 'Hibás' },
-        { value: AzureTaskStatusType.DONE, name: 'Kész' },
-        { value: AzureTaskStatusType.NEW, name: 'Új' },
-    ]
+    //     { value: AzureTaskStatusType.STOPPED, name: 'Áll' },
+    //     { value: AzureTaskStatusType.ERROR, name: 'Hibás' },
+    //     { value: AzureTaskStatusType.DONE, name: 'Kész' },
+    //     { value: AzureTaskStatusType.NEW, name: 'Új' },
+    // ]
 
-    statuses = [
-        { value: 'Stopped', name: 'Áll' },
-        { value: 'Bug', name: 'Hibás' },
-        { value: 'Completed', name: 'Kész' },
-        { value: 'New', name: 'Új' },
+    types = [
+        { value: 'Bug', name: 'Hiba' },
+        { value: 'Task', name: 'Feladat' },
+        { value: 'UserStroy', name: 'User story' },
     ];
     priorities = [
         { value: 0, name: 'Elsődleges' },
@@ -80,9 +85,28 @@ export class AzureTaskEditComponent implements OnInit {
         { value: 2, name: 'Kevésbé fontos' },
         { value: 3, name: 'SOS' },
     ];
-
-
+    queryParams: any = null
+    isEditing = false;
+    user: any = {
+        role: 'User'
+    }
     ngOnInit(): void {
+
+        this.router.events.pipe(
+            filter(event => event instanceof NavigationEnd)
+        ).subscribe(() => {
+            this.id = this.aroute.snapshot.params['id'];
+            console.log('heki')
+            // if (+this.id !== 0) {
+            //     this.loadTaskData(this.id);
+            // } else {
+            //     this.resetFormForNewTask();
+            // }
+        });
+        this.aroute.paramMap.subscribe((params) => {
+            console.log('Route parameter changed:', params);
+        });
+
         this.id = this.aroute.snapshot.params['id'];
         if (+this.id !== 0) {
             this.azureTaskService.getTask(this.id).pipe().subscribe((result) => {
@@ -100,11 +124,9 @@ export class AzureTaskEditComponent implements OnInit {
                     id: result.id,
                     title: result.title,
                     description: result.description,
-                    status: result.status,
                     type: result.type,
                 });
 
-                console.log(this.azureTaskFormGroup, 'fg')
             });
         }
         else {
@@ -112,10 +134,9 @@ export class AzureTaskEditComponent implements OnInit {
                 id: 0,
                 title: null,
                 description: null,
-                status: {
-                    name: "Hibás", value: "Bug"
+                type: {
+                    name: "Hiba", value: "Bug"
                 },
-                type: null,
             });
         }
 
@@ -135,7 +156,6 @@ export class AzureTaskEditComponent implements OnInit {
     }
 
     editorContentChange(event: any, comment: any) {
-        console.log(event, 'event')
     }
 
     isCommentEditing(index: number) {
@@ -144,8 +164,7 @@ export class AzureTaskEditComponent implements OnInit {
 
 
     onChangeSelect(event: any) {
-        console.log(event, 'event')
-        console.log(this.azureTaskFormGroup, 'fg on select')
+
     }
 
     addNewComment() {
@@ -158,41 +177,41 @@ export class AzureTaskEditComponent implements OnInit {
         commentsFormArray.insert(0, commentGroup);
     }
     onDropdownChange(value: any): void {
-        this.azureTaskFormGroup.controls['status'].setValue(value);
-        console.log(this.azureTaskFormGroup)
+        this.azureTaskFormGroup.controls['type'].setValue(value);
     }
     saveTask() {
 
-
-        console.log(this.azureTaskFormGroup, 'helo')
         const data = {
             id: this.id,
-            type: this.azureTaskFormGroup.controls['type'].value,
+            type: this.azureTaskFormGroup.controls['type'].value.value,
             title: this.azureTaskFormGroup.controls['title'].value,
             description: this.azureTaskFormGroup.controls['description'].value,
             siteUrl: "string",
             affectedVersion: "string",
-            fixedVersion: "string"
+            fixedVersion: "string",
+            attachments: [null]
         };
 
+        this.files.forEach((file) => {
+            let attachment: any
+            attachment = {
+                id: 0,
+                file: {
+                    id: 0,
+                    name: file.name,
+                    extension: file.type
+                }
+            }
+            data.attachments.push(attachment)
+        })
         if (this.id === '0') {
-            console.log(data)
             this.azureTaskService.insertData(data).subscribe(response => {
-                console.log(response, 'resp')
-                console.log('Data inserted successfully:', response);
                 this.location.back();
-            }, error => {
-                console.log(error, 'resp')
-
-                console.error('Error inserting data:', error);
             });
         }
         else {
             this.azureTaskService.updateData(data, this.id).subscribe(response => {
-                console.log('Data updated successfully:', response);
                 this.location.back();
-            }, error => {
-                console.error('Error inserting data:', error);
             });
         }
 
@@ -204,22 +223,43 @@ export class AzureTaskEditComponent implements OnInit {
             commentsArray.removeAt(index);
         }
     }
+    onUpload(event: any) {
+    }
+
+
+
+    onFileSelected(event: Event): void {
+        const input = event.target as HTMLInputElement;
+        if (input.files) {
+            const selectedFiles = Array.from(input.files);
+
+            selectedFiles.forEach((file) => {
+                // Avoid duplicate files
+                if (!this.files.some(existing => existing.file.name === file.name && existing.file.size === file.size)) {
+                    const fileData: any = { file };
+
+                    // Check if the file is an image
+                    if (file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = (e: ProgressEvent<FileReader>) => {
+
+                            fileData.preview = e.target?.result as string;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                    fileData.name = file.name;
+                    fileData.size = file.size;
+                    fileData.type = file.type;
+
+                    this.files.push(fileData);
+                }
+            });
+
+            input.value = '';
+        }
+    }
+
+    removeFile(idx: number): void {
+        this.files.splice(idx, 1);
+    }
 }
-
-
-
-
-
-
-
-
-
-
-//   // Call the insertData method
-//   this.azureTaskService.insertData(data).subscribe(response => {
-//     console.log('Data inserted successfully:', response);
-//   }, error => {
-//     console.error('Error inserting data:', error);
-//   });
-
-// Call the insertData method

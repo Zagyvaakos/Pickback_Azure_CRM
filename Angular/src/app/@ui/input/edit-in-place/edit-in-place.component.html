@@ -1,0 +1,21 @@
+<div>
+    <span *ngIf="!isEditing" (click)="editTitle()" class="title-display">
+        {{ title }}
+    </span>
+
+    <!-- <input *ngIf="isEditing" class="title-edit" autofocus /> -->
+
+    <div *ngIf="isEditing" class="editingInput">
+        <div class="input-field">
+            <input [value]="title" required [(ngModel)]="title" (blur)="saveTitle($event)"
+                (keydown.enter)="saveTitle(title)" (keydown.esc)="cancelEdit()" type="text">
+
+        </div>
+        <div class="editingButtons">
+            <p-button class="btn-cancel" (click)="cancelEdit()">✖</p-button>
+            <p-button class="btn-ok" [disabled]="!title" (click)="saveTitle(title)">✔</p-button>
+
+        </div>
+
+    </div>
+</div>

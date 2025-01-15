@@ -6,6 +6,7 @@ import { Subject } from "rxjs";
 })
 export class NavMenuService {
     public expanded = signal(false);
+    public activeMenu = signal('')
 
     toggleMenu(optionalBoolean?: boolean) {
         if (optionalBoolean !== undefined) {

@@ -11,6 +11,7 @@ import { LoginData } from '../../models/login-data';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { debounce, debounceTime, delay } from 'rxjs';
+import { LoadingService } from '../../../../@core/services/loading.service';
 
 
 
@@ -33,6 +34,7 @@ import { debounce, debounceTime, delay } from 'rxjs';
   providers: [AuthStore],
 })
 export class LoginComponent implements OnInit {
+  constructor(public loadingService: LoadingService) { }
   readonly store = inject(AuthStore);
   readonly ngForm = viewChild(NgForm);
 
@@ -70,7 +72,6 @@ export class LoginComponent implements OnInit {
 
   onStupid() {
     this.stupid.set(!this.stupid());
-    console.log(this.stupid())
 
   }
   loading: boolean = false;
@@ -79,9 +80,10 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     if (this.loading) return;
     this.loading = true;
-    console.log(this.loginData())
+    this.loadingService.isLoading.set(true)
     if (this.ngForm()?.invalid) {
       setTimeout(() => {
+        this.loadingService.isLoading.set(false)
         this.loading = false;
       }, 1000);
       return;
@@ -89,6 +91,7 @@ export class LoginComponent implements OnInit {
     this.store.login(this.loginData());
     setTimeout(() => {
       this.loading = false;
+      this.loadingService.isLoading.set(false)
     }, 1000);
     // if (this.rememberMe) {
     //   localStorage.setItem('email', this.loginData().email);

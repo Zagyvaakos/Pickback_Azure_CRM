@@ -38,10 +38,4 @@ export class NavControlPanelComponent implements OnInit {
         const isMenuExpanded = menuState === 'true';
         this._navMenuService.expanded.update(() => isMenuExpanded);
     }
-    public changeMenu(event: any) {
-        this._navMenuService.expanded.update(() => (true));
-        localStorage.setItem('menuState', this._navMenuService.expanded().toString())
-        this.menu = event
-
-    }
 }

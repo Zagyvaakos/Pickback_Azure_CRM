@@ -5,20 +5,36 @@ import { Injectable } from '@angular/core';
 })
 export class AzureTaskUIService {
     private typeColors: { [key: number | string]: string } = {
-        0: '24px solid #c32828f0',
-        1: '24px solid #63c328bf',
-        2: '24px solid #288fc3bf',
-        3: '24px solid #e98400f0',
-        4: '24px solid #8a8a8af0',
+        'Bug': '24px solid #c32828f0',
+        'Something': '24px solid #63c328bf',
+        'Task': '24px solid #288fc3bf',
+        'UserStory': '24px solid #e98400f0',
+        'Setup': '24px solid #8a8a8af0',
     };
 
     private typeIcons: { [key: number | string]: string } = {
-        0: 'task',
-        1: 'task',
-        2: 'bug_report',
-        3: 'text_snippet',
-        4: 'schedule',
+        'Task': 'task',
+        'any': 'task',
+        'Bug': 'bug_report',
+        'Userstory': 'text_snippet',
+        'Okay': 'schedule',
     };
+
+
+    private typeStrings: { [key: number | string]: string } = {
+        'Bug': 'Hiba',
+        'Task': 'Feladat',
+        'UserStory': 'User story'
+    };
+
+
+    private typeBackgroundColors: { [key: number | string]: string } = {
+        'Bug': 'rgba(195, 40, 40, 0.24)',
+        'Task': 'rgba(40, 143, 195, 0.34)',
+        'UserStory': ' #e98400f0'
+    };
+
+
 
     private stateColors: { [key: number | string]: string } = {
         'Stopped': '#c32828f0',
@@ -50,23 +66,32 @@ export class AzureTaskUIService {
         'Withdrawn': 'Kiszedett',
     };
 
-    getTypeColor(status: number): string {
-        return this.typeColors[status] || '';
+    getTypeColor(type: string | number): string {
+        return this.typeColors[type] || '';
     }
 
-    getTypeIcon(type: number): string {
+    getTypeIcon(type: string | number): string {
         return this.typeIcons[type] || '';
     }
+    getTypeString(type: string | number): string {
+        return this.typeStrings[type] || 'Hiba a név-értékeknél';
+    }
 
-    getStateColor(state: number): string {
+    getTypeBackgroundColor(type: string | number): string {
+        return this.typeBackgroundColors[type] || '#8a8a8a38';
+    }
+
+
+
+    getStateColor(state: string | number): string {
         return this.stateColors[state] || '#bebebe';
     }
 
-    getStateBackgroundColor(state: number): string {
+    getStateBackgroundColor(state: string | number): string {
         return this.stateBackgroundColors[state] || '#8a8a8a38';
     }
 
-    getStateString(state: number): string {
+    getStateString(state: string | number): string {
         return this.stateStrings[state] || 'Hiba a név-értékeknél';
     }
 }

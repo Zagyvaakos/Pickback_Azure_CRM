@@ -1,17 +1,19 @@
 @use '@angular/material' as mat;
 
 @font-face {
-    font-family: 'Abel';
-    src: url('../fonts/Abel.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Abel';
+  src: url('../fonts/Abel.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
+
 @font-face {
-    font-family: 'Parkinsas';
-    src: url('../fonts/Parkinsas.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
+  font-family: 'Parkinsas';
+  src: url('../fonts/Parkinsas.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
 }
+
 @font-face {
   font-family: 'NotoSansMono';
   src: url('../fonts/NotoSansMono.ttf') format('truetype');
@@ -21,93 +23,120 @@
 
 :root {
   --background-color: #fff; // Default background (light theme)
-  --text-color: #000;       // Default text color
+  --text-color: #000; // Default text color
   --primary-color: #ff6347;
   // Define other theme variables here
 }
 
-.p-float-label input:focus ~ label{
+.p-float-label input.p-filled~label {
+  border-left: thin solid var(--border-color);
+  border-right: thin solid var(--border-color);
+  border-top: thin solid var(--border-color);
+  border-bottom: none !important;
   transition: 0.12s ease-in-out all;
   top: -6px;
   left: 5px;
-  font-size: 11px;
-  background: radial-gradient(var(--background-color-lighter), var(--background-color-lighter) , transparent, transparent);
+  font-size: 10px;
+  background: radial-gradient(var(--background-color-lighter), var(--background-color-lighter), transparent, transparent);
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 3px 3px 0px 0px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  box-shadow: inset 0px 0px 1px 20px var(--background-color-soft);
+
+}
+
+.p-float-label input:focus~label {
+  transition: 0.12s ease-in-out all;
+  top: -6px;
+  left: 5px;
+  font-size: 10px;
+  // background: radial-gradient(var(--background-color-lighter), var(--background-color-lighter), transparent, transparent);
+  background-color: var(--background-color-lighter);
   padding-left: 5px;
   padding-right: 5px;
   border-radius: 3px 3px 00px 00px;
   padding-top: 2px;
   padding-bottom: 2px;
-  box-shadow: inset 0px 0px 1px 20px var(--changeOutlineColor);
+  border-left: thin solid var(--changeOutlineColor);
+  border-right: thin solid var(--changeOutlineColor);
+  border-top: thin solid var(--changeOutlineColor);
+  border-bottom: none !important;
 }
 
 
-.separator-line{
+
+
+.separator-line {
   height: 20px;
   width: 1px;
   border-right: 1px solid grey;
   padding: 5px !important
 }
+
 body {
   background-color: var(--background-color);
   color: var(--text-color);
 }
+
 .dark-theme {
   --item-color: rgba(255, 255, 255, 0.685);
-    --component-font-size: small;
-    --padding-fix: 5px 10px;
-    --filled-background: rgb(22, 21, 21);
-    font-family: "Inter var", sans-serif;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    font-variation-settings: normal;
-    --font-family: "Inter var", sans-serif;
-    --font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    --surface-a: #ffffff;
-    --surface-b: #f9fafb;
-    --surface-c: #f3f4f6;
-    --surface-d: #e5e7eb;
-    --surface-e: #ffffff;
-    --surface-f: #ffffff;
-    --text-color: var(--other-color-soft);
-    --text-color-secondary: #6b7280;
-    --primary-color: var(--changeOutlineColor);
-    --primary-color-text: #ffffff;
-    --surface-0: #ffffff;
-    --surface-50: #f9fafb;
-    --surface-100: #f3f4f6;
-    --surface-200: #e5e7eb;
-    --surface-300: #d1d5db;
-    --surface-400: #9ca3af;
-    --surface-500: #6b7280;
-    --surface-600: #4b5563;
-    --surface-700: #374151;
-    --surface-800: #1f2937;
-    --surface-900: #111827;
-    --gray-50: #f9fafb;
-    --gray-100: #f3f4f6;
-    --gray-200: #e5e7eb;
-    --gray-300: #d1d5db;
-    --gray-400: #9ca3af;
-    --gray-500: #6b7280;
-    --gray-600: #4b5563;
-    --gray-700: #374151;
-    --gray-800: #1f2937;
-    --gray-900: #111827;
-    --content-padding: 1.25rem;
-    --inline-spacing: 0.5rem;
-    --border-radius: 6px;
-    --surface-ground: #f9fafb;
-    --surface-section: #ffffff;
-    --surface-card: #ffffff;
-    --surface-overlay: #ffffff;
-    --surface-border: #dfe7ef;
-    --surface-hover: #f6f9fc;
-    --focus-ring: 0 0 0 0.2rem var(--changeOutlineColor);
-    --maskbg: rgba(0, 0, 0, 0.4);
-    --highlight-bg: var(--changeOutlineColor);
-    --highlight-text-color: var(--highlight-text-color);
-    color-scheme: light;
+  --component-font-size: small;
+  --padding-fix: 5px 10px;
+  --filled-background: rgb(22, 21, 21);
+  font-family: "Inter var", sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  font-variation-settings: normal;
+  --font-family: "Inter var", sans-serif;
+  --font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  --surface-a: #ffffff;
+  --surface-b: #f9fafb;
+  --surface-c: #f3f4f6;
+  --surface-d: #e5e7eb;
+  --surface-e: #ffffff;
+  --surface-f: #ffffff;
+  --text-color: var(--other-color-soft);
+  --text-color-secondary: #6b7280;
+  --primary-color: var(--changeOutlineColor);
+  --primary-color-text: #ffffff;
+  --surface-0: #ffffff;
+  --surface-50: #f9fafb;
+  --surface-100: #f3f4f6;
+  --surface-200: #e5e7eb;
+  --surface-300: #d1d5db;
+  --surface-400: #9ca3af;
+  --surface-500: #6b7280;
+  --surface-600: #4b5563;
+  --surface-700: #374151;
+  --surface-800: #1f2937;
+  --surface-900: #111827;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --content-padding: 1.25rem;
+  --inline-spacing: 0.5rem;
+  --border-radius: 6px;
+  --surface-ground: #f9fafb;
+  --surface-section: #ffffff;
+  --surface-card: #ffffff;
+  --surface-overlay: #ffffff;
+  --surface-border: #dfe7ef;
+  --surface-hover: #f6f9fc;
+  --focus-ring: 0 0 0 0.2rem var(--changeOutlineColor);
+  --maskbg: rgba(0, 0, 0, 0.4);
+  --highlight-bg: var(--changeOutlineColor);
+  --highlight-text-color: var(--highlight-text-color);
+  color-scheme: light;
 
-  
+
   @font-face {
     font-family: "Inter var";
     font-weight: 100 900;
@@ -116,6 +145,7 @@ body {
     font-named-instance: "Regular";
     src: url("../fonts/Inter-roman.var.woff2?v=3.19") format("woff2");
   }
+
   @font-face {
     font-family: "Inter var";
     font-weight: 100 900;
@@ -124,59 +154,65 @@ body {
     font-named-instance: "Italic";
     src: url("../fonts/Inter-italic.var.woff2?v=3.19") format("woff2");
   }
+
   --button-background: rgba(56, 140, 153, 0);
   --button-hover-background: rgb(56, 140, 153);
   --color-secondary: #ffffffcc;
-    --color: #fff;
-    --color-of-items: rgb(224, 224, 224);
-    --border-color: rgb(75, 75, 75);
-    --border-color-solid: rgb(75, 75, 75);
-    --error-color: rgb(190, 0, 0);
-    --error-color-border: rgb(184, 77, 77);
-    --other-color: #6b7280;
-    --box-shadow-color-focus: var(--changeOutlineColor);
-    --box-shadow-color: #404041;
-    --other-color-soft: #4b5563;
-    --other-color-soft-stroke: #4b5563;
-    --other-color-soft-fill: #4b5563;
-    --stroke-color: var(--other-color);
-    --fill-color: var(--other-color);
-    --background-color: #272727;
-    --background-color-item: #383838b0;
-    --background-color-lighter: rgb(61, 56, 56);
-    --background-color-lighter-focus: #05080bf0;
-    --background-color-overlay: rgba(0, 0, 0, 0.384);
-    --background-color-soft:   #3b3b3bee;
-    --highlight-focus-background: rgb(119, 119, 119);
-    --nth-child-background:  rgb(65, 65, 65);
-    --filled-background-color: rgb(58, 58, 58);
-    --filled-background-color-hover: rgb(7, 7, 7);
-    --filled-background-color-focus: rgb(31, 31, 31);
-    --background-color-head: rgb(109, 109, 109);
-    --input-background: rgb(70, 92, 117);
-    --changeBasicBorder: 1px solid rgba(148, 148, 148, 0.18);
-    --changeBasicBoxShadow: rgba(128, 128, 128, 0.0784313725) 0px 0px 10px 4px;
-    --changeBasicBackground: var(--background-color);
-    --changeGradientColor: linear-gradient(90deg, #3babf600, rgb(255 255 255 / 29%));
-    --changHighlightColor: #3babf669;
-    --changeOutlineColor: rgb(56, 140, 153);
-    --changeOutlineColorHover: rgb(96, 226, 247);
-    --switch-color: #144464;
+  --color: #fff;
+  --color-lighter: #cacaca;
+  --color-of-items: rgb(224, 224, 224);
+  --border-color: rgb(75, 75, 75);
+  --border-color-solid: rgb(75, 75, 75);
+  --error-color: rgb(190, 0, 0);
+  --error-color-border: rgb(184, 77, 77);
+  --other-color: #6b7280;
+  --box-shadow-color-focus: var(--changeOutlineColor);
+  --box-shadow-color: #404041;
+  --other-color-soft: #4b5563;
+  --other-color-soft-stroke: #4b5563;
+  --other-color-soft-shadow: #07070796;
+  --other-color-soft-fill: #4b5563;
+  --stroke-color: var(--other-color);
+  --fill-color: var(--other-color);
+  --background-color: #272727;
+  --background-color-item: #383838b0;
+  --background-color-lighter: rgb(61, 56, 56);
+  --background-color-lighter-focus: #05080bf0;
+  --background-color-overlay: rgba(0, 0, 0, 0.384);
+  --background-color-soft: #3b3b3bee;
+  --background-color-soft-opacity: #3b3b3b2d;
+  --highlight-focus-background: rgb(119, 119, 119);
+  --nth-child-background: rgb(65, 65, 65);
+  --filled-background-color: rgb(58, 58, 58);
+  --filled-background-color-hover: rgb(7, 7, 7);
+  --filled-background-color-focus: rgb(31, 31, 31);
+  --background-color-head: rgb(109, 109, 109);
+  --input-background: rgb(70, 92, 117);
+  --changeBasicBorder: 1px solid rgba(148, 148, 148, 0.18);
+  --changeBasicBoxShadow: rgba(128, 128, 128, 0.0784313725) 0px 0px 10px 4px;
+  --changeBasicBackground: var(--background-color);
+  --changeGradientColor: linear-gradient(90deg, #3babf600, rgb(255 255 255 / 29%));
+  --changHighlightColor: #3babf669;
+  --changeOutlineColor: rgb(56, 140, 153);
+  --changeOutlineColorHover: rgb(96, 226, 247);
+  --switch-color: #144464;
   --scrollbar-thumb: #388c99;
   --scrollbar-track: inset 0 0 5px #c4c1c1bb;
   --highlight-background-color: #0f0f0f;
   --highlight-text: #388c99;
   --selected-text-color: #388c99;
   --editor-header: #272727;
-  --box-shadow-user: 0px 0px 0px 2px rgb(255 255 255 / 29%), 0px 0px 10px 12px #00000071;
-  
+  --box-shadow-user: 0px 0px 0px 2px rgb(255 255 255 / 29%),
+  0px 0px 10px 12px #00000071;
+  --paginatior-shadow-color: black;
+
   // #c9c9c9
 }
 
 
 .light-theme {
   --button-hover-background: rgb(56, 140, 153);
-  --changeOutlineColorHover:rgb(58, 201, 223);
+  --changeOutlineColorHover: rgb(58, 201, 223);
   --changeOutlineColor: rgb(56, 140, 153);
 
   --box-shadow-user: 0px 0px 0px 7px rgba(0, 0, 0, 0.29), 0px 0px 10px 12px #b4b4b487;
@@ -188,7 +224,9 @@ body {
   --filled-background: #f3f4f5;
   --item-color: rgba(61, 60, 60, 0.685);
   --scrollbar-track: inset 0 0 5px #80808040;
-  --scrollbar-thumb: rgba(20, 101, 154, 0.17);;
+  --scrollbar-thumb: rgba(20, 101, 154, 0.17);
+  ;
+  --color-lighter: #353535;
   --component-font-size: small;
   --padding-fix: 5px 10px;
   --background-color-item: #ffffffb0;
@@ -228,9 +266,10 @@ body {
   --background-color-lighter: rgb(212, 196, 196);
   --background-color-lighter-focus: #b8c1d547;
   --background-color-overlay: rgba(255, 255, 255, 0.384);
-  --background-color-soft: rgb(255, 255, 255);
+  --background-color-soft: rgba(254, 254, 255, 0.911);
+  --other-color-soft-shadow: #373c442d;
   --highlight-focus-background: rgb(173, 173, 173);
-  --nth-child-background:  rgb(196, 191, 191);
+  --nth-child-background: rgb(196, 191, 191);
   --filled-background-color: rgb(184, 182, 182);
   --filled-background-color-hover: rgb(252, 249, 249);
   --filled-background-color-focus: rgb(255, 255, 255);
@@ -243,7 +282,9 @@ body {
   --changHighlightColor: #3babf634;
   --switch-color: #144464;
   --editor-header: #f9fafb;
+  --paginatior-shadow-color: rgba(0, 0, 0, 0.281);
 }
+
 // .w-100{
 //   width: 100% !important;
 // }
@@ -252,90 +293,107 @@ body {
 //   height: 100% !important;
 // }
 
-::ng-deep mat-snack-bar-container>div{
+::ng-deep mat-snack-bar-container>div {
   background-color: #2c3a389c !important;
   border-radius: 8px !important;
   color: #ff8383 !important;
   font-weight: 700;
   border: 2px solid #ff8383;
-  
+
   font-size: larger;
   text-align: center;
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 }
 
-mat-snack-bar-container.success{
-  background-color: #2c3a389c !important;
+mat-snack-bar-container.success {
+  background-color: var(--background-color-soft) !important;
   border-radius: 8px !important;
   color: var(--changeOutlineColor) !important;
   font-weight: 700;
-  border: 2px solid var(--changeOutlineColor) !important;
-  
+  border: 2px solid var(--changeOutlineColorHover) !important;
+
   font-size: larger;
   text-align: center;
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 }
-mat-snack-bar-container.error{
+
+mat-snack-bar-container.error {
   background-color: #2c3a389c !important;
   border-radius: 8px !important;
   color: #ff8383 !important;
   font-weight: 700;
   border: 2px solid #ff8383;
-  
+
   font-size: larger;
   text-align: center;
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 }
-.d-flex{
+
+
+
+
+.d-flex {
   display: flex;
 }
-.row{
+
+.row {
   display: flex;
   flex-direction: row;
 }
 
-.col{
+.col {
   display: flex;
   flex-direction: column;
 }
-body{
-    font-size: 14px;
-    font-family: GoogleSansMono, Arial, sans-serif;
-    background-color: var(--background-color-lighter-focus);
-    max-height: 100vh !important;
-    color: var(--color);
-    font-weight: 500;
+
+body {
+  font-size: 14px;
+  font-family: GoogleSansMono, Arial, sans-serif;
+  background-color: var(--background-color-lighter-focus);
+  max-height: 100vh !important;
+  color: var(--color);
+  font-weight: 500;
 }
 
-::ng-deep ._container{
+::ng-deep ._container {
   max-height: 100%;
   max-width: 100%;
   max-width: calc(100% - 10x) !important;
 }
-.card
-{
+
+.card {
   border: var(--changeBasicBorder);
   background-color: var(--background-color);
   box-shadow: var(--changeBasicBoxShadow);
   border-radius: 10px;
   padding: 10px;
-    max-height: calc(100vh - 30px) !important;
+  max-height: calc(100vh - 30px) !important;
 }
-::ng-deep{
-  p-overlay{
+
+::ng-deep {
+  p-overlay {
     position: absolute !important;
   }
-  .p-overlay{
+
+  .p-overlay {
     position: absolute !important;
   }
-  p-overlay-content{ position: static !important;}
-  .p-overlay-content{ position: static !important; }
+
+  p-overlay-content {
+    position: static !important;
+  }
+
+  .p-overlay-content {
+    position: static !important;
+  }
 }
-.content-container{
-  flex-grow: 1; /* Ensures it takes up remaining space */
+
+.content-container {
+  flex-grow: 1;
+  /* Ensures it takes up remaining space */
   overflow-y: auto;
   min-height: calc(100vh - 16px);
   padding: 0px 5px 0px 8px;
@@ -344,8 +402,11 @@ body{
 /* width */
 ::-webkit-scrollbar {
   width: 8px;
+  border-radius: 5px;
+  height: 8px;
 }
-.ql-editor{
+
+.ql-editor {
   min-height: 100px !important;
   max-height: 400px !important;
   overflow: auto;
@@ -353,14 +414,14 @@ body{
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: var( --scrollbar-track);
-  border-radius: 1px;
+  box-shadow: var(--scrollbar-track);
+  border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
-  border-radius: 1px;
+  border-radius: 5px;
   transition: all 0.15s ease-in-out;
 
   min-height: 30px;
@@ -377,8 +438,9 @@ body{
   background-color: rgb(0, 191, 255) !important;
 }
 
-.override-this{
+.override-this {
   // min-width: 200px ;
+  min-width: 200px !important;
   width: 100% !important;
   // width: 100% !important;
   height: 30px !important;

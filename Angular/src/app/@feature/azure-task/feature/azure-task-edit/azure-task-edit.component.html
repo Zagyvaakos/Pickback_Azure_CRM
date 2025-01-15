@@ -1,137 +1,211 @@
-<div class="_container">
-    <div class="row p-0 m-0 d-flex"
-        style="padding: 0px 10px; height: 40px; align-items: center; justify-content: space-between">
-        <div style="display: flex;
+<ng-container *ngIf="!isEditing && userService.role()">
+
+    <div class="_container">
+        <div class="row p-0 m-0 d-flex"
+            style="padding: 0px 10px; height: 40px; align-items: center; justify-content: space-between">
+            <div style="display: flex;
             flex-direction: row;
             align-items: center;">
-            <div class="title" style="padding: 0px 10px">
-                Szerkesztés
+                <div class="title" style="padding: 0px 10px">
+                    {{this.userService.isEditing() ? 'Szerkesztés' : 'Megtekintés'}}
+                </div>
+                <div class="separator-line"></div>
+                <div
+                    style="padding: 0px 10px; align-items: center; display: flex; gap: 10px; font-size: 12px !important;">
+                    <p-button label="Vissza" (click)="navigationService.navigateBack()" icon="pi pi-angle-left"
+                        class="p-button-text" styleClass="custom-button-back">
+                    </p-button>
+                </div>
             </div>
-            <div class="separator-line"></div>
-            <div style="padding: 0px 10px; align-items: center; display: flex; gap: 10px; font-size: 12px !important;">
-                <p-button label="Vissza" (click)="navigationService.navigateBack()" icon="pi pi-angle-left"
-                    class="p-button-text" styleClass="custom-button-back">
-                </p-button>
-            </div>
-        </div>
-        <div style="display: flex;
+            <div style="display: flex;
             flex-direction: row;
             align-items: center;">
-            <div style="width: 100%;">
-                <div style="margin: 0px 5px;  "> <p-button [label]="'SPLIT'" [outlined]="true"></p-button></div>
-            </div>
-            <div style="margin: 0px 5px; width: 100%; "> <p-button styleClass="buttonWidthOverride" (click)="saveTask()"
-                    [label]="'Feladat mentése'" [outlined]="true"></p-button>
-            </div>
+                <div style="width: 100%;">
+                    <div style="margin: 0px 5px;  "> <p-button [label]="'SPLIT'" [outlined]="true"></p-button></div>
+                </div>
+                <div style="margin: 0px 5px; width: 100%; "> <p-button styleClass="buttonWidthOverride"
+                        (click)="saveTask()" [label]="'Feladat mentése'" [outlined]="true"></p-button>
+                </div>
 
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col" style="flex-grow: 7">
-            <div class=" card flex" style="flex-direction: column;">
-                <div class="mt-2 mb-1 title" style="font-size: medium; font-weight: 600;">
-                    Adatok
-                </div>
-                <div class="row  gap-1 pl-2" style="width: 100% ">
-                    <div *ngIf="id !== '0'" class="col p-0 m-0" class="title" style="color: var(--changeOutlineColor)">
-                        {{id}}</div>
-                    <div class="col p-0 m-0" style="flex-grow: 7">
-                        <input class="override-this" type="text" pInputText placeholder="Feladat neve"
-                            [formControl]="azureTaskFormGroup.controls['title']" (input)="updateTitle($event)" />
-                    </div>
-                    <div class="col p-0 m-0 " style="flex-grow: 3">
-                        <p-dropdown (onChange)="onDropdownChange($event.value)" styleClass=" override-this"
-                            [options]="statuses" [readonly]="+id=== 0"
-                            [emptyFilterMessage]="'Nincs megjeleníthető adat'"
-                            [(ngModel)]="azureTaskFormGroup.controls['status'].value" [showHeader]="true"
-                            [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true" optionLabel="name"
-                            placeholder="Státusz" [filterBy]="'name'" [loading]="false" [virtualScroll]="true"
-                            [virtualScrollItemSize]="32">
-                            <ng-template let-statusess pTemplate="status">
-                                <div class="item-status" style="width: 100% !important"
-                                    [ngStyle]="{'background-color': taskUI.getStateBackgroundColor(statusess.value)}">
-                                    <div [ngStyle]="{'color': taskUI.getStateColor(statusess.value)}">
-                                        {{taskUI.getStateString(statusess.value)}}
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </p-dropdown>
-
-                    </div>
-                </div>
-                <div class="row p-0 mt-1 w-100" style="width: 100%; display: flex; flex-direction: column; ">
+        <div class="row">
+            <div class="col" style="flex-grow: 7">
+                <div class=" card flex" style="flex-direction: column;">
                     <div class="mt-2 mb-1 title" style="font-size: medium; font-weight: 600;">
-                        Feladat leírása
+                        Adatok
                     </div>
-                    <div style="width: 100%;" class="pl-2">
-                        <p-editor [style]="{ height: '320px' }"
-                            [formControl]="azureTaskFormGroup.controls['description']"
-                            (onTextChange)="editorContentChange($event, null)">
-                            <ng-template pTemplate="header">
-                                <span class="ql-formats">
-                                    <button type="button" class="ql-bold" aria-label="Bold"></button>
-                                    <button type="button" class="ql-italic" aria-label="Italic"></button>
-                                    <button type="button" class="ql-underline" aria-label="Underline"></button>
-                                </span>
-                            </ng-template>
-                        </p-editor>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col" style="flex-grow: 2">
-            <div class=" card flex" style="flex-direction: column; height: 100%;">
-                <div class="row p-0 m-0 w-100" style="width: 100%; display: flex; flex-direction: column; ">
-                    <div class="mt-2 mb-2 pb-1 title"
-                        style="border-bottom: 1px solid rgb(197, 197, 197); font-size: medium; font-weight: 600;">
-                        Részletek
-                    </div>
-                    <div style="width: 100%;">
-                        <div style="font-weight: 600; color: gray;">
-                            Órák száma
+                    <div class="row  gap-1 pl-2" style="width: 100% ">
+                        <div *ngIf="id !== '0'" class="col p-0 m-0" class="title"
+                            style="color: var(--changeOutlineColor)">
+                            {{id}}</div>
+                        <div class="col p-0 m-0" style="flex-grow: 7">
+                            <input class="override-this" type="text" pInputText placeholder="Feladat neve"
+                                [formControl]="azureTaskFormGroup.controls['title']" (input)="updateTitle($event)" />
                         </div>
-                        <div style="font-weight: 700; padding: 10px;">
-                            0.5 óra
-                        </div>
-                    </div>
-                    <div style="width: 100%;">
-                        <div style="font-weight: 600; color: gray;">
-                            Prioritás
-                        </div>
-                        <div style="padding: 10px;">
-                            <p-dropdown styleClass=" override-this" [options]="priorities"
-                                [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedCities"
-                                [showHeader]="true" [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true"
-                                optionLabel="name" placeholder="Prioritás" [filterBy]="'name'" [loading]="false"
-                                [virtualScroll]="true" [virtualScrollItemSize]="32">
-
-                                <ng-template let-priorities pTemplate="priorities">
-                                    <div style="width: 100% !important">
-                                        <div>
-                                            {{ priorities.name}}
+                        <div class="col p-0 m-0 " style="flex-grow: 3">
+                            <p-dropdown [disabled]="userService.isEditing()" (onChange)="onDropdownChange($event.value)"
+                                styleClass=" override-this" [options]="types" [readonly]="+id=== 0"
+                                [emptyFilterMessage]="'Nincs megjeleníthető adat'"
+                                [(ngModel)]="azureTaskFormGroup.controls['type'].value" [showHeader]="true"
+                                [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true" optionLabel="name"
+                                placeholder="Típus" [filterBy]="'name'" [loading]="false" [virtualScroll]="true"
+                                [virtualScrollItemSize]="32">
+                                <ng-template let-typess pTemplate="type">
+                                    <div class="item-type" style="width: 100% !important"
+                                        [ngStyle]="{'background-color': taskUI.getStateBackgroundColor(typess.value)}">
+                                        <div [ngStyle]="{'color': taskUI.getStateColor(typess.value)}">
+                                            {{taskUI.getStateString(typess.value)}}
                                         </div>
                                     </div>
                                 </ng-template>
-
                             </p-dropdown>
-                        </div>
-                    </div>
-                    <div style="width: 100%;">
-                        <div style="font-weight: 600; color: gray;">
-                            Becsült idő
-                        </div>
-                        <div style="font-weight: 700; padding: 10px;">
-                            10 óra
-                        </div>
-                    </div>
 
+                        </div>
+                    </div>
+                    <div class="row p-0 mt-1 w-100" style="width: 100%; display: flex; flex-direction: column; ">
+                        <div class="mt-2 mb-1 title" style="font-size: medium; font-weight: 600;">
+                            Feladat leírása
+                        </div>
+                        <div style="width: 100%;" class="pl-2">
+                            <p-editor [style]="{ height: '320px'} " [readonly]="!userService.isEditing()"
+                                [formControl]="azureTaskFormGroup.controls['description']"
+                                (onTextChange)="editorContentChange($event, null)">
+                                <ng-template pTemplate="header">
+                                    <span class="ql-formats">
+                                        <button type="button" class="ql-bold" aria-label="Bold"></button>
+                                        <button type="button" class="ql-italic" aria-label="Italic"></button>
+                                        <button type="button" class="ql-underline" aria-label="Underline"></button>
+                                    </span>
+                                </ng-template>
+                            </p-editor>
+                        </div>
+                    </div>
+                    <div class="row p-0 mt-1 w-100" style="width: 100%; display: flex; flex-direction: column; ">
+                        <div class="mt-2 mb-1 title"
+                            style="font-size: medium; font-weight: 600; width: 100%; justify-content: space-between;">
+                            <div>Fájlok</div>
+
+                            <p-button pTooltip="Fájl(ok) feltöltése" tooltipPosition="top" icon="pi pi-upload"
+                                (click)="fileInput.click()" [outlined]="true"></p-button>
+                        </div>
+                        <!-- 
+                        <p-button styleClass="buttonWidthOverride" (click)="fileInput.click()"
+                            (change)="onFileSelected($event)" [label]="'+ Fájlok feltöltése'"
+                            [outlined]="true"></p-button> -->
+
+                    </div>
+                    <div style="width: 100%;" class="pl-2">
+
+
+                        <div class="custom-file-upload">
+                            <div class="file-container">
+                                <input #fileInput type="file" (change)="onFileSelected($event)" style="display: none;"
+                                    multiple />
+                                <div *ngIf="files.length">
+                                    <div class="file-row" *ngFor="let file of files; let idx = index">
+                                        <div class="file-placeholder">
+                                            <ng-container *ngIf="file.preview !== null">
+                                                <img *ngIf="file.preview" [src]="file.preview"
+                                                    class="file-preview-image" />
+                                            </ng-container>
+                                            <ng-container *ngIf="!file.preview">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/9272/9272949.png" />
+                                            </ng-container>
+                                        </div>
+                                        <div class="file-name">
+                                            {{ file.name }} <div style="font-size: xx-small; opacity: 0.5;">{{ file.size
+                                                |
+                                                number }} bytes</div>
+                                        </div>
+                                        <div class="file-action">
+
+                                            <p-button icon="pi pi-times" severity="danger" (click)="removeFile(idx)"
+                                                [outlined]="true"></p-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
+            </div>
+            <div class="col" style="flex-grow: 2">
+                <div class=" card flex" style="flex-direction: column; height: 100%;">
+                    <div class="row p-0 m-0 w-100" style="width: 100%; display: flex; flex-direction: column; ">
+                        <div class="mt-2 mb-2 pb-1 title"
+                            style="border-bottom: 1px solid rgb(197, 197, 197); font-size: medium; font-weight: 600;">
+                            Részletek
+                        </div>
+                        <div style="width: 100%;">
+                            <div style="font-weight: 600; color: gray;">
+                                Órák száma
+                            </div>
+                            <div style="font-weight: 700; padding: 10px;">
+                                0.5 óra
+                            </div>
+                        </div>
+                        <div style="width: 100%;">
+                            <div style="font-weight: 600; color: gray;">
+                                Prioritás
+                            </div>
+                            <div style="padding: 10px;">
+                                <p-dropdown styleClass=" override-this" [options]="priorities"
+                                    [emptyFilterMessage]="'Nincs megjeleníthető adat'" [(ngModel)]="selectedCities"
+                                    [showHeader]="true" [ariaFilterLabel]="'Keresés'" [filter]="true"
+                                    [showToggleAll]="true" optionLabel="name" placeholder="Prioritás"
+                                    [filterBy]="'name'" [loading]="false" [virtualScroll]="true"
+                                    [virtualScrollItemSize]="32">
+
+                                    <ng-template let-priorities pTemplate="priorities">
+                                        <div style="width: 100% !important">
+                                            <div>
+                                                {{ priorities.name}}
+                                            </div>
+                                        </div>
+                                    </ng-template>
+
+                                </p-dropdown>
+                            </div>
+                        </div>
+                        <div style="width: 100%;">
+                            <div style="font-weight: 600; color: gray;">
+                                Becsült idő
+                            </div>
+                            <div style="font-weight: 700; padding: 10px;">
+                                10 óra
+                            </div>
+                        </div>
+
+                    </div>
+                    <div
+                        style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                        <div style="    height: 70px;
+                        width: 70%;
+                        font-size: 50px;
+                        text-align: center;
+                        justify-content: center;
+                        align-items: center;
+                        display: flex
+                    ;
+                        background: #388c99;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        color: white;
+                        box-shadow: 0px 0px 10px 10px #00000008;
+                        font-weight: 700;">
+                            SPLIT
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
 
         </div>
 
-    </div>
-    <ng-container>
+        <!-- <ng-container>
         <div class="row p-0 m-0 d-flex"
             style="padding: 0px 10px; height: 40px; align-items: center; justify-content: space-between">
             <div class="title" style="padding: 0px 10px">
@@ -169,139 +243,80 @@
                     <div class="row p-0 m-0 w-100" style="display: flex; flex-direction: row; ">
                         <div style="display: flex; align-items: center;  justify-content: space-between; height: 100%;
                         flex-direction: column;">
-                            <div style="margin-bottom: 15px;" class="user one"></div>
+                            <div style="margin-bottom: 15px;" class="user-here-one"></div>
 
                         </div>
                         <div style="width: 100%; margin-left: 10px">
-                            <!-- 
-                            <ng-container>
-                                <p-editor [readonly]="!comment.get('editing').value"
-                                    [style]="{ minHeight: '100px', maxHeight: '500px', overflow: 'auto'}"
-                                    [formControl]="comment.get('content')"
-                                    (onTextChange)="editorContentChange($event, comment)">
-                                    <ng-template pTemplate="header">
-                                        <div
-                                            style="width: 100% !important; display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                                            <div
-                                                style="font-size: x-small; opacity: 0.6; padding-left: 10px; padding-right: 10px;">
-                                                <b>Kiss Béla </b>
-                                            </div>
-                                            <div style="margin-right: 5px !important"
-                                                *ngIf="!comment.get('editing').value">
-                                                <p-button icon="pi pi-pencil" [outlined]="true"
-                                                    (click)="comment.get('editing').setValue(true)"></p-button>
-                                            </div>
-                                        </div>
-
-                                        <div *ngIf="comment.get('editing').value"
-                                            style="width: 100% !important; display: flex; flex-direction: row; justify-content: space-between;">
-                                            <div>
-                                                <button type="button" class="ql-bold" aria-label="Bold"></button>
-                                                <button type="button" class="ql-italic" aria-label="Italic"></button>
-                                                <button type="button" class="ql-underline"
-                                                    aria-label="Underline"></button>
-                                            </div>
-
-                                            <div style="display: flex;" *ngIf="comment.get('editing').value">
-                                                <div style="margin: 0px 5px;">
-                                                    <p-button icon="pi pi-times" (click)="revertComment(comment, i)"
-                                                        [outlined]="true"></p-button>
-                                                </div>
-                                                <div style="margin: 0px 5px;">
-                                                    <p-button icon="pi pi-save" (click)="saveComment(comment, i)"
-                                                        [outlined]="true"></p-button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </ng-template>
-                                </p-editor>
-                            </ng-container> -->
+                     
 
 
 
 
-                            <ng-container *ngIf="!comment.get('editing').value">
-                                <p-editor [readonly]="true"
-                                    [style]="{ minHeight: '100px', maxHeight: '500px', overflow: 'auto'}"
-                                    [formControl]="comment.get('content')"
-                                    (onTextChange)="editorContentChange($event, comment)">
-                                    <ng-template pTemplate="header">
-                                        <div
-                                            style="width: 100% !important; display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                                            <div
-                                                style="color: var(--changeOutlineColor); font-size: small;  padding-left: 10px; padding-right: 10px;">
-                                                <b>Kiss Béla </b>
-                                            </div>
-                                            <div class="ql-formats" style="
-                                            margin-right: 5px !important">
-                                                <p-button icon="pi pi-pencil" [outlined]="true"
-                                                    (click)="comment.get('editing').setValue(true)"></p-button>
-                                                <p-button icon="pi pi-trash" [outlined]="true"
-                                                    (click)="deleteComment(i)"></p-button>
-                                            </div>
-                                        </div>
-
-                                    </ng-template>
-                                </p-editor>
-                            </ng-container>
-                            <ng-container *ngIf="comment.get('editing').value">
-                                <p-editor [style]="{ minHeight: '100px', maxHeight: '500px', overflow: 'auto'}"
-                                    [formControl]="comment.get('content')"
-                                    (onTextChange)="editorContentChange($event, comment)">
-                                    <ng-template pTemplate="header">
-                                        <div
-                                            style="width: 100% !important; display: flex; flex-direction: row; justify-content: space-between;">
-                                            <div class="ql-formats">
-                                                <button type="button" class="ql-bold" aria-label="Bold"></button>
-                                                <button type="button" class="ql-italic" aria-label="Italic"></button>
-                                                <button type="button" class="ql-underline"
-                                                    aria-label="Underline"></button>
-                                            </div>
-                                            <div style="
-                                            display: flex;">
-                                                <div style="margin: 0px 5px;">
-                                                    <p-button icon="pi pi-times" (click)="revertComment(comment, i)"
-                                                        [outlined]="true"></p-button>
-                                                </div>
-                                                <div style="margin: 0px 5px;">
-                                                    <p-button icon="pi pi-save" (click)="saveComment(comment, i)"
-                                                        [outlined]="true"></p-button>
-                                                </div>
-                                                <div style="margin: 0px 5px;">
-                                                    <p-button icon="pi pi-trash" [outlined]="true"
-                                                        (click)="deleteComment( i)"></p-button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </ng-template>
-                                </p-editor>
-                            </ng-container>
-                        </div>
-                        <!-- <div *ngIf="!comment.get('editing').value">
-                            <p-button [label]="'Szerkesztés'" [outlined]="true"
-                                (click)="comment.get('editing').setValue(true)"></p-button>
-                        </div> -->
+    <ng-container *ngIf="!comment.get('editing').value">
+        <p-editor [readonly]="true" [style]="{ minHeight: '100px', maxHeight: '500px', overflow: 'auto'}"
+            [formControl]="comment.get('content')" (onTextChange)="editorContentChange($event, comment)">
+            <ng-template pTemplate="header">
+                <div
+                    style="width: 100% !important; display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                    <div
+                        style="color: var(--changeOutlineColor); font-size: small;  padding-left: 10px; padding-right: 10px;">
+                        <b>Kiss Béla </b>
                     </div>
+                    <div class="ql-formats" style="
+                                            margin-right: 5px !important">
+                        <p-button icon="pi pi-pencil" [outlined]="true"
+                            (click)="comment.get('editing').setValue(true)"></p-button>
+                        <p-button icon="pi pi-trash" [outlined]="true" (click)="deleteComment(i)"></p-button>
+                    </div>
+                </div>
 
-                    <!-- <div *ngIf="comment.get('editing').value"
-                        style="width: 100%; display: flex; flex-direction: row; justify-content: end; margin-top: 10px;">
+            </ng-template>
+        </p-editor>
+    </ng-container>
+    <ng-container *ngIf="comment.get('editing').value">
+        <p-editor [style]="{ minHeight: '100px', maxHeight: '500px', overflow: 'auto'}"
+            [formControl]="comment.get('content')" (onTextChange)="editorContentChange($event, comment)">
+            <ng-template pTemplate="header">
+                <div
+                    style="width: 100% !important; display: flex; flex-direction: row; justify-content: space-between;">
+                    <div class="ql-formats">
+                        <button type="button" class="ql-bold" aria-label="Bold"></button>
+                        <button type="button" class="ql-italic" aria-label="Italic"></button>
+                        <button type="button" class="ql-underline" aria-label="Underline"></button>
+                    </div>
+                    <div style="
+                                            display: flex;">
                         <div style="margin: 0px 5px;">
-                            <p-button (click)="revertComment(comment, i)" [label]="'Mégse'"
+                            <p-button icon="pi pi-times" (click)="revertComment(comment, i)"
                                 [outlined]="true"></p-button>
                         </div>
                         <div style="margin: 0px 5px;">
-                            <p-button (click)="saveComment(comment, i)" [label]="'Mentés'" [outlined]="true"></p-button>
+                            <p-button icon="pi pi-save" (click)="saveComment(comment, i)" [outlined]="true"></p-button>
                         </div>
-                    </div> -->
-                    <div style=" margin-top: 5px; width: 100%; align-items: center; display: flex; justify-content: end; font-size: x-small; font-weight: 700; 
-    color: var(--changeOutlineColor);
-    ">
-                        2024.12.30. 14:41:46</div>
+                        <div style="margin: 0px 5px;">
+                            <p-button icon="pi pi-trash" [outlined]="true" severity="danger"
+                                (click)="deleteComment( i)"></p-button>
+                        </div>
+                    </div>
                 </div>
 
-            </div>
-
-        </div>
+            </ng-template>
+        </p-editor>
     </ng-container>
 </div>
+
+</div>
+
+
+<div style=" margin-top: 5px; width: 100%; align-items: center; display: flex; justify-content: end; font-size: x-small; font-weight: 700; 
+    color: var(--changeOutlineColor);
+    ">
+    2024.12.30. 14:41:46</div>
+</div>
+
+</div>
+
+</div>
+</ng-container> -->
+    </div>
+</ng-container>

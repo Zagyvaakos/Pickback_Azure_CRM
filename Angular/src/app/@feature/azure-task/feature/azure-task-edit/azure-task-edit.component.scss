@@ -1,85 +1,166 @@
-
-.title{
-    align-items: center;
-    display: flex;
-    font-weight: 700;
-    color: var(--color-secondary);
-    font-size: medium ;
+.title {
+  align-items: center;
+  display: flex;
+  font-weight: 700;
+  color: var(--color-secondary);
+  font-size: medium;
 }
-.custom-button-back{
-    font-size: 14px !important;
-    font-weight: 400 !important;
-    span{
+
+.custom-button-back {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+
+  span {
     font-size: 14px !important;
     font-weight: 700 !important;
     color: var(--changeOutlineColor);
-    }
+  }
 }
+
 .card.active-editor {
   box-shadow: 0 0 10px red;
 }
-.custom-button-back:hover{
-  span{color: white !important;
+
+.custom-button-back:hover {
+  span {
+    color: white !important;
     font-weight: 700 !important;
   }
 }
-.item-status{
-    justify-content: center;
-    width: 50px !important;
-    padding: 4px 10px;
-    border-radius: 5px;
-    font-size: smaller;
-    display: flex;
-    align-items: center;
-    font-weight: 700;
+
+.item-status {
+  justify-content: center;
+  width: 50px !important;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: smaller;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
 }
 
-.override-this{
-    // min-width: 200px ;
+.override-this {
+  // min-width: 200px ;
+  width: 100% !important;
+  // width: 100% !important;
+  height: 30px !important;
+  align-items: center;
+  font-size: larger;
+  font-weight: 700;
+}
+
+@media (max-width: 850px) {
+  .row {
+    flex-direction: column !important;
+  }
+
+  .col {
     width: 100% !important;
-    // width: 100% !important;
-    height: 30px !important;
-    align-items: center;
-    font-size: larger;
-    font-weight: 700;
+    flex-grow: unset;
+  }
 }
-  @media (max-width: 850px) {
-    .row {
-      flex-direction: column !important;
-    }
-    .col {
-      width: 100% !important;
-      flex-grow: unset;
-    }
-  }
 
-  .one {
-    background-image: url('https://ih1.redbubble.net/image.3835241466.9911/flat,750x,075,f-pad,750x1000,f8f8f8.jpg');
-  }
-  .user {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    box-shadow: 0px 0px 4px 3px #80808021;
-    border-radius: 25%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-  }
-
-  .buttonWidthOverride{
-    width: max-content;
-  }
-  .disabled-toolbar {
-    pointer-events: none; /* Disable interactivity */
-    opacity: 0.5; /* Make it visually distinct */
+.user-here-one {
+  background-image: url('https://ih1.redbubble.net/image.3835241466.9911/flat,750x,075,f-pad,750x1000,f8f8f8.jpg');
 }
-.outlinedCard{
+
+.user-here-one {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0px 0px 4px 3px #80808021;
+  border-radius: 25%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.bazdmeg {
+  box-shadow: inset 0px 0px 6px 3px #80808038;
+}
+
+.buttonWidthOverride {
+  width: max-content;
+}
+
+.disabled-toolbar {
+  pointer-events: none;
+  /* Disable interactivity */
+  opacity: 0.5;
+  /* Make it visually distinct */
+}
+
+.outlinedCard {
   transition: all 0.3s ease;
   outline: 1px solid var(--changeOutlineColor) !important;
   box-shadow: 0px 0px 10px 0px var(--box-shadow-color-focus);
 }
-.card{
+
+.card {
   transition: all 0.3s ease;
 
+}
+
+.file-container {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 5px;
+  border-radius: 6px;
+  // border: dashed 1px var(--changeOutlineColor);
+  box-shadow: inset 0px 0px 6px 3px var(--other-color-soft-shadow);
+}
+
+.file-row {
+  background-color: var(--background-color-soft-opacity);
+  /* border: solid thin var(--changeOutlineColor); */
+  box-shadow: 1px 2px 7px -1px var(--other-color-soft-shadow);
+  border-radius: 6px;
+  padding-left: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-right: 20px;
+  gap: 5px;
+  margin: 10px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+}
+
+.file-name {
+  width: 100%;
+  font-weight: 700;
+  font-size: smaller;
+  color: rgb(61, 61, 61);
+}
+
+.file-placeholder {
+
+  height: 35px;
+  width: 35px;
+  object-fit: cover;
+  margin-right: 10px;
+  opacity: 0.9;
+  border-radius: 6px;
+
+  border: solid 1px var(--other-color-soft-shadow);
+  box-shadow: 0px 0px 0px 2px var(--other-color-soft-shadow);
+
+
+}
+
+img {
+
+  height: 35px;
+  width: 35px;
+  object-fit: cover;
+  margin-right: 10px;
+  opacity: 0.9;
+  border-radius: 6px;
+
+  border: solid 1px var(--other-color-soft-shadow);
+  box-shadow: 0px 0px 0px 2px var(--other-color-soft-shadow);
 }

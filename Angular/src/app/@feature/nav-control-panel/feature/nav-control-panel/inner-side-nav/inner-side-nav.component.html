@@ -12,33 +12,49 @@
             </mat-icon>
             <p>{{name}}</p>
         </div>
-        <div (click)="logOut()" pTooltip="Kijelentkezés" tooltipPosition="bottom" class="toggle">
-            <mat-icon style="rotate: 180deg;">
-                logout
-            </mat-icon>
 
-        </div>
 
     </div>
 
     <ng-container *ngIf="activeMenu === 'user' ">
-        <div class="user-placeholder-div  ">
-            <div class="user one">
-
+        <div style="width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <div class="user-placeholder-div">
+                <div class="user one">
+                    <img [src]="userService.image()" alt="User Profile" class="profile-picture" />
+                    <button pTooltip="Profil beállítások" (click)="goToUserEdit()" pButton icon="pi pi-cog"
+                        class="edit-button" aria-label="Edit Profile"></button>
+                </div>
             </div>
-
         </div>
-
+        <div class="profile-name">
+            {{user.name}}
+        </div>
+        <div class="profile-email">
+            {{user.email}}
+        </div>
+        <div class="profile-phone">
+            {{user.phone}}
+        </div>
     </ng-container>
-    <mat-list class="nav">
-        <div style="padding-left: 10px; font-size: xx-small; font-weight: 700; opacity: 0.3; margin-bottom: 10px">
-            {{grouptext}}
-        </div>
-        <div class="nav-item" mat-list-item [ngClass]="{'is-active': route.isActive}"
-            *ngFor="let route of currentRouteLinks; trackBy: trackByRoute" routerLinkActive="active-link"
-            [routerLink]="route.link" (click)="onRouteClick(route)">
-            <p matLine *ngIf="_navMenuService.expanded()">{{ route.name }}</p>
-        </div>
-    </mat-list>
 
+    <ng-container *ngIf="activeMenu !== 'user' ">
+        <mat-list class="nav">
+            <div style="padding-left: 10px; font-size: xx-small; font-weight: 700; opacity: 0.3; margin-bottom: 10px">
+                {{grouptext}}
+            </div>
+            <div class="nav-item" mat-list-item [ngClass]="{'is-active': route.isActive}"
+                *ngFor="let route of currentRouteLinks; trackBy: trackByRoute" [routerLink]="route.link"
+                [queryParams]="route.queryParams" routerLinkActive="active-link" (click)="onRouteClick(route)">
+                <p matLine *ngIf="_navMenuService.expanded()">{{ route.name }}</p>
+            </div>
+        </mat-list>
+    </ng-container>
 </section>
+
+
+<div (click)="logOut()" pTooltip="Kijelentkezés" tooltipPosition="bottom" class="toggle logout-button">
+    Kijelentkezés <mat-icon style="rotate: 180deg;">
+        logout
+    </mat-icon>
+
+</div>

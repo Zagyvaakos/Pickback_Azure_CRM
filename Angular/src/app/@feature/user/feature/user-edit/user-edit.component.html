@@ -13,8 +13,9 @@
                     class="p-button-text" styleClass="custom-button-back">
                 </p-button>
             </div>
+
         </div>
-        <div style="display: flex;
+        <!-- <div style="display: flex;
             flex-direction: row;
             align-items: center;">
 
@@ -22,30 +23,105 @@
                     [label]="'Mentés'" [outlined]="true"></p-button>
             </div>
 
-        </div>
+        </div> -->
     </div>
-    <div class="row">
-        <div class="col">
+    <div class="row w-100 d-flex align-items-center justify-content-center">
+        <div class="col" style="max-width: 700px;">
             <div class=" card flex" style="flex-direction: column;">
                 <div class="mt-2 mb-3 title" style="font-size: medium; font-weight: 600;">
                     Adatok
                 </div>
 
-                <div class="row  gap-1 pl-2" style="width: 100% ">
 
-                    <div class="col p-0 m-0">
-                        <p-floatLabel variant="on">
-                            <input id="firstname" class="override-this" type="text" pInputText />
-                            <label for="firstname">Vezetéknév</label>
-                        </p-floatLabel>
+                <div
+                    style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 20px;">
+                    <div class="user-placeholder-div-here" style="margin-bottom: 10px">
+                        <div class="user one">
+                            <img src="https://ih1.redbubble.net/image.3835241466.9911/flat,750x,075,f-pad,750x1000,f8f8f8.jpg"
+                                alt="User Profile" class="profile-picture" />
+                            <button pButton icon="pi pi-upload" class="edit-button" aria-label="Edit Profile"></button>
+                            <div class="overlay">
+                                <i class="pi pi-upload dragdrop-icon"></i>
+                                <p>Húzza ide az új képet</p>
+                            </div>
+                        </div>
+
+
                     </div>
-                    <div class="col p-0 m-0">
-                        <p-floatLabel variant="on">
-                            <input id="lastname" class="override-this" type="text" pInputText />
-                            <label for="lastname">Keresztnév</label>
-                        </p-floatLabel>
+                    <div style="display: flex; flex-direction: row;">
+
+                        <div>
+                            <edit-in-place [title]="itemTitle" (titleChange)="onTitleChange($event)"></edit-in-place>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="gap-2" style="display:flex; flex-direction: column;  width: 100% ">
+
+                    <!-- <div class="row p-0 m-0" style="width: 100% ">
+                        <div class="col p-0 m-0">
+                            <p-floatLabel variant="on">
+                                <input id="firstname" class="override-this" type="text" pInputText />
+                                <label for="firstname">Vezetéknév</label>
+                            </p-floatLabel>
+                        </div>
                     </div>
 
+                    <div class="row p-0 m-0" style="width: 100% ">
+                        <div class="col p-0 m-0">
+                            <p-floatLabel variant="on">
+                                <input id="lastname" class="override-this" type="text" pInputText />
+                                <label for="lastname">Keresztnév</label>
+                            </p-floatLabel>
+                        </div>
+                    </div> -->
+                    <div class="row p-2 m-0" style="width: 100%; display: flex; justify-content: center;">
+                        <div style="width: 350px;">
+                            <p-floatLabel variant="on">
+                                <input id="email" class="override-this" type="text" pInputText />
+                                <label for="email">Email</label>
+                            </p-floatLabel>
+                        </div>
+                    </div>
+                    <div class="row p-2 m-0" style="width: 100%; display: flex; justify-content: center;">
+
+                        <div style="width: 350px;">
+                            <p-floatLabel variant="on">
+                                <input id="password" class="override-this" type="text" pInputText />
+                                <label for="password">Jelszó</label>
+                            </p-floatLabel>
+                        </div>
+                    </div>
+                    <div class="row p-2 m-0" style="width: 100%; display: flex; justify-content: center;">
+
+                        <div style="width: 350px;">
+                            <p-floatLabel variant="on">
+                                <input id="phone" class="override-this" type="text" pInputText />
+                                <label for="phone">Telefonszám</label>
+                            </p-floatLabel>
+                        </div>
+                    </div>
+                    <div class="row p-2 m-0" style="width: 100%; display: flex; justify-content: center; padding: 10px">
+
+                        <div
+                            style="width: 350px; display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                            <div style="margin: 0px 5px;">
+                                <p-button severity="danger" [label]="'Mégse'" [outlined]="true"></p-button>
+                            </div>
+                            <div style="margin: 0px 5px;">
+                                <p-button [label]="'Mentés'" [outlined]="true"></p-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        style="padding: 0px 10px; align-items: center; display: flex; gap: 10px; font-size: 12px !important;">
+                        <p-button label="Admin kapcsoló" (click)="onRoleChange()" class="p-button-text"
+                            styleClass="custom-button-back">
+                        </p-button>
+                    </div>
                 </div>
             </div>
         </div>
