@@ -58,7 +58,7 @@ export class InnerSideNavComponent implements OnInit {
     { link: 'crm/tasks', name: 'Aktív felatadok', isActive: false },
     { link: 'crm/tasks', name: 'Saját feladataim', isActive: false },
     { link: 'crm/tasks', name: 'Megosztott feladatok', isActive: false },
-    { link: 'crm/tasks', name: 'Elkészült feladatok', isActive: false },
+    { link: 'crm/examples', name: 'Példa store', isActive: false },
   ];
 
   // public routeSettingsLinks: any[] = [
@@ -109,6 +109,11 @@ export class InnerSideNavComponent implements OnInit {
 
         this.currentRouteLinks = this.routeTaskLinks;
         break;
+      // case 'settings':
+      //   this.name = 'Beállítások';
+      //   this.currentRouteLinks = this.routeSettingsLinks;
+      //   break;
+
       // case 'settings':
       //   this.name = 'Beállítások';
       //   this.currentRouteLinks = this.routeSettingsLinks;

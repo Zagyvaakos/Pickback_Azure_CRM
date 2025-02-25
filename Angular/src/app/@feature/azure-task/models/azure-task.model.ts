@@ -2,12 +2,20 @@ export interface AzureTask {
     id: number;
     name: string;
     description: string;
-    status: AzureTaskStatusType;
-    type: number;
+    status: string;
+    type: string;
     title: string;
     createdUserId: number;
     createdDateUtc: Date;
     companyId: number;
+    company: any;
+    createdUser: any;
+    createdDate: Date;
+    siteUrl: any;
+    affectedVersion: any;
+    fixedVersion: any;
+    comments: any[];
+    attachments: any[];
 }
 
 export enum AzureTaskType {

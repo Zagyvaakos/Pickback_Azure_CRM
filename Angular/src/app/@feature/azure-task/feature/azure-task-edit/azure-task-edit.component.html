@@ -1,4 +1,4 @@
-<ng-container *ngIf="!isEditing && userService.role()">
+<ng-container>
 
     <div class="_container">
         <div class="row p-0 m-0 d-flex"
@@ -40,14 +40,14 @@
                             style="color: var(--changeOutlineColor)">
                             {{id}}</div>
                         <div class="col p-0 m-0" style="flex-grow: 7">
-                            <input class="override-this" type="text" pInputText placeholder="Feladat neve"
-                                [formControl]="azureTaskFormGroup.controls['title']" (input)="updateTitle($event)" />
+                            <basic-input label="Név" [validator]="store.validators().get('title')"
+                                [value]="store.model.title()" [isDisabled]="store.isDetails()"
+                                (valueChange)="store.patchModel('title', $event)" />
                         </div>
                         <div class="col p-0 m-0 " style="flex-grow: 3">
-                            <p-dropdown [disabled]="userService.isEditing()" (onChange)="onDropdownChange($event.value)"
+                            <!-- <p-dropdown [disabled]="userService.isEditing()" (onChange)="onDropdownChange($event.value)"
                                 styleClass=" override-this" [options]="types" [readonly]="+id=== 0"
-                                [emptyFilterMessage]="'Nincs megjeleníthető adat'"
-                                [(ngModel)]="azureTaskFormGroup.controls['type'].value" [showHeader]="true"
+                                [emptyFilterMessage]="'Nincs megjeleníthető adat'" [showHeader]="true"
                                 [ariaFilterLabel]="'Keresés'" [filter]="true" [showToggleAll]="true" optionLabel="name"
                                 placeholder="Típus" [filterBy]="'name'" [loading]="false" [virtualScroll]="true"
                                 [virtualScrollItemSize]="32">
@@ -59,7 +59,7 @@
                                         </div>
                                     </div>
                                 </ng-template>
-                            </p-dropdown>
+                            </p-dropdown> -->
 
                         </div>
                     </div>
@@ -68,8 +68,7 @@
                             Feladat leírása
                         </div>
                         <div style="width: 100%;" class="pl-2">
-                            <p-editor [style]="{ height: '320px'} " [readonly]="!userService.isEditing()"
-                                [formControl]="azureTaskFormGroup.controls['description']"
+                            <!-- <p-editor [style]="{ height: '320px'} " [readonly]="!userService.isEditing()"
                                 (onTextChange)="editorContentChange($event, null)">
                                 <ng-template pTemplate="header">
                                     <span class="ql-formats">
@@ -78,7 +77,7 @@
                                         <button type="button" class="ql-underline" aria-label="Underline"></button>
                                     </span>
                                 </ng-template>
-                            </p-editor>
+                            </p-editor> -->
                         </div>
                     </div>
                     <div class="row p-0 mt-1 w-100" style="width: 100%; display: flex; flex-direction: column; ">
@@ -132,14 +131,14 @@
                 </div>
             </div>
             <div class="col" style="flex-grow: 2">
-                <div class=" card flex" style="flex-direction: column; height: 100%;">
+                <div class=" card flex" style="flex-direction: column;">
                     <div class="row p-0 m-0 w-100" style="width: 100%; display: flex; flex-direction: column; ">
                         <div class="mt-2 mb-2 pb-1 title"
-                            style="border-bottom: 1px solid rgb(197, 197, 197); font-size: medium; font-weight: 600;">
+                            style="border-bottom: 1px solid var(--border-color); color: var(--color-secondary); font-size: medium; font-weight: 600;">
                             Részletek
                         </div>
-                        <div style="width: 100%;">
-                            <div style="font-weight: 600; color: gray;">
+                        <div style="width: 100%;" *ngIf="userService.role()">
+                            <div style="font-weight: 600; color: var(--color-secondary);">
                                 Órák száma
                             </div>
                             <div style="font-weight: 700; padding: 10px;">
@@ -147,7 +146,7 @@
                             </div>
                         </div>
                         <div style="width: 100%;">
-                            <div style="font-weight: 600; color: gray;">
+                            <!-- <div style="font-weight: 600; color: gray;">
                                 Prioritás
                             </div>
                             <div style="padding: 10px;">
@@ -167,40 +166,40 @@
                                     </ng-template>
 
                                 </p-dropdown>
-                            </div>
+                            </div> -->
                         </div>
                         <div style="width: 100%;">
-                            <div style="font-weight: 600; color: gray;">
+                            <div style="font-weight: 600; color: var(--color-secondary);">
                                 Becsült idő
                             </div>
-                            <div style="font-weight: 700; padding: 10px;">
+                            <div style="font-weight: 700; padding: 10px; color: var(--changeOutlineColor);">
                                 10 óra
                             </div>
                         </div>
 
                     </div>
-                    <div
-                        style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-                        <div style="    height: 70px;
-                        width: 70%;
-                        font-size: 50px;
-                        text-align: center;
-                        justify-content: center;
-                        align-items: center;
-                        display: flex
-                    ;
-                        background: #388c99;
-                        border-radius: 10px;
-                        cursor: pointer;
-                        color: white;
-                        box-shadow: 0px 0px 10px 10px #00000008;
-                        font-weight: 700;">
-                            SPLIT
-                        </div>
 
-                    </div>
+                </div>
+                <!--  <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                    <div style="margin: 0px 5px;  "> <p-button [label]="'SPLIT'" [outlined]="true"></p-button></div>
+                    <div style="    height: 70px;
+                width: 70%;
+                font-size: 50px;
+                text-align: center;
+                justify-content: center;
+                align-items: center;
+                display: flex
+            ;
+                background: #388c99;
+                border-radius: 10px;
+                cursor: pointer;
+                color: white;
+                box-shadow: 0px 0px 10px 10px #00000008;
+                font-weight: 700;">
+                    SPLIT
                 </div>
 
+                </div> -->
             </div>
 
         </div>

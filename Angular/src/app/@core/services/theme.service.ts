@@ -37,6 +37,9 @@ export class ThemeService {
 
         }
     }
+
+
+
     initializeTheme(): void {
         const savedDarkmode = localStorage.getItem('isDarkmode') === 'true';
         this.isDarkmode.set(savedDarkmode);
@@ -52,4 +55,18 @@ export class ThemeService {
         }
     }
 
+    updateDeviceSizing(device: any) {
+        const htmlElement = document.documentElement;
+        if (device.isMobile) {
+            document.body.classList.add('mobile');
+            htmlElement.classList.add('mobile')
+        }
+        else if (device.isTablet) {
+            htmlElement.classList.add('tablet')
+
+            this.document.body.classList.add('tablet')
+        }
+        else { }
+
+    }
 }

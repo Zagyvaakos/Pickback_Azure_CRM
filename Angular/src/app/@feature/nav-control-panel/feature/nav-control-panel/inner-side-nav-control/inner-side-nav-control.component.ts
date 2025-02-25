@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, EventEmitter, input, Input, OnInit, Output } from '@angular/core';
+import { Component, computed, EventEmitter, inject, input, Input, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,6 +12,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { InnerSideNavComponent } from '../inner-side-nav/inner-side-nav.component';
 import { NavMenuService } from '../../../data-access/nav-menu.service';
 import { LoadingComponent } from '../../../../../@ui/loading/loading.component';
+import { DeviceStore } from '../../../../../@core/stores/device.store';
 
 @Component({
   selector: 'inner-side-nav-control',
@@ -33,8 +34,18 @@ import { LoadingComponent } from '../../../../../@ui/loading/loading.component';
   styleUrl: './inner-side-nav-control.component.scss'
 })
 export class InnerSideNavControlComponent implements OnInit {
+  width: string = "250px";
+  deviceStore = inject(DeviceStore)
+  device: any;
   constructor(public _navMenuService: NavMenuService) {
   }
   ngOnInit() {
+    this.device = this.deviceStore.getDevice();
+    if (this.device.isMobile) {
+      this.width = "200px"
+    }
+    else {
+      this.width = "250px"
+    }
   }
 }

@@ -1,11 +1,12 @@
 <div>
     <mat-sidenav-container autosize>
         <mat-sidenav #sidenav fixedInViewport="true" mode="side" [opened]="true"
-            [style.width]="_navMenuService.expanded() ? '250px' : '0px'">
+            [style.width]="_navMenuService.expanded() ? width : '0px'">
             <inner-side-nav [activeMenu]="_navMenuService.activeMenu()"></inner-side-nav>
         </mat-sidenav>
 
-        <mat-sidenav-content [style.margin-left.px]="_navMenuService.expanded() ? 250 : 0">
+        <mat-sidenav-content
+            [style.margin-left]="_navMenuService.expanded() ? (device.isMobile? '0px' : width) : '0px'">
             <div class="content-container">
 
                 <router-outlet></router-outlet>

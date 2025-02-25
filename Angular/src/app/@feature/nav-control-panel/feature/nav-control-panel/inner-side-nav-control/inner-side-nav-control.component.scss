@@ -1,64 +1,67 @@
 /* Smooth transitions for width */
 mat-sidenav {
-    transition: width 0.3s ease-in-out;
-    overflow: hidden !important;
-  }
-  
-  /* When minimized, hide text and show only icons */
-  mat-sidenav {
-    transition: width 0.3s ease-in-out;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 60px;
-    top: 0px;
-    bottom: 0px;
-    transform: none;
-    visibility: visible;
-    border: 1px solid rgb(148 148 148 / 18%);
-    margin-top: 5px;
-    margin-bottom: 5px;
-    box-shadow: #80808014 0px 0px 10px 4px;
-    width: 250px;
-    top: 0px;
-    bottom: 0px;
-    transform: none;
-    visibility: visible;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    margin-left: -8px;
-    background-color: var(--background-color);
-    height: 100v;
-    z-index: 998;
-  }
-  mat-sidenav {
-    transition: width 0.3s ease-in-out;
-  }
-  
-  mat-sidenav-content {
-    transition: margin-left 0.3s ease-in-out;
-  }
-  mat-sidenav[opened="false"] .nav p {
-    display: none;
-  }
-  
-  /* Optional: styling for the toggle button */
-  .toggle {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    cursor: pointer;
-  }
-  
-  /* Ensure the icon color changes on hover */
-  mat-icon {
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  /* Optional: styling for hover effects */
-  .nav a:hover mat-icon {
-    color: #3f51b5;
-  }
-  .nav{
-    margin-top: 30px;
-  }
+  transition: width 0.3s ease-in-out;
+  overflow: hidden !important;
+}
+
+/* When minimized, hide text and show only icons */
+mat-sidenav {
+  transition: width 0.3s ease-in-out;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 60px;
+  top: 0px;
+  bottom: 0px;
+  transform: none;
+  visibility: visible;
+  border: 1px solid rgb(148 148 148 / 18%);
+  margin-top: 5px;
+  margin-bottom: 5px;
+  box-shadow: #80808014 0px 0px 10px 4px;
+  width: 250px;
+  top: 0px;
+  bottom: 0px;
+  transform: none;
+  visibility: visible;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-left: -8px;
+  background-color: var(--background-color);
+  height: 100v;
+  z-index: 998;
+}
+
+mat-sidenav {
+  transition: width 0.3s ease-in-out;
+}
+
+mat-sidenav-content {
+  transition: margin-left 0.3s ease-in-out;
+}
+
+mat-sidenav[opened="false"] .nav p {
+  display: none;
+}
+
+/* Optional: styling for the toggle button */
+.toggle {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+}
+
+/* Ensure the icon color changes on hover */
+mat-icon {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* Optional: styling for hover effects */
+.nav a:hover mat-icon {
+  color: #3f51b5;
+}
+
+.nav {
+  margin-top: 30px;
+}

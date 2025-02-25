@@ -1,4 +1,4 @@
-import { Component, computed, CUSTOM_ELEMENTS_SCHEMA, effect, isDevMode, OnDestroy, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, computed, CUSTOM_ELEMENTS_SCHEMA, effect, inject, isDevMode, OnDestroy, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AzureTaskService } from '../../data-access/azure-task.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -20,10 +20,13 @@ import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
 import { finalize, Subject, takeUntil } from 'rxjs';
 import { LoadingComponent } from '../../../../@ui/loading/loading.component';
 import { LoadingService } from '../../../../@core/services/loading.service';
+import { DeviceStore } from '../../../../@core/stores/device.store';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { AzureTaskEditStore } from '../../data-access/azure-task-edit.store';
 @Component({
   selector: 'app-azure-task-list',
-  templateUrl: './azure-task-list-mobile.component.html',
-  styleUrl: './azure-task-list-mobile.component.scss',
+  templateUrl: './azure-task-list.component.html',
+  styleUrl: './azure-task-list.component.scss',
   encapsulation: ViewEncapsulation.None,
   standalone: true,  // Standalone component
   imports: [
@@ -43,9 +46,12 @@ import { LoadingService } from '../../../../@core/services/loading.service';
     DataViewModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService, MessageService, AzureTaskEditStore]
 })
 export class AzureTaskListComponent implements OnInit, OnDestroy {
+  readonly store = inject(AzureTaskEditStore);
+  readonly deviceStore = inject(DeviceStore);
+
   constructor(
     public loadingService: LoadingService,
     public taskUI: AzureTaskUIService,
@@ -55,6 +61,7 @@ export class AzureTaskListComponent implements OnInit, OnDestroy {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
   ) {
+
     this.updateButtonLabel();
     window.addEventListener('resize', () => this.updateButtonLabel());
     effect(() => {
@@ -112,12 +119,16 @@ export class AzureTaskListComponent implements OnInit, OnDestroy {
   selectedTypes: any[] = [];
   selectedNames: any[] = [];
   destroy$ = new Subject();
-
+  device: any;
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      console.log('Route parameter changed:', params);
-    });
+    this.device = this.deviceStore.getDevice()
+    console.log(this.device, 'devájsz')
+    // let device = this.deviceStore.getDevice()
+    // console.log(device, 'device')
+    // this.route.paramMap.subscribe((params) => {
+    //   console.log('Route parameter changed:', params);
+    // });
 
     let paginationState = localStorage.getItem('paginationState');
     if (paginationState) {
@@ -290,43 +301,3 @@ export class AzureTaskListComponent implements OnInit, OnDestroy {
 
 
 
-
-
-
-
-// testpost() {
-//   const data = {
-//     id: 0,
-//     company: {
-//       id: 0,
-//       name: "string"
-//     },
-//     createdUser: {
-//       id: 0,
-//       isAdmin: true,
-//       isActive: true,
-//       company: {
-//         id: 0,
-//         name: "string"
-//       },
-//       firstName: "string",
-//       lastName: "string",
-//       email: "string",
-//       passwordHash: "string",
-//       phone1: "string",
-//       phone2: "string"
-//     },
-//     createdDate: new Date().toISOString(), // Current date-time in ISO format
-//     type: "Bug",
-//     status: "New",
-//     title: "string",
-//     description: "string",
-//     siteUrl: "string",
-//     affectedVersion: "string",
-//     fixedVersion: "string"
-//   };
-
-//   // Call the insertData method
-//   this.azureTaskService.insertData(data).subscribe(response => {
-//   }
-// }

@@ -1,9 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
-  selector: 'app-float-input',
-  imports: [],
+  selector: 'float-input',
+  standalone: true,
+  imports: [FloatLabelModule, InputTextModule],
   templateUrl: './float-input.component.html',
   styleUrl: './float-input.component.scss'
 })

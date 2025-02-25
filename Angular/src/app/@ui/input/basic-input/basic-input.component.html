@@ -1,0 +1,3 @@
+<input [ngClass]="formFieldNgClass()" #ngModelControl="ngModel" #inputElRef [name]="name()" [type]="type()"
+    [min]="validator()?.min" [max]="validator()?.max" [(ngModel)]="value" [required]="isRequired()"
+    [pattern]="validator()?.pattern ?? ''" [disabled]="isDisabled()" pInputText [placeholder]="label()" />
