@@ -6,7 +6,6 @@ export interface AzureTask {
     type: string;
     title: string;
     createdUserId: number;
-    createdDateUtc: Date;
     companyId: number;
     company: any;
     createdUser: any;

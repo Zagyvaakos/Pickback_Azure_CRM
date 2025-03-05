@@ -1,11 +1,11 @@
 <div class="_container">
 
-    <p-dataView #dv [value]="workItemsToShow()" [totalRecords]="totalCount()" [alwaysShowPaginator]="true"
+    <p-dataView #dv [value]="workItemsToShow()" [totalRecords]="totalCount()" [alwaysShowPaginator]="device.isDesktop"
         [paginator]="true" [rowsPerPageOptions]="[10, 25, 50, 100, 250, 500]" [showCurrentPageReport]="device.isDesktop"
-        [pageLinks]="5" [showPageLinks]="device.isMobile? false : true" [sortField]="sortField" [sortOrder]="sortOrder"
-        [lazy]="true" [emptyMessage]="'Nincs elérhető adat'" [paginatorDropdownAppendTo]="'body'"
-        [rows]="paginationLimit()" [page]="paginationOffset()" (onPage)="onPageChange($event)" filterBy="name"
-        layout="list">
+        [pageLinks]="device.isDesktop? 5 : 3" [showPageLinks]="device.isMobile? false : true" [sortField]="sortField"
+        [sortOrder]="sortOrder" [lazy]="true" [emptyMessage]="'Nincs elérhető adat'"
+        [paginatorDropdownAppendTo]="'body'" [rows]="paginationLimit()" [page]="paginationOffset()"
+        (onPage)="onPageChange($event)" filterBy="name" layout="list">
         <ng-template pTemplate="header">
             <div class="row  m-0 w-100"
                 style="display: flex; align-items: center; justify-content: space-between; padding: 8px 0px">

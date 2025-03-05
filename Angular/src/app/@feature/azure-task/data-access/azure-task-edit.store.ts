@@ -2,23 +2,21 @@ import { patchState, signalStore, withComputed, withMethods, withState } from '@
 import { AzureTaskService } from './azure-task.service';
 import { DestroyRef, inject } from '@angular/core';
 import { withActivatedRouteData } from '../../../@core/utils/withActivatedRouteDataFeature';
+import { Location } from '@angular/common';
 
 const initialState = {
     isDetails: false,
     isLoading: false,
     model: {
         company: null,
-        companyId: 0,
         createdUser: null,
-        createdUserId: 0,
         createdDate: new Date(),
-        createdDateUtc: new Date(),
         type: '',
         status: '',
         title: '',
         description: '',
         siteUrl: null,
-        affectedVersion: null,
+        affectedVersion: 1,
         fixedVersion: null,
         comments: [],
         attachments: [],
@@ -40,6 +38,7 @@ export const AzureTaskEditStore = signalStore(
         destroyRef = inject(DestroyRef)
     ) => {
         const azureTaskService = inject(AzureTaskService)
+        const location = inject(Location)
         return {
             patchModelWithPartial(value: Partial<any>): void {
                 patchState(store, (state) => ({
@@ -59,6 +58,7 @@ export const AzureTaskEditStore = signalStore(
                     },
                 }));
             },
+
             setModel(model: any): void {
                 patchState(store, () => ({ model }));
             },
@@ -75,16 +75,20 @@ export const AzureTaskEditStore = signalStore(
                     type: store.model.type(),
                     title: store.model.title(),
                     description: store.model.description(),
-
+                    attachments: store.model.attachments(),
+                    affectedVersion: store.model.affectedVersion(),
                 };
                 if (data.id === 0) {
                     azureTaskService.insertData(data).subscribe(response => {
-                        // this.location.back();
+                        console.log(response, 'result')
+                        location.back();
                     });
                 }
                 else {
                     azureTaskService.updateData(data, data.id).subscribe(response => {
-                        // this.location.back();
+                        console.log(response, 'update')
+
+                        location.back();
                     });
                 }
 

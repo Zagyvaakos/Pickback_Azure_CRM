@@ -1,0 +1,17 @@
+.resizable-card {
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-container {
+    position: relative;
+    margin: 10px;
+}
+
+.resize-handle {
+    background-color: #ccc;
+    border-radius: 4px;
+    width: 10px;
+    height: 10px;
+    cursor: se-resize;
+}

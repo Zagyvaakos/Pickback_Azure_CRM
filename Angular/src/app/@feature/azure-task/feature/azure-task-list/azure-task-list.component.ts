@@ -123,7 +123,6 @@ export class AzureTaskListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.device = this.deviceStore.getDevice()
-    console.log(this.device, 'devájsz')
     // let device = this.deviceStore.getDevice()
     // console.log(device, 'device')
     // this.route.paramMap.subscribe((params) => {

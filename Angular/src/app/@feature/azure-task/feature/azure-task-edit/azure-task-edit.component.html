@@ -68,8 +68,8 @@
                             Feladat leírása
                         </div>
                         <div style="width: 100%;" class="pl-2">
-                            <!-- <p-editor [style]="{ height: '320px'} " [readonly]="!userService.isEditing()"
-                                (onTextChange)="editorContentChange($event, null)">
+                            <p-editor [style]="{ height: '320px'} " [readonly]="!userService.isEditing()"
+                                (onTextChange)="editorContentChange($event)" [ngModel]="store.model.description()">
                                 <ng-template pTemplate="header">
                                     <span class="ql-formats">
                                         <button type="button" class="ql-bold" aria-label="Bold"></button>
@@ -77,7 +77,7 @@
                                         <button type="button" class="ql-underline" aria-label="Underline"></button>
                                     </span>
                                 </ng-template>
-                            </p-editor> -->
+                            </p-editor>
                         </div>
                     </div>
                     <div class="row p-0 mt-1 w-100" style="width: 100%; display: flex; flex-direction: column; ">

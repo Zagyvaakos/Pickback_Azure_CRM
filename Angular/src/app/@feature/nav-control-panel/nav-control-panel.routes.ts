@@ -17,9 +17,9 @@ export const routes: Routes = [
       {
         title: 'Kezdőlap',
         path: 'crm/home',
-        loadComponent: () =>
-          import('../home/feature/home/home.component').then(
-            (file) => file.HomeComponent
+        loadChildren: () =>
+          import('../home/home.routes').then(
+            (file) => file.routes
           ),
       },
       {

@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
 
       isTablet: this.deviceService.isTablet() as boolean,
     };
-    console.log(deviceInfo, 'deviceinfo');
     this.deviceStore.setDevice(deviceInfo);
     this.themeService.updateDeviceSizing(deviceInfo);
 
@@ -45,12 +44,10 @@ export class AppComponent implements OnInit {
         break
     }
     this.themeService.toggleDarkmode(darkmode)
-    console.log('toggledarkmode')
 
     this.themeService.initializeTheme();
   }
   private isMacOS(): boolean {
-    console.log(/Macintosh|MacIntel|MacPPC|Mac68K/.test(navigator.userAgent), 'mac');
     return /Macintosh|MacIntel|MacPPC|Mac68K/.test(navigator.userAgent);
   }
 

@@ -50,6 +50,12 @@ export class AzureTaskService {
 
         return this.http.put(this.apiUrl + 'tasks/update/' + id, data, { headers });
     }
+    uploadData(data: any): Observable<any> {
+        const headers = new HttpHeaders({
+            Authorization: `Bearer ${this.token}`
+        });
+        return this.http.put(this.apiUrl + 'upload/', { data });
+    }
 
     getTask(id: number): Observable<any> {
         const headers = new HttpHeaders({

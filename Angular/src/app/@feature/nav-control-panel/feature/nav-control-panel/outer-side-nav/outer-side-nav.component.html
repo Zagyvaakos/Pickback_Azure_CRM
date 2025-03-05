@@ -1,13 +1,13 @@
 <section class="sidenav">
     <div class="nav">
-        <div class="user-placeholder-div list-item" (click)="onMenuClick('user')">
+        <div class="user-placeholder-div list-item" (click)=" _navMenuService.setActiveMenu('user')">
             <div class="user one">
             </div>
         </div>
 
     </div>
-    <div class="nav">
-        <div class="list-item" *ngFor="let menu of menus" (click)="onMenuClick(menu.link)">
+    <div class="nav" *ngFor="let menu of menus">
+        <div class="list-item" (click)="_navMenuService.setActiveMenu(menu.link)">
             <mat-icon [pTooltip]="menu.name" style="border-bottom: thin solid rgb(99 99 99 / 10%);" mat-list-icon>{{
                 menu.icon }}</mat-icon>
         </div>
@@ -15,13 +15,15 @@
 
     <div class="nav">
         <div class="list-item" (click)="onRoleChange()">
-            <mat-icon style="border-bottom: thin solid rgb(99 99 99 / 10%);" mat-list-icon>person</mat-icon>
+            <mat-icon style="border-bottom: thin solid rgb(99 99 99 / 10%);" mat-list-icon
+                [pTooltip]="'Admin role'">person</mat-icon>
         </div>
 
     </div>
     <div class="nav">
         <div class="list-item" (click)="onEditingStateChange()">
-            <mat-icon style="border-bottom: thin solid rgb(99 99 99 / 10%);" mat-list-icon>{{userService.isEditing()?
+            <mat-icon [pTooltip]="'Edit / details switch'" style="border-bottom: thin solid rgb(99 99 99 / 10%);"
+                mat-list-icon>{{userService.isEditing()?
                 'edit' :
                 'visibility'}}</mat-icon>
         </div>

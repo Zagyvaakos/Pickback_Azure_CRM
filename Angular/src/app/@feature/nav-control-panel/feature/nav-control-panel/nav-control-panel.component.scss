@@ -1,12 +1,12 @@
 /* Smooth transition for content width change */
 .content {
-  transition: margin-left 0.3s ease-in-out;
+  transition: margin-left 0.2s ease-in-out;
 }
 
 /* Smooth transitions for sidenav width */
 mat-sidenav {
   overflow: hidden !important;
-  transition: width 0.3s ease-in-out;
+  transition: width 0.2s ease-in-out;
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: var(--background-color);
@@ -25,11 +25,11 @@ mat-sidenav {
 
 /* Optional: styling for the sidenav and content */
 mat-sidenav {
-  transition: width 0.3s ease-in-out;
+  transition: width 0.2s ease-in-out;
 }
 
 mat-sidenav-content {
-  transition: margin-left 0.3s ease-in-out;
+  transition: margin-left 0.2s ease-in-out;
 }
 
 /* Optional: styling for the toggle button */

@@ -69,7 +69,6 @@ export const AzureTaskListStore = signalStore(
                     types: store.model.types(),
 
                 };
-                console.log(data, 'data hehe')
 
 
 
